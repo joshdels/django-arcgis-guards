@@ -5,3 +5,6 @@ from django.shortcuts import render
 # 1 for clients (guards name, )
 # 1 for guards (total time, jobs history)
   # time in/out
+
+def show_agency(request):
+    return render(request, "agency_page.html")
