@@ -1,0 +1,31 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.dashboard-card {
+  border: 1px solid var(--calcite-color-border-1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  min-height: 300px;
+}
+
+.dashboard-card:hover {
+  border: 1px solid var(--calcite-color-status-info);
+}
+
+.dashboard-card calcite-icon {
+  width: 80px;
+  height: 80px;
+}

@@ -1,5 +1,7 @@
+@import url("container.css");
+
 html,
-body {
+body, * {
   padding: 0;
   margin: 0;
 }
