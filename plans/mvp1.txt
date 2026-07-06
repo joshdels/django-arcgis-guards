@@ -1,0 +1,40 @@
+1. Agency Dashboard (overview)
+  - total Clients
+  - total guards
+  - guards on duty
+  - hours work today
+  - pending invoices
+
+2. Clients List
+  - construction
+  - xyz manufacturing
+  - city hall
+
+3. Clients Details
+  - name
+  - billing rate/email
+  - assigned guards
+  - total hrs this month
+  - generate invoice
+
+4. Guards List/ Details
+  - Time in / Time out
+  - login and logout
+
+5. Attendance Page( Agency )
+
+6. Invoice Page
+
+Dashboard
+      │
+      ├── Clients
+      │      └── Client Detail
+      │
+      ├── Guards
+      │      └── Guard Detail
+      │
+      ├── Attendance
+      │      ├── Time In
+      │      └── Time Out
+      │
+      └── Invoices
