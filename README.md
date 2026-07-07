@@ -15,5 +15,6 @@ this is for the Prof of Concept on the upcoming app for inventory of Security Gu
 ## to start
 ```
 uv sync
+python manage.py seed
 python manage.py runserver
 ```
