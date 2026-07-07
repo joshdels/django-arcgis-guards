@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Guard Page | Guards{% endblock %}
 {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'css/_guard_page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/_page.css' %}">
 {% endblock %}
 {% block content %}
     {% include 'component/navbar.html' %}
@@ -12,32 +12,57 @@
             Back to Dashboard
         </a>
         <h1>Guards</h1>
-        <section class="header">
+        <header class="header">
             <div>
-                <input type="Search by name, email" />
-                <a href="{% url 'guards' %}">All</a>
-                <a href="?status=ACTIVE">Active</a>
-                <a href="?status=INACTIVE">Inactive</a>
+
+                <form method="get" class="flex">
+                    <calcite-input type="search" name="search" placeholder="Search name and location`" icon="search" value="{{ search|default:'' }}">
+                    </calcite-input>
+                    <calcite-button type="submit">Search</calcite-button>
+                </form>
+                <a href="{% url 'guards' %}"
+                    class="{% if not current_status %}active{% endif %}"
+                >All</a>
+                <a href="?status=active"
+                 class="{% if current_status == 'active' %}active{% endif %}"
+                >Active</a>
+                <a href="?status=inactive"
+                 class="{% if current_status == 'inactive' %}active{% endif %}"
+                >Inactive</a>
             </div>
             <calcite-button href=""  icon-start="plus">Add Guard</calcite-button>
-        </section>
+        </header>
+        {% if not guards %}
+            <p>No guards found.</p>
+        {% endif %}
+        
         {% for guard in guards %}
             <a href="{% url 'guard-profile' guard.id %}" class="list-card">
-                <div>
+                <div class="space-between">
                     <div>
-                        <h2>{{ guard.user }}</h2>
+                        <div class="column">
+                            <h2>{{ guard.user.get_full_name }}</h2>
+                            {% if guard.is_active %}
+                                <calcite-chip appearance="outline-fill">active</calcite-chip>
+                            {% else %}
+                                <calcite-chip>inactive</calcite-chip>
+                            {% endif %}
+                        </div>
                         <p>
-                            <calcite-icon icon="phone" scale="s"></calcite-icon>
-                            {{ guard.phone_number }}
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            <calcite-icon icon="user-plus" /> {{ guard.created_at }}
+                            <calcite-icon icon="home" scale="s"></calcite-icon>
+                            {{ guard.location|default:"N/A" }}
                         </p>
                     </div>
                 </div>
-                <div></div>
+                <div>
+                    <p>
+                        <calcite-icon icon="phone" scale="s"></calcite-icon>
+                        {{ guard.phone_number }}
+                    </p>
+                    <p>
+                        <calcite-icon icon="user-plus"></calcite-icon> {{ guard.created_at|date:"M d, Y" }}
+                    </p>
+                </div>
             </a>
         {% endfor %}
     </section>

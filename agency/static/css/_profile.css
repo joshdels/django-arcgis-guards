@@ -9,6 +9,11 @@
   justify-content: space-between;
 }
 
+.profile header h1 {
+  text-transform: capitalize;
+  margin: 0 auto;
+}
+
 .profile a {
   text-decoration: none;
   color: inherit;
@@ -27,6 +32,29 @@
   padding: 2rem;
 }
 
-.profile section > div {
-  background-color: rgb(148, 146, 146);
+.profile .space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile .end {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.profile .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 1rem;
+}
+
+.profile .grid p {
+  text-transform: capitalize;
+}
+
+.profile .grid h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

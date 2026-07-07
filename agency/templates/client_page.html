@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Client Page | Guards{% endblock %}
 {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'css/_client_page.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/_page.css' %}" />
 {% endblock %}
 {% block content %}
     {% include 'component/navbar.html' %}
@@ -12,31 +12,51 @@
             Back to Dashboard
         </a>
         <h1>Clients</h1>
-        <section class="header">
+        <header>
             <div>
-                <input type="Search by name, org, email" />
-                <a href="{% url 'clients' %}">All</a>
-                <a href="?status=OVERDUE">Overdue</a>
-                <a href="?status=PENDING">Pending</a>
-                <a href="?status=PAID">Paid</a>
+                <form method="get" class="flex">
+                    <calcite-input type="search" name="search" placeholder="Search clients" icon="search" value="{{ search|default:'' }}">
+                    </calcite-input>
+                    <calcite-button type="submit">Search</calcite-button>
+                </form>
+                <a href="{% url 'clients' %}"
+                   class="{% if not current_status %}active{% endif %}">All</a>
+                <a href="?status=overdue"
+                   class="{% if current_status == 'overdue' %}active{% endif %}">Overdue</a>
+                <a href="?status=pending"
+                   class="{% if current_status == 'pending' %}active{% endif %}">Pending</a>
+                <a href="?status=paid"
+                   class="{% if current_status == 'paid' %}active{% endif %}">Paid</a>
             </div>
             <calcite-button href="" icon-start="plus">Add Client</calcite-button>
-        </section>
+        </header>
+        {% if not clients %}
+            <p>No Clients Available</p>
+        {% endif %}
+
         {% for client in clients %}
             <a href="{% url 'client-profile' client.id %}" class="list-card">
                 <div>
                     <div></div>
                     <div>
-                        <h2>{{ client.name }}</h2>
-                        <p>{{ client.organization }}</p>
+                        <div class="column">
+                            <h2>{{ client.name }}</h2>
+                            {% if client.status %}
+                                <calcite-chip  appearance="outline-fill">{{client.status}}</calcite-chip>
+                            {% endif %}
+                        </div>
+                        <p> <calcite-icon icon="home" scale="s"></calcite-icon>{{ client.location }}</p>
                     </div>
                 </div>
                 <div>
                     <p>
                         <calcite-icon icon="envelope" scale="s"></calcite-icon>
-                        {{ client.billing_email }}
+                        {{ client.email }}
                     </p>
-                    <p>Billing Date: {{ client.next_billing_date }}</p>
+                    <p>
+                        <calcite-icon icon="date-time" scale="s"></calcite-icon>
+                        {{ client.next_billing_date }}
+                    </p>
                 </div>
             </a>
         {% endfor %}

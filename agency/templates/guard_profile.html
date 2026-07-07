@@ -13,9 +13,13 @@
         </a>
         <header>
             <div>
-                <h1>{{ guard.user }}</h1>
+                <h1>{{ guard.user.get_full_name }}</h1>
                 <p>{{ guard.badge_number }}</p>
-                <p>{{ guard.is_active }}</p>
+                {% if guard.is_active %}
+                    <calcite-chip appearance="outline-fill">active</calcite-chip>
+                {% else %}
+                    <calcite-chip>inactive</calcite-chip>
+                {% endif %}
             </div>
             <div>
                 <calcite-button appearance="outline-fill">Deactivate</calcite-button>
@@ -23,30 +27,41 @@
             </div>
         </header>
         <section>
-            <h3>Current Billing</h3>
-            <div>
+            <h3>Current Payroll</h3>
+            <div class="space-between">
                 <h1>$ 4,000.00</h1>
-                <p>Billing Date</p>
+                <div class="end">
+                    <p>Billing Date</p>
+                    <h4>July 24, 2025</h4>
+                </div>
             </div>
         </section>
         <section>
             <h3>Contact</h3>
-            <div>
+            <div class="grid">
                 <div>
                     <p>email</p>
-                    <h3>{{ client.billing_email }}</h3>
-                </div>
-                <div>
-                    <p>primary contact</p>
-                    <h3>{{ guard.created_at }}</h3>
+                    <h4>
+                        <calcite-icon scale="s" icon="envelope"></calcite-icon>  email
+                    </h4>
                 </div>
                 <div>
                     <p>phone</p>
-                    <h3>095235235235</h3>
+                    <h4>
+                        <calcite-icon scale="s" icon="phone"></calcite-icon>  095235235235
+                    </h4>
                 </div>
                 <div>
-                    <p>client since</p>
-                    <h3>{{ guard.creted_at }}</h3>
+                    <p>address</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="home"></calcite-icon>  My address
+                    </h4>
+                </div>
+                <div>
+                    <p>joined since</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="user-plus"></calcite-icon>  {{ guard.created_at|date:"M d, Y" }}
+                    </h4>
                 </div>
             </div>
         </section>

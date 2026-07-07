@@ -1,16 +1,49 @@
 from decimal import Decimal
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+
+class User(AbstractUser):
+    ROLE_ADMIN = "ADMIN"
+    ROLE_STAFF = "STAFF"
+    ROLE_CLIENT = "CLIENT"
+    ROLE_GUARD = "GUARD"
+
+    ROLE_CHOICES = [
+        (ROLE_ADMIN, "Admin"),
+        (ROLE_STAFF, "Staff"),
+        (ROLE_CLIENT, "Client"),
+        (ROLE_GUARD, "Guard"),
+    ]
+
+    role = models.CharField(
+        max_length=10,
+        choices=ROLE_CHOICES,
+        default=ROLE_GUARD,
+    )
+
+    def __str__(self):
+        return self.get_full_name() or self.username
 
 
 class Client(models.Model):
     """Company that hires security guards."""
 
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="client_profile",
+        null=True,
+        blank=True,
+    )
+
     name = models.CharField(max_length=255)
     organization = models.CharField(max_length=255, blank=True)
+    location = models.CharField(max_length=255, blank=True)
 
-    billing_email = models.EmailField()
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=20, blank=True)
 
     invoice_cycle_days = models.PositiveIntegerField(default=30)
     next_billing_date = models.DateField()
@@ -20,8 +53,14 @@ class Client(models.Model):
         decimal_places=2,
     )
 
+    is_active = models.BooleanField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def status(self):
+        latest_invoice = self.invoices.last()
+        return latest_invoice.status if latest_invoice else "Unknown"
+    
     def __str__(self):
         return self.name
 
@@ -35,17 +74,16 @@ class Guard(models.Model):
         related_name="guard_profile",
     )
 
-    badge_number = models.CharField(
-        max_length=50,
-    )
+    badge_number = models.CharField(max_length=50)
 
     hourly_pay_rate = models.DecimalField(
         max_digits=10,
         decimal_places=2,
     )
+    address = models.CharField(max_length=255, blank=True)
 
     phone_number = models.CharField(
-        max_length=30,
+        max_length=20,
         blank=True,
     )
 
@@ -58,10 +96,7 @@ class Guard(models.Model):
 
 
 class GuardAssignment(models.Model):
-    """
-    Assigns a guard to a client.
-    One assignment can have many attendance records.
-    """
+    """Assigns a guard to a client."""
 
     client = models.ForeignKey(
         Client,
@@ -76,6 +111,7 @@ class GuardAssignment(models.Model):
     )
 
     assigned_from = models.DateField()
+
     assigned_until = models.DateField(
         null=True,
         blank=True,
@@ -86,13 +122,11 @@ class GuardAssignment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.guard} -> {self.client}"
+        return f"{self.guard} → {self.client}"
 
 
 class GuardAttendance(models.Model):
-    """
-    Daily login/logout of a guard.
-    """
+    """Daily attendance of a guard."""
 
     assignment = models.ForeignKey(
         GuardAssignment,
@@ -132,9 +166,9 @@ class GuardAttendance(models.Model):
 
 
 class Invoice(models.Model):
-    STATUS_PENDING = "PENDING"
-    STATUS_PAID = "PAID"
-    STATUS_OVERDUE = "OVERDUE"
+    STATUS_PENDING = "pending"
+    STATUS_PAID = "paid"
+    STATUS_OVERDUE = "overdue"
 
     STATUS_CHOICES = [
         (STATUS_PENDING, "Pending"),
@@ -152,7 +186,6 @@ class Invoice(models.Model):
     billing_end = models.DateField()
 
     issued_date = models.DateField(auto_now_add=True)
-
     due_date = models.DateField()
 
     total_hours = models.DecimalField(

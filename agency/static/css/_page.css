@@ -4,15 +4,22 @@
   gap: 1rem;
 }
 
-.dashboard .header {
+.dashboard header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
-.dashboard .header > div {
+.dashboard header > div {
   display: flex;
   gap: 1rem;
+}
+
+.dashboard header .flex {
+  display: flex;
+}
+
+.dashboard header .active {
+  color: var(--calcite-color-brand);
 }
 
 .dashboard a {
@@ -25,6 +32,10 @@
 
 .dashboard a:hover {
   color: var(--calcite-color-brand);
+}
+
+.list-card:hover calcite-chip {
+  --calcite-chip-text-color:
 }
 
 .list-card {
@@ -42,6 +53,16 @@
   border: 1px solid var(--calcite-color-brand-hover);
 }
 
+.list-card h2{
+  text-transform: capitalize;
+}
+
+.list-card .column {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem
+} 
+
 .list-card > div {
   display: flex;
   flex-direction: column;
@@ -57,3 +78,9 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.list-card calcite-chip {
+  text-transform: capitalize;
+}
+
+

@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
+
 from .models import Client, Guard
 
 
@@ -8,25 +10,49 @@ def show_agency(request):
 
 def show_clients(request):
     status = request.GET.get("status")
+    search = request.GET.get("search")
+
     clients = Client.objects.all()
+
+    if status:
+        clients = clients.filter(invoices__status=status)
+
+    if search:
+        clients = clients.filter(
+            Q(name__icontains=search)
+            | Q(organization__icontains=search)
+            | Q(email__icontains=search)
+        )
 
     context = {
         "clients": clients,
         "current_status": status,
+        "search": search,
     }
-
-    if status:
-        clients = clients.filter(invoices__status=status).distinct()
 
     return render(request, "client_page.html", context)
 
 
 def show_guards(request):
+    status = request.GET.get("status")
+    search = request.GET.get("search")
+
     guards = Guard.objects.all()
 
-    context = {
-        "guards": guards,
-    }
+    if status == "active":
+        guards = guards.filter(is_active=True)
+    elif status == "inactive":
+        guards = guards.filter(is_active=False)
+
+    if search:
+        guards = guards.filter(
+            Q(user__first_name__icontains=search) |
+            Q(user__last_name__icontains=search) |
+            Q(user__username__icontains=search) |
+            Q(user__email__icontains=search) 
+        )
+
+    context = {"guards": guards, "current_status": status, "search": search}
 
     return render(
         request,
