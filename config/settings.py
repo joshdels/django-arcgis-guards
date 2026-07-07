@@ -6,7 +6,7 @@ SECRET_KEY = "django-insecure-1hj(nx-%cv5=d2@xy&^a&%s^@o@21*zy1z*xo2k6%8o%s$+$x$
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["django-arcgis-guards.onrender.com", "*"]
 
 
 # Application definition
