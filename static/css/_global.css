@@ -1,4 +1,5 @@
 @import url("container.css");
+@import url("navbar.css");
 
 html:not(.calcite-hydrated) {
   visibility: hidden;
@@ -19,6 +20,4 @@ body {
   background-color: var(--calcite-color-surface-4);
 }
 
-nav {
-  background-color: var(--calcite-color-surface-2);
-}
+

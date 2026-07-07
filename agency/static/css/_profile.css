@@ -1,0 +1,32 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-out;
+}
+
+.profile a:hover {
+  color: var(--calcite-color-brand);
+}
+
+.profile section {
+  border: 1px solid var(--calcite-color-border-1);
+  background-color: var(--calcite-color-surface-2);
+  padding: 2rem;
+}
+
+.profile section > div {
+  background-color: rgb(148, 146, 146);
+}

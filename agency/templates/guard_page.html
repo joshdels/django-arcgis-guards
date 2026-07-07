@@ -1,9 +1,44 @@
 {% extends '_base.html' %}
 {% load static %}
-{% block title %} Guard Page | Guards {% endblock %}
-
-{% block content %} 
-  <h1>Esri testing</h1>
-  <calcite-button>submit</calcite-button>
+{% block title %}Guard Page | Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_guard_page.css' %}">
 {% endblock %}
-
+{% block content %}
+    {% include 'component/navbar.html' %}
+    <section class="dashboard container">
+        <a href="{% url 'home' %}">
+            <calcite-icon icon="chevron-left"> </calcite-icon>
+            Back to Dashboard
+        </a>
+        <h1>Guards</h1>
+        <section class="header">
+            <div>
+                <input type="Search by name, email" />
+                <a href="{% url 'guards' %}">All</a>
+                <a href="?status=ACTIVE">Active</a>
+                <a href="?status=INACTIVE">Inactive</a>
+            </div>
+            <calcite-button href=""  icon-start="plus">Add Guard</calcite-button>
+        </section>
+        {% for guard in guards %}
+            <a href="{% url 'guard-profile' guard.id %}" class="list-card">
+                <div>
+                    <div>
+                        <h2>{{ guard.user }}</h2>
+                        <p>
+                            <calcite-icon icon="phone" scale="s"></calcite-icon>
+                            {{ guard.phone_number }}
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <calcite-icon icon="user-plus" /> {{ guard.created_at }}
+                        </p>
+                    </div>
+                </div>
+                <div></div>
+            </a>
+        {% endfor %}
+    </section>
+{% endblock %}

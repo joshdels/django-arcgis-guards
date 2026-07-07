@@ -1,0 +1,29 @@
+nav {
+  background-color: var(--calcite-color-surface-2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 500;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--calcite-color-text-1);
+}
+
+nav section {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+nav section > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: end;
+}

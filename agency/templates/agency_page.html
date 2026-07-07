@@ -1,50 +1,26 @@
 {% extends '_base.html' %}
 {% load static %}
-
 {% block title %}Agency | Guards{% endblock %}
-
-{% block extra_head %} 
-  <link rel="stylesheet" href="{% static 'css/_agency_page.css' %}">{% endblock %}   
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_agency_page.css' %}">
+{% endblock %}
 {% block content %}
-
-{% include 'component/navbar.html' %}
-
-
-<section class="container">
-
-  <h1>Agency Dashboard</h1>
-
-  <main class="dashboard">
-
-
-      <a href="{% url 'clients' %}" class="dashboard-card">
-      <calcite-icon
-        slot="thumbnail"
-        icon="organization"
-        scale="l">
-      </calcite-icon>
-
-      <h2>Clients</h2>
-      <p>
-        View and manage all client companies.
-      </p>
-  </a>
-
-  <a href="{% url 'guards' %}" class="dashboard-card">
-      <calcite-icon
-        icon="address-book"
-        scale="l">
-      </calcite-icon>
-
-      <h2>Guards</h2>
-      <p>
-        View and manage all guards.
-      </p>
-  </a>
-  </main>
-
-
-
-</section>
-
+    {% include 'component/navbar.html' %}
+    <section class="container">
+        <h1>Agency Dashboard</h1>
+        <main class="dashboard">
+            <a href="{% url 'clients' %}" class="dashboard-card">
+                <calcite-icon slot="thumbnail" icon="organization" scale="l">
+                </calcite-icon>
+                <h2>Clients</h2>
+                <p>View and manage all client companies.</p>
+            </a>
+            <a href="{% url 'guards' %}" class="dashboard-card">
+                <calcite-icon icon="address-book" scale="l">
+                </calcite-icon>
+                <h2>Guards</h2>
+                <p>View and manage all guards.</p>
+            </a>
+        </main>
+    </section>
 {% endblock %}

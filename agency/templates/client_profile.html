@@ -1,9 +1,67 @@
 {% extends '_base.html' %}
 {% load static %}
-{% block title %} Client Profile | Guards {% endblock %}
-
-{% block content %} 
-  <h1>Esri testing</h1>
-  <calcite-button> submit </calcite-button>
+{% block title %}Client Profile | Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
 {% endblock %}
-
+{% block content %}
+    {% include 'component/navbar.html' %}
+    <main class="container profile">
+        <a href="{% url 'clients' %}">
+            <calcite-icon icon="chevron-left"> </calcite-icon>
+            Back to Clients
+        </a>
+        <header>
+            <div>
+                <h1>{{ client.name }}</h1>
+                <p>{{ client.organization }}</p>
+            </div>
+            <div>
+                {% comment %} Might activate or deactivate {% endcomment %}
+                <calcite-button appearance="outline-fill">Deactivate</calcite-button>
+                <calcite-button>Edit</calcite-button>
+            </div>
+        </header>
+        <section>
+            <h3>Current Billing</h3>
+            <div>
+                <h1>$ 4,000.00</h1>
+                <p>Billing Date</p>
+            </div>
+        </section>
+        <section>
+            <h3>Contact</h3>
+            <div>
+                <div>
+                    <p>email</p>
+                    <h5>{{ client.billing_email }}</h5>
+                </div>
+                <div>
+                    <p>primary contact</p>
+                    <h5>Hello testing</h5>
+                </div>
+                <div>
+                    <p>phone</p>
+                    <h5>095235235235</h5>
+                </div>
+                <div>
+                    <p>client since</p>
+                    <h5>{{ client.creted_at }}</h5>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Assigned Guards</h3>
+            <p>guard 1</p>
+            <p>guard 2</p>
+        </section>
+        <section>
+            <h3>Invoice History</h3>
+            <div>
+                <p>kust 1</p>
+                <p>kust 1</p>
+                <p>kust 1</p>
+            </div>
+        </section>
+    </main>
+{% endblock %}

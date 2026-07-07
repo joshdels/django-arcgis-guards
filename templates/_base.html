@@ -1,22 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %} {% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/_global.css' %}">
-  {% block extra_head %} {% endblock %}   
-  <script type="module" src="https://js.arcgis.com/5.1/"></script>
-</head>
-<body>
-  {% block content %} {% endblock %}
-  {% block extra_script %} {% endblock %}
-
-  <script>
-  customElements.whenDefined("calcite-button").then(() => {
-    document.documentElement.classList.add("calcite-hydrated");
-  });
-</script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+        <link rel="stylesheet" href="{% static 'css/_global.css' %}">
+        {% block extra_head %}{% endblock %}
+        <script type="module" src="https://js.arcgis.com/5.1/"></script>
+    </head>
+    <body>
+        {% block content %}{% endblock %}
+        {% block extra_script %}{% endblock %}
+        <script src="{% static 'js/hydration.js' %}"></script>
+    </body>
 </html>
