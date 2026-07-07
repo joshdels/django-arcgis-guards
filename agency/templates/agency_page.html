@@ -7,11 +7,17 @@
   <link rel="stylesheet" href="{% static 'css/_agency_page.css' %}">{% endblock %}   
 {% block content %}
 
-<h1 class="container-navbar">Agency Dashboard</h1>
+{% include 'component/navbar.html' %}
 
-<section class="dashboard container">
 
-  <a href="{% url 'client-page' %}" class="dashboard-card">
+<section class="container">
+
+  <h1>Agency Dashboard</h1>
+
+  <main class="dashboard">
+
+
+      <a href="{% url 'clients' %}" class="dashboard-card">
       <calcite-icon
         slot="thumbnail"
         icon="organization"
@@ -24,7 +30,7 @@
       </p>
   </a>
 
-  <a href="{% url 'guard-page' %}" class="dashboard-card">
+  <a href="{% url 'guards' %}" class="dashboard-card">
       <calcite-icon
         icon="address-book"
         scale="l">
@@ -35,6 +41,9 @@
         View and manage all guards.
       </p>
   </a>
+  </main>
+
+
 
 </section>
 

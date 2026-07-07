@@ -1,7 +1,24 @@
 @import url("container.css");
 
+html:not(.calcite-hydrated) {
+  visibility: hidden;
+}
+
+html.calcite-hydrated {
+  visibility: visible;
+}
+
 html,
-body, * {
+body,
+* {
   padding: 0;
   margin: 0;
+}
+
+body {
+  background-color: var(--calcite-color-surface-4);
+}
+
+nav {
+  background-color: var(--calcite-color-surface-2);
 }

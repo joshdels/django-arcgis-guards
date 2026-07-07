@@ -12,5 +12,11 @@
 <body>
   {% block content %} {% endblock %}
   {% block extra_script %} {% endblock %}
+
+  <script>
+  customElements.whenDefined("calcite-button").then(() => {
+    document.documentElement.classList.add("calcite-hydrated");
+  });
+</script>
 </body>
 </html>

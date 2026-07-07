@@ -1,9 +1,45 @@
-{% extends '_base.html' %}
-{% load static %}
-{% block title %} Client Page | Guards {% endblock %}
+{% extends '_base.html' %} {% load static %} {% block title %} Client Page |
+Guards {% endblock %} {% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/_client_page.css' %}" />
+{% endblock %} {% block content %} {% include 'component/navbar.html' %}
 
-{% block content %} 
-  <h1>Esri testing</h1>
-  <calcite-button> submit </calcite-button>
+<section class="dashboard container">
+  <section class="header">
+    
+    <div>
+      <input type="Search by name, org, email" />
+      <a href="{% url 'clients' %}">All</a>
+      <a href="?status=OVERDUE">Overdue</a>
+      <a href="?status=PENDING">Pending</a>
+      <a href="?status=PAID">Paid</a>
+    </div>
+
+
+    <a href="">
+      <calcite-button appearance="solid" icon-start="plus">Add Client</calcite-button>
+    </a>
+  </section>
+
+  {% for client in clients %}
+
+  <a href="{% url 'client-profile' client.id %}" class="list-card">
+    <div>
+      <div></div>
+      <div>
+        <h2>{{ client.name }}</h2>
+        <p>{{ client.organization }}</p>
+      </div>
+    </div>
+    <div>
+      <p>
+        <calcite-icon icon="envelope" scale="s"></calcite-icon> 
+        {{ client.billing_email }}
+      </p>
+      <p>Billing Date: {{ client.next_billing_date }}</p>
+    </div>
+  </a>
+
+  {% endfor %}
+</section>
+
 {% endblock %}
-

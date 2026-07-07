@@ -7,9 +7,16 @@ def show_agency(request):
 
 
 def show_clients(request):
+    status = request.GET.get("status")
     clients = Client.objects.all()
 
-    context = {"clients": clients}
+    context = {
+        "clients": clients,
+        "current_status": status,
+    }
+
+    if status:
+        clients = clients.filter(invoices__status=status).distinct()
 
     return render(request, "client_page.html", context)
 

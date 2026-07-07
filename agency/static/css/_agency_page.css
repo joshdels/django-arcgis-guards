@@ -11,21 +11,25 @@
 
 .dashboard-card {
   border: 1px solid var(--calcite-color-border-1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-in-out;
-  min-height: 300px;
+  height: 300px;
+  background-color: var(--calcite-color-surface-2);
 }
 
 .dashboard-card:hover {
-  border: 1px solid var(--calcite-color-status-info);
+  border: 1px solid var(--calcite-color-brand-hover);
 }
 
 .dashboard-card calcite-icon {
   width: 80px;
   height: 80px;
+}
+
+navbar {
+  background-color: var(--calcite-color-surface-2);
 }
