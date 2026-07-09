@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 
-from .models import Client, Guard
+from apps.client.models import Client
+from apps.guard.models import Guard
 
 
 def show_agency(request):

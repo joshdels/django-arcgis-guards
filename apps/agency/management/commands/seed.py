@@ -5,13 +5,8 @@ from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
-from apps.agency.models import (
-    Client,
-    Guard,
-    GuardAssignment,
-    GuardAttendance,
-    Invoice,
-)
+from apps.client.models import Client, Invoice
+from apps.guard.models import Guard, GuardAssignment, GuardAttendance
 
 User = get_user_model()
 
