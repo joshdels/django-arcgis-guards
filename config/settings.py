@@ -18,12 +18,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # apps
-    "agency",
+    "apps.agency",
+    "apps.client",
+    "apps.guard",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-        # temp files
+    # temp files
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -116,7 +118,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 # ----------------------------
-# STOGRAGES 
+# STOGRAGES
 # ----------------------------
 # temp
 STORAGES = {

@@ -5,7 +5,7 @@ from .models import Client, Guard
 
 
 def show_agency(request):
-    return render(request, "agency_page.html")
+    return render(request, "_agency_page.html")
 
 
 def show_clients(request):
