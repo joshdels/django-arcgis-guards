@@ -17,6 +17,7 @@ class Client(models.Model):
     organization = models.CharField(max_length=255, blank=True)
     location = models.CharField(max_length=255, blank=True)
 
+    contact_person = models.CharField(max_length=255, blank=True)
     email = models.EmailField(blank=True)
     phone = models.CharField(max_length=20, blank=True)
 
@@ -38,48 +39,3 @@ class Client(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Invoice(models.Model):
-    STATUS_PENDING = "pending"
-    STATUS_PAID = "paid"
-    STATUS_OVERDUE = "overdue"
-
-    STATUS_CHOICES = [
-        (STATUS_PENDING, "Pending"),
-        (STATUS_PAID, "Paid"),
-        (STATUS_OVERDUE, "Overdue"),
-    ]
-
-    client = models.ForeignKey(
-        Client,
-        on_delete=models.CASCADE,
-        related_name="invoices",
-    )
-
-    billing_start = models.DateField()
-    billing_end = models.DateField()
-
-    issued_date = models.DateField(auto_now_add=True)
-    due_date = models.DateField()
-
-    total_hours = models.DecimalField(
-        max_digits=8,
-        decimal_places=2,
-    )
-
-    total_amount = models.DecimalField(
-        max_digits=12,
-        decimal_places=2,
-    )
-
-    status = models.CharField(
-        max_length=10,
-        choices=STATUS_CHOICES,
-        default=STATUS_PENDING,
-    )
-
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Invoice #{self.pk} - {self.client.name}"
