@@ -22,7 +22,7 @@ class Client(models.Model):
     phone = models.CharField(max_length=20, blank=True)
 
     invoice_cycle_days = models.PositiveIntegerField(default=30)
-    next_billing_date = models.DateField()
+    next_billing_date = models.DateField(null=True, blank=True)
 
     hourly_billing_rate = models.DecimalField(
         max_digits=10,

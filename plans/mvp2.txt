@@ -1,0 +1,22 @@
+Agency
+-----
+Can create a Client Detail
+Can Suspend a client
+Delegate Jobs to each client
+Send Registration to client (unique link) (optional)
+Sends Invoice
+
+Client
+-----
+Request number of Guards or Jobs
+Edit Own Details Information
+History of Invoice and Billing
+Billing - PDF (html)
+Feedback guards
+
+Guards
+----
+Edit Information
+See Jobs and History
+Rccumulated payroll
+Report Details Problems/Inspection (ArcGIS Survey)
