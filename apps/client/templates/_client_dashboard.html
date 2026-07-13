@@ -1,29 +1,24 @@
 {% extends '_base.html' %}
 {% load static %}
-{% block title %}Client Profile | Dumagete Guards{% endblock %}
+{% block title %}My Client Portal | Dumagete Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
 {% endblock %}
 {% block content %}
     <div class="dashboard-container ">
         <aside class="dashboard-sidebar">
-            {% include 'components/sidebar.html' %}
+            {% include 'components/client-sidebar.html' %}
         </aside>
         <section class="dashboard-content">
             {% include 'components/navbar-dashboard.html' %}
             <main class="container-profile profile">
-                <a href="{% url 'clients' %}">
-                    <calcite-icon icon="chevron-left"> </calcite-icon>
-                    Back to Clients
-                </a>
                 <div>
                     <header>
                         <div>
-                            <h1>{{ client.name }}</h1>
-                            <p>{{ client.organization }}</p>
+                            <h1>My Client</h1>
+                            <p>Organization</p>
                         </div>
                         <div>
-                            <calcite-button appearance="outline-fill">Deactivate</calcite-button>
                             <calcite-button>Edit</calcite-button>
                         </div>
                     </header>

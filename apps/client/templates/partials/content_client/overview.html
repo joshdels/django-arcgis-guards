@@ -1,0 +1,69 @@
+<main class="profile">
+    <section>
+        <h2>Information</h2>
+        <div class="grid">
+            <div>
+                <p>email</p>
+                <h4>
+                    <calcite-icon scale="s" icon="envelope"></calcite-icon>
+                    {{ client.email }}
+                </h4>
+            </div>
+            <div>
+                <p>phone</p>
+                <h4>
+                    <calcite-icon scale="s" icon="phone"></calcite-icon>
+                    {{ client.phone }}
+                </h4>
+            </div>
+            <div>
+                <p>client since</p>
+                <h4>{{ client.created_at|date:"M d, Y" }}</h4>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="space-between">
+            <h2>Active Contracts</h2>
+            <calcite-button icon-start="plus" label="Add New Contract">New Contract</calcite-button>
+        </div>
+        <div>
+            <h4>contract 1</h4>
+            <h4>contract 2</h4>
+        </div>
+    </section>
+    <section>
+        <h2>Guards</h2>
+        <div class="grid">
+            <div>
+                <p>Total Guard Hired</p>
+                <h4><calcite-icon icon="users" scale="s"></calcite-icon>  13</h4>
+            </div>
+            <div>
+                <p>Active Guards</p>
+                <h4><calcite-icon icon="user" scale="s"></calcite-icon> 5</h4>
+            </div>
+            <div>
+                <p>Inactive Guards</p>
+                <h4><calcite-icon icon="user-x" scale="s"></calcite-icon> 2</h4>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Billing Overview</h2>
+        <div class="grid">
+            <div>
+                <p>Current Billing</p>
+                <h4>Php 43,000.00</h4>
+            </div>
+            <div>
+                <p>Total Spent</p>
+                <h4>Php 43,000.00</h4>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Report</h2>
+    </section>
+</main>

@@ -1,0 +1,12 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.container-profile {
+  padding: 2rem;
+}
+
+#client-content {
+  margin-top: 2rem;
+}

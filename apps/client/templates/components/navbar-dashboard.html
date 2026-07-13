@@ -1,8 +1,5 @@
-<nav class="navbar container-navbar">
+<nav class="profile-navbar">
     <main>
-        <a href="{% url 'home' %}">
-            <h1>Dumagete Guards Agency</h1>
-        </a>
         <section>
             <div>
                 <h4>{{ request.user.first_name|default:request.user.username }}</h4>
