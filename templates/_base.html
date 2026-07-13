@@ -8,11 +8,9 @@
             {% block title %}{% endblock %}
         </title>
         <link rel="stylesheet" href="{% static 'css/_global.css' %}">
-        {% block extra_head %}{% endblock %}
-        <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
-                integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V"
-                crossorigin="anonymous"></script>
         <script type="module" src="https://js.arcgis.com/5.1/"></script>
+        <script src="{% static 'lib/htmx.min.js '%}"></script>
+        {% block extra_head %}{% endblock %}
     </head>
     <body>
         {% block content %}{% endblock %}
