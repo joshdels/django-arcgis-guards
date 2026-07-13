@@ -2,8 +2,8 @@
     <main>
         <section>
             <div>
-                <h4>Joshua</h4>
-                <p>staff</p>
+                <h4>{{ request.user.first_name|default:request.user.username }}</h4>
+                <p>{{ request.user.get_role_display|capfirst }}</p>
             </div>
             <div>
                 <calcite-button scale="l">Logout</calcite-button>

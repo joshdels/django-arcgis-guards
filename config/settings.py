@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # apps
+    "apps.accounts",
     "apps.agency",
     "apps.client",
     "apps.guard",
@@ -89,7 +90,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "agency.User"
+AUTH_USER_MODEL = "accounts.User"
 
 
 # Internationalization
