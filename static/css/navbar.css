@@ -1,27 +1,27 @@
-nav {
+.navbar {
   background-color: var(--calcite-color-surface-2);
+  border-bottom: solid 1px var(--calcite-color-border-1);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 500;
 }
 
-nav a {
+.navbar a {
   text-decoration: none;
   color: var(--calcite-color-text-1);
 }
 
-nav section {
+.navbar section {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
-nav section > div {
+.navbar section > div {
   display: flex;
   flex-direction: column;
   text-align: end;

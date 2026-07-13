@@ -1,0 +1,8 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.container-profile {
+  padding: 2rem;
+}

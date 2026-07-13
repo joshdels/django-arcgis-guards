@@ -1,4 +1,6 @@
-@import url('dashboard.css');
+@import url("dashboard.css");
+@import url("profile_container.css");
+@import url("profile_navbar.css");
 
 .profile {
   display: flex;
