@@ -9,7 +9,7 @@ urlpatterns = [
 
     path("client-profile/<int:id>/", views.client_profile, name="client-profile"),
 
-    path("client-profile/<int:id>/dashboard/", views.client_dashboard, name="client_dashboard"),
+    path("client-profile/<int:id>/overview/", views.client_overview, name="client_overview"),
     path("client-profile/<int:id>/information/", views.client_information, name="client_information"),
     path("client-profile/<int:id>/guard/", views.client_guard, name="client_guard"),
     path("client-profile/<int:id>/billing/", views.client_billing, name="client_billing"),

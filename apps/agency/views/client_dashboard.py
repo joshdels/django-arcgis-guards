@@ -3,9 +3,9 @@ from django.shortcuts import get_object_or_404, render
 from apps.client.models import Client
 
 
-def client_dashboard(request, id):
+def client_overview(request, id):
     client = get_object_or_404(Client, id=id)
-    return render(request, "partials/content_client/dashboard.html", {"client": client})
+    return render(request, "partials/content_client/overview.html", {"client": client})
 
 
 def client_information(request, id):
