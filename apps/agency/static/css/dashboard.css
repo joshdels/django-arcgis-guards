@@ -1,0 +1,44 @@
+.container-navbar section {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dashboard-sidebar {
+  position: sticky;
+  top: 0;
+
+  width: 400px;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+}
+
+.dashboard-content {
+  width: calc(100vw - 400px)
+}
+
+@media (max-width: 1400px) {
+
+}
+
+@media (max-width: 1200px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 480px) {
+
+}

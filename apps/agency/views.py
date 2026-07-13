@@ -10,13 +10,9 @@ def show_agency(request):
 
 
 def show_clients(request):
-    status = request.GET.get("status")
     search = request.GET.get("search")
 
     clients = Client.objects.all()
-
-    if status:
-        clients = clients.filter(invoices__status=status)
 
     if search:
         clients = clients.filter(
@@ -27,7 +23,6 @@ def show_clients(request):
 
     context = {
         "clients": clients,
-        "current_status": status,
         "search": search,
     }
 
@@ -35,25 +30,19 @@ def show_clients(request):
 
 
 def show_guards(request):
-    status = request.GET.get("status")
     search = request.GET.get("search")
 
     guards = Guard.objects.all()
 
-    if status == "active":
-        guards = guards.filter(is_active=True)
-    elif status == "inactive":
-        guards = guards.filter(is_active=False)
-
     if search:
         guards = guards.filter(
-            Q(user__first_name__icontains=search) |
-            Q(user__last_name__icontains=search) |
-            Q(user__username__icontains=search) |
-            Q(user__email__icontains=search) 
+            Q(user__first_name__icontains=search)
+            | Q(user__last_name__icontains=search)
+            | Q(user__username__icontains=search)
+            | Q(user__email__icontains=search)
         )
 
-    context = {"guards": guards, "current_status": status, "search": search}
+    context = {"guards": guards, "search": search}
 
     return render(
         request,

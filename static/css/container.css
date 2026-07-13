@@ -3,8 +3,31 @@
 }
 
 .container-navbar {
+  display: flex;
+  flex-direction: column;
   padding: 1rem 10rem;
 }
+
+.container-navbar main {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container-navbar main section  div{
+  display: flex;
+  flex-direction: column;
+} 
+
+.container-navbar aside {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 1rem;
+}
+
 
 @media (max-width: 1400px) {
   .container {

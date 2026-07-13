@@ -31,11 +31,3 @@ class Client(models.Model):
 
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
-    @property
-    def status(self):
-        latest_invoice = self.invoices.last()
-        return latest_invoice.status if latest_invoice else "Unknown"
-
-    def __str__(self):
-        return self.name
