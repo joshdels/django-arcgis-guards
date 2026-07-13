@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     "apps.agency",
     "apps.client",
     "apps.guard",
+    "apps.billing",
+    "apps.operation",
 ]
 
 MIDDLEWARE = [
