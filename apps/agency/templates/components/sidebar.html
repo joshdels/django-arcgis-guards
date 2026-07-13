@@ -15,10 +15,15 @@
            hx-push-url="true">
         <calcite-icon icon="user"></calcite-icon>Information</a>
         <a class="sidebar-link"
+           hx-get="{% url 'client_contract' client.id %}"
+           hx-target="#client-content"
+           hx-push-url="true">
+        <calcite-icon icon="pen"></calcite-icon>Contract</a>        
+        <a class="sidebar-link"
            hx-get="{% url 'client_guard' client.id %}"
            hx-target="#client-content"
            hx-push-url="true">
-        <calcite-icon icon="security"></calcite-icon>Guards</a>
+        <calcite-icon icon="security"></calcite-icon>Guard</a>
         <a class="sidebar-link"
            hx-get="{% url 'client_billing' client.id %}"
            hx-target="#client-content"

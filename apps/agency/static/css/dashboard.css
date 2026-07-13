@@ -41,7 +41,7 @@
 }
 
 .sidebar main a:hover {
-   background-color: var(--calcite-color-brand);
+  background-color: var(--calcite-color-brand);
   color: var(--calcite-color-surface-2);
   cursor: pointer;
 }
@@ -49,7 +49,7 @@
 .sidebar-link.active {
   color: var(--calcite-color-surface-2);
   background-color: var(--calcite-color-brand-hover);
- border-left: 8px solid var(--calcite-color-brand-press);
+  border-left: 8px solid var(--calcite-color-brand-press);
 }
 
 .dashboard-content {

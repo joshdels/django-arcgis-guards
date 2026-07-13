@@ -22,6 +22,15 @@ def client_information(request, id):
 
     return render(request, "client_profile.html", context)
 
+def client_contract(request, id):
+    client = get_object_or_404(Client, id=id)
+    context = {"client": client}
+
+    if request.htmx:
+        return render(request, "partials/content_client/contract.html", context)
+
+    return render(request, "client_profile.html", context)
+
 
 def client_guard(request, id):
     client = get_object_or_404(Client, id=id)
