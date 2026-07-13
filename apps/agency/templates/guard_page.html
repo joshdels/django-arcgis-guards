@@ -14,28 +14,23 @@
         <h1>Guards</h1>
         <header class="header">
             <div>
-
                 <form method="get" class="flex">
                     <calcite-input type="search" name="search" placeholder="Search name and location`" icon="search" value="{{ search|default:'' }}">
                     </calcite-input>
                     <calcite-button type="submit">Search</calcite-button>
                 </form>
                 <a href="{% url 'guards' %}"
-                    class="{% if not current_status %}active{% endif %}"
-                >All</a>
+                   class="{% if not current_status %}active{% endif %}">All</a>
                 <a href="?status=active"
-                 class="{% if current_status == 'active' %}active{% endif %}"
-                >Active</a>
+                   class="{% if current_status == 'active' %}active{% endif %}">Active</a>
                 <a href="?status=inactive"
-                 class="{% if current_status == 'inactive' %}active{% endif %}"
-                >Inactive</a>
+                   class="{% if current_status == 'inactive' %}active{% endif %}">Inactive</a>
             </div>
             <calcite-button href=""  icon-start="plus">Add Guard</calcite-button>
         </header>
         {% if not guards %}
             <p>No guards found.</p>
         {% endif %}
-        
         {% for guard in guards %}
             <a href="{% url 'guard-profile' guard.id %}" class="list-card">
                 <div class="space-between">

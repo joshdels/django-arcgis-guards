@@ -33,7 +33,6 @@
         {% if not clients %}
             <p>No Clients Available</p>
         {% endif %}
-
         {% for client in clients %}
             <a href="{% url 'client-profile' client.id %}" class="list-card">
                 <div>
@@ -42,10 +41,12 @@
                         <div class="column">
                             <h2>{{ client.name }}</h2>
                             {% if client.status %}
-                                <calcite-chip  appearance="outline-fill">{{client.status}}</calcite-chip>
+                                <calcite-chip appearance="outline-fill">{{ client.status }}</calcite-chip>
                             {% endif %}
                         </div>
-                        <p> <calcite-icon icon="home" scale="s"></calcite-icon>{{ client.location }}</p>
+                        <p>
+                            <calcite-icon icon="home" scale="s"></calcite-icon>{{ client.location }}
+                        </p>
                     </div>
                 </div>
                 <div>

@@ -37,12 +37,19 @@
   padding: 1rem 2rem;
   text-decoration: none;
   color: var(--calcite-color-text-1);
-  transition: 0.3s ease-in;
+  transition: 0.2s ease-in-out;
 }
 
 .sidebar main a:hover {
-  background-color: var(--calcite-color-brand-hover);
+   background-color: var(--calcite-color-brand);
   color: var(--calcite-color-surface-2);
+  cursor: pointer;
+}
+
+.sidebar-link.active {
+  color: var(--calcite-color-surface-2);
+  background-color: var(--calcite-color-brand-hover);
+ border-left: 8px solid var(--calcite-color-brand-press);
 }
 
 .dashboard-content {
