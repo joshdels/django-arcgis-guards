@@ -13,6 +13,7 @@ from apps.agency.forms import ClientForm
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def show_clients(request):
     search = request.GET.get("search")
+    status = request.GET.get("status")
 
     clients = Client.objects.all()
 
@@ -22,6 +23,11 @@ def show_clients(request):
             | Q(organization__icontains=search)
             | Q(email__icontains=search)
         )
+    if status == "active":
+        clients = clients.filter(is_active=True)
+
+    elif status == "inactive":
+        clients = clients.filter(is_active=False)
 
     return render(
         request,
@@ -29,6 +35,7 @@ def show_clients(request):
         {
             "clients": clients,
             "search": search,
+            "is_active": status,
         },
     )
 
