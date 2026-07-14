@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 
+from apps.operation.models import Contract
+
 
 class Guard(models.Model):
     """Security guard employed by the agency."""
@@ -30,3 +32,24 @@ class Guard(models.Model):
     is_active = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class GuardAssignment(models.Model):
+    contract = models.ForeignKey(
+        Contract,
+        related_name="assignments",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
+    guard = models.ForeignKey(
+        Guard,
+        related_name="assignment",
+        on_delete=models.CASCADE,
+    )
+
+    assigned_at = models.DateField()
+    relieved_at = models.DateField(null=True, blank=True)
+
+    is_active = models.BooleanField(default=True)

@@ -1,17 +1,69 @@
 from django.db import models
+
 from apps.client.models import Client
-from apps.operation.models import Job
+from apps.operation.models import Contract
 
 
 class Invoice(models.Model):
+    STATUS_CHOICES = [
+        ("draft", "Draft"),
+        ("sent", "Sent"),
+        ("paid", "Paid"),
+        ("overdue", "Overdue"),
+        ("cancelled", "Cancelled"),
+    ]
+
     client = models.ForeignKey(
-        Client, on_delete=models.CASCADE, related_name="invoices"
+        Client,
+        on_delete=models.CASCADE,
+        related_name="invoices",
     )
-    job = models.ForeignKey(
-        Job, on_delete=models.CASCADE, related_name="invoices", null=True, blank=True
+
+    contract = models.ForeignKey(
+        Contract,
+        on_delete=models.PROTECT,
+        related_name="invoices",
     )
-    invoice_number = models.CharField(max_length=100, unique=True)
+
+    invoice_number = models.CharField(
+        max_length=50,
+        unique=True,
+    )
+
+    billing_period_start = models.DateField()
+    billing_period_end = models.DateField()
     issue_date = models.DateField(auto_now_add=True)
+
     due_date = models.DateField()
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    is_paid = models.BooleanField(default=False)
+
+    subtotal = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0,
+    )
+
+    tax = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0,
+    )
+
+    total_amount = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0,
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="draft",
+    )
+
+    notes = models.TextField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.invoice_number
