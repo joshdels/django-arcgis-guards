@@ -10,21 +10,19 @@
             {% include 'components/client-sidebar.html' %}
         </aside>
         <section class="dashboard-content">
-            {% include 'components/navbar-dashboard.html' %}
+            {% include 'components/client-navbar-dashboard.html' %}
             <main class="container-profile profile">
                 <div>
                     <header>
                         <div>
-                            <h1>My Client</h1>
-                            <p>Organization</p>
+                            <h1>{{ client.name }}</h1>
+                            <p>{{ client.organization }}</p>
                         </div>
                         <div>
                             <calcite-button>Edit</calcite-button>
                         </div>
                     </header>
-                    <div  id="client-content">
-                    {% include "partials/content_client/overview.html" %}
-                    </div>
+                    <div id="client-content">{% include "partials/content_client/overview.html" %}</div>
                 </div>
             </main>
         </section>

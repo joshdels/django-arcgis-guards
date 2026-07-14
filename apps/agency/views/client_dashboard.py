@@ -2,7 +2,11 @@ from django.shortcuts import get_object_or_404, render
 
 from apps.client.models import Client
 
+from apps.accounts.decorators import roles_required
+from apps.accounts.models import User
 
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_overview(request, id):
     client = get_object_or_404(Client, id=id)
     context = {"client": client}
@@ -13,6 +17,7 @@ def client_overview(request, id):
     return render(request, "client_profile.html", context)
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_information(request, id):
     client = get_object_or_404(Client, id=id)
     context = {"client": client}
@@ -22,6 +27,8 @@ def client_information(request, id):
 
     return render(request, "client_profile.html", context)
 
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_contract(request, id):
     client = get_object_or_404(Client, id=id)
     context = {"client": client}
@@ -32,6 +39,7 @@ def client_contract(request, id):
     return render(request, "client_profile.html", context)
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_guard(request, id):
     client = get_object_or_404(Client, id=id)
     context = {"client": client}
@@ -42,6 +50,7 @@ def client_guard(request, id):
     return render(request, "client_profile.html", context)
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_billing(request, id):
     client = get_object_or_404(Client, id=id)
     context = {"client": client}
@@ -52,6 +61,7 @@ def client_billing(request, id):
     return render(request, "client_profile.html", context)
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_report(request, id):
     client = get_object_or_404(Client, id=id)
     context = {"client": client}

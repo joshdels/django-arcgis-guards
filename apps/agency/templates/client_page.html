@@ -7,7 +7,7 @@
 {% block content %}
     {% include 'components/navbar-with-choice.html' %}
     <section class="dashboard container">
-        <a href="{% url 'home' %}">
+        <a href="{% url 'agency:home' %}">
             <calcite-icon icon="chevron-left"> </calcite-icon>
             Back to Dashboard
         </a>
@@ -19,7 +19,7 @@
                     </calcite-input>
                     <calcite-button type="submit">Search</calcite-button>
                 </form>
-                <a href="{% url 'clients' %}"
+                <a href="{% url 'agency:clients' %}"
                    class="{% if not current_status %}active{% endif %}">All</a>
                 <a href="?status=overdue"
                    class="{% if current_status == 'overdue' %}active{% endif %}">Overdue</a>
@@ -34,7 +34,7 @@
             <p>No Clients Available</p>
         {% endif %}
         {% for client in clients %}
-            <a href="{% url 'client-profile' client.id %}" class="list-card">
+            <a href="{% url 'agency:client_profile' client.id %}" class="list-card">
                 <div>
                     <div></div>
                     <div>

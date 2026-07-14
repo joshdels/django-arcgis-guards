@@ -1,5 +1,5 @@
 <nav class="container-navbar">
-    <a href="{% url 'home' %}">
+    <a href="{% url 'guard:home' %}">
         <h1>Dumagete Guards Portal</h1>
     </a>
     <section>
@@ -8,7 +8,9 @@
             <p>guard</p>
         </div>
         <div>
-            <calcite-button scale="l">Logout</calcite-button>
+            <form action="{% url 'accounts:guard_logout' %}" method="post">
+                <calcite-button scale="l">Logout</calcite-button>
+            </form>
         </div>
     </section>
 </nav>

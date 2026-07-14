@@ -3,7 +3,11 @@ from django.db.models import Q
 
 from apps.guard.models import Guard
 
+from apps.accounts.decorators import roles_required
+from apps.accounts.models import User
 
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def guard_profile(request, id):
     guard = get_object_or_404(Guard, id=id)
     context = {"guard": guard}
@@ -11,6 +15,7 @@ def guard_profile(request, id):
     return render(request, "guard_profile.html", context)
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def show_guards(request):
     search = request.GET.get("search")
 

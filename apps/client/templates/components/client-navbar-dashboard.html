@@ -1,20 +1,16 @@
-<nav class="navbar container-navbar">
+<nav class="profile-navbar">
     <main>
-        <a href="{% url 'home' %}">
-            <h1>Dumagete Guards Agency</h1>
-        </a>
         <section>
             <div>
                 <h4>{{ request.user.first_name|default:request.user.username }}</h4>
                 <p>{{ request.user.get_role_display|capfirst }}</p>
             </div>
             <div>
-                <calcite-button scale="l" url="">Logout</calcite-button>
+                <form method="post" action="{% url 'accounts:client_logout' %}">
+                    {% csrf_token %}
+                    <calcite-button type="submit" scale="l">Logout</calcite-button>
+                </form>
             </div>
         </section>
     </main>
-    <aside>
-        <a href="">List View</a>
-        <a href="">Map View</a>
-    </aside>
 </nav>

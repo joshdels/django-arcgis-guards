@@ -12,7 +12,7 @@
         <section class="dashboard-content">
             {% include 'components/navbar-dashboard.html' %}
             <main class="container-profile profile">
-                <a href="{% url 'clients' %}">
+                <a href="{% url 'agency:clients' %}">
                     <calcite-icon icon="chevron-left"> </calcite-icon>
                     Back to Clients
                 </a>
@@ -27,9 +27,7 @@
                             <calcite-button>Edit</calcite-button>
                         </div>
                     </header>
-                    <div  id="client-content">
-                    {% include "partials/content_client/overview.html" %}
-                    </div>
+                    <div id="client-content">{% include "partials/content_client/overview.html" %}</div>
                 </div>
             </main>
         </section>

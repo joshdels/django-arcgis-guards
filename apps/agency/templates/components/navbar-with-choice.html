@@ -1,6 +1,6 @@
 <nav class="navbar container-navbar">
     <main>
-        <a href="{% url 'home' %}">
+        <a href="{% url 'agency:home' %}">
             <h1>Dumagete Guards Agency</h1>
         </a>
         <section>
@@ -9,7 +9,10 @@
                 <p>{{ request.user.get_role_display|capfirst }}</p>
             </div>
             <div>
-                <calcite-button scale="l" url="">Logout</calcite-button>
+                <form method="post" action="{%url 'accounts:staff_logout' %}">
+                    {% csrf_token %}
+                    <calcite-button type="submit" scale="l">Logout</calcite-button>
+                </form>
             </div>
         </section>
     </main>

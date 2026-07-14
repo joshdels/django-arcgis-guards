@@ -1,20 +1,21 @@
 from django.urls import path
 
 from .views import (
-    AdminLoginView,
+    StaffLoginView,
     ClientLoginView,
     GuardLoginView,
-    StaffLoginView,
-    UserLogoutView,
+    StaffLogoutView,
+    ClientLogoutView,
+    GuardLogoutView,
 )
 
 app_name = "accounts"
 
 urlpatterns = [
-    path("admin/login/", AdminLoginView.as_view(), name="admin_login"),
-    path("staff/login/", StaffLoginView.as_view(), name="staff_login"),
-    path("client/login/", ClientLoginView.as_view(), name="client_login"),
-    path("guard/login/", GuardLoginView.as_view(), name="guard_login"),
-
-    path("logout/", UserLogoutView.as_view(), name="logout"),
+    path("login/staff", StaffLoginView.as_view(), name="staff_login"),
+    path("login/client", ClientLoginView.as_view(), name="client_login"),
+    path("login/guard", GuardLoginView.as_view(), name="guard_login"),
+    path("logout/staff", StaffLogoutView.as_view(), name="staff_logout"),
+    path("logout/client", ClientLogoutView.as_view(), name="client_logout"),
+    path("logout/guard", GuardLogoutView.as_view(), name="guard_logout"),
 ]

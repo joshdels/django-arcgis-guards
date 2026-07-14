@@ -7,7 +7,7 @@
 {% block content %}
     {% include 'components/navbar.html' %}
     <section class="dashboard container">
-        <a href="{% url 'home' %}">
+        <a href="{% url 'agency:home' %}">
             <calcite-icon icon="chevron-left"> </calcite-icon>
             Back to Dashboard
         </a>
@@ -19,7 +19,8 @@
                     </calcite-input>
                     <calcite-button type="submit">Search</calcite-button>
                 </form>
-                <a href="{% url 'guards' %}"
+                <!-- Might flag this one -->
+                <a href="{% url 'agency:guards' %}"
                    class="{% if not current_status %}active{% endif %}">All</a>
                 <a href="?status=active"
                    class="{% if current_status == 'active' %}active{% endif %}">Active</a>
@@ -32,7 +33,7 @@
             <p>No guards found.</p>
         {% endif %}
         {% for guard in guards %}
-            <a href="{% url 'guard-profile' guard.id %}" class="list-card">
+            <a href="{% url 'agency:guard_profile' guard.id %}" class="list-card">
                 <div class="space-between">
                     <div>
                         <div class="column">
