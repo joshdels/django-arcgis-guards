@@ -9,13 +9,13 @@
     <section class="container">
         <h1>Agency Dashboard</h1>
         <main class="dashboard">
-            <a href="{% url 'agency:clients' %}" class="dashboard-card">
+            <a href="{% url 'agency:show_clients' %}" class="dashboard-card">
                 <calcite-icon slot="thumbnail" icon="organization" scale="l">
                 </calcite-icon>
                 <h2>Clients</h2>
                 <p>View and manage all client companies.</p>
             </a>
-            <a href="{% url 'agency:guards' %}" class="dashboard-card">
+            <a href="{% url 'agency:show_guards' %}" class="dashboard-card">
                 <calcite-icon icon="address-book" scale="l">
                 </calcite-icon>
                 <h2>Guards</h2>

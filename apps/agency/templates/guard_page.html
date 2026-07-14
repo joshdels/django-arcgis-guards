@@ -20,7 +20,7 @@
                     <calcite-button type="submit">Search</calcite-button>
                 </form>
                 <!-- Might flag this one -->
-                <a href="{% url 'agency:guards' %}"
+                <a href="{% url 'agency:show_guards' %}"
                    class="{% if not current_status %}active{% endif %}">All</a>
                 <a href="?status=active"
                    class="{% if current_status == 'active' %}active{% endif %}">Active</a>

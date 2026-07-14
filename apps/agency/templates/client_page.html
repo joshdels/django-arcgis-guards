@@ -19,7 +19,7 @@
                     </calcite-input>
                     <calcite-button type="submit">Search</calcite-button>
                 </form>
-                <a href="{% url 'agency:clients' %}"
+                <a href="{% url 'agency:show_clients' %}"
                    class="{% if not current_status %}active{% endif %}">All</a>
                 <a href="?status=overdue"
                    class="{% if current_status == 'overdue' %}active{% endif %}">Overdue</a>
@@ -28,7 +28,7 @@
                 <a href="?status=paid"
                    class="{% if current_status == 'paid' %}active{% endif %}">Paid</a>
             </div>
-            <calcite-button href="" icon-start="plus">Add Client</calcite-button>
+            <calcite-button href="{% url 'agency:client_create' %}" icon-start="plus">Add Client</calcite-button>
         </header>
         {% if not clients %}
             <p>No Clients Available</p>
@@ -40,8 +40,14 @@
                     <div>
                         <div class="column">
                             <h2>{{ client.name }}</h2>
-                            {% if client.status %}
-                                <calcite-chip appearance="outline-fill">{{ client.status }}</calcite-chip>
+                            {% if client.is_active %}
+                                <calcite-chip appearance="outline-fill" kind="inverse" scale="s">
+                                    Active
+                                </calcite-chip>
+                            {% else %}
+                                <calcite-chip appearance="solid" kind="neutral" scale="s">
+                                    Inactive
+                                </calcite-chip>
                             {% endif %}
                         </div>
                         <p>
