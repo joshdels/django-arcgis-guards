@@ -21,13 +21,13 @@
                 </form>
                 <!-- Might flag this one -->
                 <a href="{% url 'agency:show_guards' %}"
-                   class="{% if not current_status %}active{% endif %}">All</a>
+                   class="{% if not is_active %}active{% endif %}">All</a>
                 <a href="?status=active"
-                   class="{% if current_status == 'active' %}active{% endif %}">Active</a>
+                   class="{% if is_active == 'active' %}active{% endif %}">Active</a>
                 <a href="?status=inactive"
-                   class="{% if current_status == 'inactive' %}active{% endif %}">Inactive</a>
+                   class="{% if is_active == 'inactive' %}active{% endif %}">Inactive</a>
             </div>
-            <calcite-button href=""  icon-start="plus">Add Guard</calcite-button>
+            <calcite-button href="{% url 'agency:guard_create' %}"  icon-start="plus">Add Guard</calcite-button>
         </header>
         {% if not guards %}
             <p>No guards found.</p>
@@ -37,7 +37,7 @@
                 <div class="space-between">
                     <div>
                         <div class="column">
-                            <h2>{{ guard.user.get_full_name }}</h2>
+                            <h2>{{ guard.user.get_full_name|default:"Unknown" }}</h2>
                             {% if guard.is_active %}
                                 <calcite-chip appearance="outline-fill">active</calcite-chip>
                             {% else %}
@@ -45,8 +45,12 @@
                             {% endif %}
                         </div>
                         <p>
+                            <calcite-icon icon="check-shield" scale="s"></calcite-icon>
+                            {{ guard.badge_number|default:"N/A"}}
+                        </p>
+                        <p>
                             <calcite-icon icon="home" scale="s"></calcite-icon>
-                            {{ guard.location|default:"N/A" }}
+                            {{ guard.address|default:"N/A" }}
                         </p>
                     </div>
                 </div>

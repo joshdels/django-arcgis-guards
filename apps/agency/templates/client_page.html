@@ -60,7 +60,7 @@
                     </p>
                     <p>
                         <calcite-icon icon="date-time" scale="s"></calcite-icon>
-                        {{ client.next_billing_date }}
+                        {{ client.created_at|date:"m/d/Y" }}
                     </p>
                 </div>
             </a>

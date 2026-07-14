@@ -7,7 +7,7 @@
 {% block content %}
     {% include 'components/navbar.html' %}
     <main class="container profile">
-        <a href="{% url 'agency:guards' %}">
+        <a href="{% url 'agency:show_guards' %}">
             <calcite-icon icon="chevron-left"> </calcite-icon>
             Back to Guards
         </a>
@@ -22,8 +22,12 @@
                 {% endif %}
             </div>
             <div>
-                <calcite-button appearance="outline-fill">Deactivate</calcite-button>
-                <calcite-button>Edit</calcite-button>
+                {% if guard.is_active %}
+                    <calcite-button href="{% url 'agency:guard_toggle_status' guard.id %}" appearance="outline-fill">Deactivate Guard</calcite-button>
+                {% else %}
+                    <calcite-button href="{% url 'agency:guard_toggle_status' guard.id %}" appearance="outline-fill">Activate Guard</calcite-button>
+                {% endif %}
+                <calcite-button href="{% url 'agency:guard_update' guard.id %}">Edit</calcite-button>
             </div>
         </header>
         <section>

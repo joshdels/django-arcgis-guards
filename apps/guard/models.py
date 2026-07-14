@@ -9,6 +9,8 @@ class Guard(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="guard_profile",
+        null=True,
+        blank=True,
     )
 
     badge_number = models.CharField(max_length=50)

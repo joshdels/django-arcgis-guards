@@ -21,4 +21,7 @@ urlpatterns = [
     path("client-profile/<int:id>/toggle-status/", views.client_toggle_status, name="client_toggle_status"),
 
     path("guard-profile/<int:id>/", views.guard_profile, name="guard_profile"),
+    path("guard-profile/create/", views.guard_create, name="guard_create"),  
+    path("guard-profile/<int:id>/update/", views.guard_update, name="guard_update"), 
+    path("guard-profile/<int:id>/toggle-status/", views.guard_toggle_status, name="guard_toggle_status")
 ]

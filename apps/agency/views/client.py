@@ -29,15 +29,9 @@ def show_clients(request):
     elif status == "inactive":
         clients = clients.filter(is_active=False)
 
-    return render(
-        request,
-        "client_page.html",
-        {
-            "clients": clients,
-            "search": search,
-            "is_active": status,
-        },
-    )
+    context = {"clients": clients, "search": search, "is_active": status}
+
+    return render(request, "client_page.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -62,8 +56,6 @@ def client_create(request):
             form.save()
             messages.success(request, "Client created sucessfully.")
             return redirect("agency:show_clients")
-        
-        print(form.errors)
 
     else:
         form = ClientForm()
@@ -95,22 +87,13 @@ def client_update(request, id):
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_toggle_status(request, id):
     client = get_object_or_404(Client, id=id)
-    
+
     client.is_active = not client.is_active
     client.save()
-    
-    if client.is_active:
-        messages.success(
-            request,
-            "Client activated successfully."
-        )
-    else:
-        messages.success(
-            request,
-            "Client deactivated successfully."
-        )
 
-    return redirect(
-        "agency:client_profile",
-        id=client.id
-    )
+    if client.is_active:
+        messages.success(request, "Client activated successfully.")
+    else:
+        messages.success(request, "Client deactivated successfully.")
+
+    return redirect("agency:client_profile", id=client.id)
