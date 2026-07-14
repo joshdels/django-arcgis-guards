@@ -4,7 +4,7 @@ from apps.accounts.decorators import roles_required
 from apps.accounts.models import User
 
 
-@roles_required("accounts:guard_login", User.ROLE_CLIENT)
+@roles_required("accounts:guard_login", User.ROLE_GUARD)
 def home(request):
     guard = request.user.guard_profile
 

@@ -1,62 +1,74 @@
-from django.shortcuts import get_object_or_404, render
-
-from apps.client.models import Client
+from django.shortcuts import render
 
 
-def client_overview(request, id):
-    client = get_object_or_404(Client, id=id)
+def overview(request):
+    client = request.user.client_profile
     context = {"client": client}
-
-    if request.htmx:
-        return render(request, "partials/content_client/overview.html", context)
-
-    return render(request, "client_profile.html", context)
-
-
-def client_information(request, id):
-    client = get_object_or_404(Client, id=id)
+    
+    client = request.user.client_profile
     context = {"client": client}
-
+    
     if request.htmx:
-        return render(request, "partials/content_client/information.html", context)
+        return render(request, "partials/content/overview.html", context)
 
-    return render(request, "client_profile.html", context)
+    return render(request, "_client_dashboard.html", context)
 
-def client_contract(request, id):
-    client = get_object_or_404(Client, id=id)
+
+def information(request):
+    client = request.user.client_profile
     context = {"client": client}
-
+    
     if request.htmx:
-        return render(request, "partials/content_client/contract.html", context)
+        return render(request, "partials/content/information.html", context)
 
-    return render(request, "client_profile.html", context)
+    return render(request, "_client_dashboard.html", context)
 
 
-def client_guard(request, id):
-    client = get_object_or_404(Client, id=id)
+def contract(request):
+    client = request.user.client_profile
     context = {"client": client}
-
+    
     if request.htmx:
-        return render(request, "partials/content_client/guard.html", context)
+        return render(request, "partials/content/contract.html", context)
 
-    return render(request, "client_profile.html", context)
+    return render(request, "_client_dashboard.html", context)
 
 
-def client_billing(request, id):
-    client = get_object_or_404(Client, id=id)
+def guard(request):
+    client = request.user.client_profile
     context = {"client": client}
-
+    
     if request.htmx:
-        return render(request, "partials/content_client/billing.html", context)
+        return render(request, "partials/content/guard.html", context)
 
-    return render(request, "client_profile.html", context)
+    return render(request, "_client_dashboard.html", context)
 
 
-def client_report(request, id):
-    client = get_object_or_404(Client, id=id)
+def billing(request):
+    client = request.user.client_profile
     context = {"client": client}
-
+    
     if request.htmx:
-        return render(request, "partials/content_client/report.html", context)
+        return render(request, "partials/content/billing.html", context)
 
-    return render(request, "client_profile.html", context)
+    return render(request, "_client_dashboard.html", context)
+
+
+def report(request):
+    client = request.user.client_profile
+    context = {"client": client}
+    
+    if request.htmx:
+        return render(request, "partials/content/report.html", context)
+
+    return render(request, "_client_dashboard.html", context)
+
+
+def setting(request):
+    client = request.user.client_profile
+    context = {"client": client}
+    
+    if request.htmx:
+        return render(request, "partials/content/report.html", context)
+
+    return render(request, "_client_dashboard.html", context)

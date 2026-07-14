@@ -6,7 +6,7 @@
                 <p>{{ request.user.get_role_display|capfirst }}</p>
             </div>
             <div>
-                <form method="post" action="{% url 'accounts:staff_logout' %}">
+                <form method="post" action="{% url 'accounts:guard_logout' %}">
                     {% csrf_token %}
                     <calcite-button type="submit" scale="l">Logout</calcite-button>
                 </form>

@@ -47,4 +47,4 @@ class GuardLoginView(BaseRoleLoginView):
     redirect_authenticated_user = True
 
     def get_sucess_url(self):
-        return reverse_lazy("guard:dashboard")
+        return reverse_lazy("guard:home")

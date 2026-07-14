@@ -1,9 +1,11 @@
 {% extends '_base.html' %}
 {% load static %}
 {% block title %}My Guard Portal | Dumagete Agency{% endblock %}
-{% block extra_head %}{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+{% endblock %}
 {% block content %}
-    {% include 'components/navbar.html' %}
+    {% include 'components/guard-navbar.html' %}
     <section class="container">
         <h1>My Guard Portal</h1>
         <main>
