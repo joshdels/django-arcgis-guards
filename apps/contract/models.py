@@ -61,6 +61,6 @@ class Contract(models.Model):
             else:
                 number = 1
 
-            self.contract_number = f"CON-{year}={number:004d}"
+            self.contract_number = f"CON-{year}-{number:004d}"
 
         super().save(*args, **kwargs)

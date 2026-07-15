@@ -1,7 +1,7 @@
 from django.db import models
 
 from apps.client.models import Client
-from apps.operation.models import Contract
+from apps.contract.models import Contract
 
 
 class Invoice(models.Model):

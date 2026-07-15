@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from apps.operation.models import Contract
+from apps.contract.models import Contract
 
 
 class Guard(models.Model):

@@ -1,6 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
-{% block title %}Guard Page | Guards{% endblock %}
+{% block title %}Operation Page | Dumagete Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_page.css' %}">
 {% endblock %}
@@ -11,7 +11,7 @@
             <calcite-icon icon="chevron-left"> </calcite-icon>
             Back to Dashboard
         </a>
-        <h1>Guards</h1>
+        <h1>Contracts</h1>
         <header class="header">
             <div>
                 <form method="get" class="flex">
@@ -20,7 +20,7 @@
                     <calcite-button type="submit">Search</calcite-button>
                 </form>
                 <!-- Might flag this one -->
-                <a href="{% url 'agency:show_guards' %}"
+                <a href="{% url 'agency:show_contracts' %}"
                    class="{% if not is_active %}active{% endif %}">All</a>
                 <a href="?status=active"
                    class="{% if is_active == 'active' %}active{% endif %}">Active</a>
@@ -29,6 +29,6 @@
             </div>
             <calcite-button href="{% url 'agency:guard_create' %}"  icon-start="plus">Add Guard</calcite-button>
         </header>
-        {% include 'components/guard/card.html' %}
+        {% include 'components/contract/tables.html' %}
     </section>
 {% endblock %}

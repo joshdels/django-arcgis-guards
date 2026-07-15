@@ -8,6 +8,7 @@ urlpatterns = [
 
     path("client-page/", views.show_clients, name="show_clients"),
     path("guard-page/", views.show_guards, name="show_guards"),
+    path("contract-page/", views.show_contracts, name="show_contracts"),
 
     path("client-profile/<int:id>/", views.client_profile, name="client_profile"),
     path("client-profile/<int:id>/overview/", views.client_overview, name="client_overview"),
@@ -23,5 +24,5 @@ urlpatterns = [
     path("guard-profile/<int:id>/", views.guard_profile, name="guard_profile"),
     path("guard-profile/create/", views.guard_create, name="guard_create"),  
     path("guard-profile/<int:id>/update/", views.guard_update, name="guard_update"), 
-    path("guard-profile/<int:id>/toggle-status/", views.guard_toggle_status, name="guard_toggle_status")
+    path("guard-profile/<int:id>/toggle-status/", views.guard_toggle_status, name="guard_toggle_status"),
 ]

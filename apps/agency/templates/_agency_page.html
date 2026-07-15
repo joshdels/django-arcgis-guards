@@ -15,17 +15,23 @@
                 <h2>Clients</h2>
                 <p>View and manage all client companies.</p>
             </a>
+            <a href="{% url 'agency:show_contracts' %}" class="dashboard-card">
+                <calcite-icon icon="partner" scale="l">
+                </calcite-icon>
+                <h2>Contracts</h2>
+                <p>View and manage all contracts between clients</p>
+            </a>
             <a href="{% url 'agency:show_guards' %}" class="dashboard-card">
                 <calcite-icon icon="address-book" scale="l">
                 </calcite-icon>
                 <h2>Guards</h2>
                 <p>View and manage all guards.</p>
             </a>
-            <a href="{% url 'agency:show_guards' %}" class="dashboard-card">
+            <a href="" class="dashboard-card">
                 <calcite-icon icon="list-check" scale="l">
                 </calcite-icon>
                 <h2>Operations</h2>
-                <p>View and manage contracts and jobs of clients and guards.</p>
+                <p>View and manage all operations</p>
             </a>
         </main>
     </section>

@@ -1,0 +1,40 @@
+{% if not clients %}
+    {# djlint:off #}
+    <calcite-notice open kind="info">
+        <div slot="message">No clients found.</div>
+    </calcite-notice>
+    {# djlint:on #}
+{% endif %}
+{% for client in clients %}
+    <a href="{% url 'agency:client_profile' client.id %}" class="list-card">
+        <div>
+            <div>
+                <div class="column">
+                    <h2>{{ client.name }}</h2>
+                    {% if client.is_active %}
+                        <calcite-chip appearance="outline-fill" kind="inverse" scale="s">
+                        Active
+                        </calcite-chip>
+                    {% else %}
+                        <calcite-chip appearance="solid" kind="neutral" scale="s">
+                        Inactive
+                        </calcite-chip>
+                    {% endif %}
+                </div>
+                <p>
+                    <calcite-icon icon="home" scale="s"></calcite-icon>{{ client.location }}
+                </p>
+            </div>
+        </div>
+        <div>
+            <p>
+                <calcite-icon icon="envelope" scale="s"></calcite-icon>
+                {{ client.email }}
+            </p>
+            <p>
+                <calcite-icon icon="date-time" scale="s"></calcite-icon>
+                {{ client.created_at|date:"m/d/Y" }}
+            </p>
+        </div>
+    </a>
+{% endfor %}
