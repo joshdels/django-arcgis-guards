@@ -10,4 +10,4 @@ def render_client_tab(request, id, partial_template):
     if request.htmx:
         return render(request, partial_template, context)
 
-    return render(request, "client_profile.html", context)
+    return render(request, "client/client_profile.html", context)

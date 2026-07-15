@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'css/_page.css' %}">
 {% endblock %}
 {% block content %}
-    {% include 'components/navbar.html' %}
+    {% include '_components/navbar.html' %}
     <section class="dashboard container">
         <a href="{% url 'agency:home' %}">
             <calcite-icon icon="chevron-left"> </calcite-icon>
@@ -33,6 +33,6 @@
             </div>
             <calcite-button href="{% url 'agency:contract_create' %}"  icon-start="plus">Add Contract</calcite-button>
         </header>
-        {% include 'components/contract/tables.html' %}
+        {% include '_components/contract/tables.html' %}
     </section>
 {% endblock %}

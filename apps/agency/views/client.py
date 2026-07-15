@@ -31,7 +31,7 @@ def show_clients(request):
 
     context = {"clients": clients, "search": search, "is_active": status}
 
-    return render(request, "client_page.html", context)
+    return render(request, "client/client_page.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -40,7 +40,7 @@ def client_profile(request, id):
 
     return render(
         request,
-        "client_profile.html",
+        "client/client_profile.html",
         {
             "client": client,
         },
@@ -60,7 +60,7 @@ def client_create(request):
     else:
         form = ClientForm()
 
-    return render(request, "client_create.html", {"form": form})
+    return render(request, "client/client_create.html", {"form": form})
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -81,7 +81,7 @@ def client_update(request, id):
     else:
         form = ClientForm(instance=client)
 
-    return render(request, "client_update.html", {"form": form, "client": client})
+    return render(request, "client/client_update.html", {"form": form, "client": client})
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)

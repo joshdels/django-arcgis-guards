@@ -1,0 +1,160 @@
+Since your goal is to **finish and monetize the security agency MVP**, I'd prioritize features based on what completes the agency's operational workflow rather than administrative conveniences.
+
+Here's the order I'd build:
+
+### 🥇 Phase 1 — Complete the Operations Workflow
+
+1. **Guard Deployment & Assignment** ⭐⭐⭐⭐⭐
+
+   * Assign guards to contracts.
+   * Show required vs. assigned guards.
+   * Handle reassignment.
+   * View deployments by contract or date.
+
+   This is the feature that turns your system into an operations platform instead of just a CRUD app.
+
+2. **Operations Dashboard** ⭐⭐⭐⭐⭐
+   Display things like:
+
+   * Active contracts
+   * Required guards
+   * Assigned guards
+   * Vacant positions
+   * Guards on leave
+   * Expiring contracts
+
+3. **Duty/Shift Scheduling** ⭐⭐⭐⭐☆
+   Even a simple version:
+
+   * Morning
+   * Afternoon
+   * Night
+
+---
+
+### 🥈 Phase 2 — Financial Workflow
+
+Once deployments are working:
+
+4. **Billing Configuration**
+   At the contract level, define things like:
+
+   ```
+   Billing Type
+   ○ Fixed Monthly
+   ○ Per Guard
+   ○ Per Shift
+   ○ Custom
+   ```
+
+   And:
+
+   ```
+   Billing Cycle
+
+   Monthly
+   Semi-monthly
+   Quarterly
+   ```
+
+5. **Invoice Generation**
+   Since every contract already knows:
+
+   * client
+   * number of guards
+   * billing type
+   * billing cycle
+
+   the system can generate invoices automatically.
+
+Example:
+
+```
+ABC Mall
+
+12 Guards
+
+Rate:
+₱18,000 / guard
+
+Total:
+₱216,000
+
+Invoice
+July 2026
+```
+
+---
+
+### 🥉 Phase 3 — Nice Business Features
+
+* Payments
+* Outstanding balances
+* Official receipts
+* Collections dashboard
+* Payroll integration (later)
+
+---
+
+## I wouldn't build invoices first.
+
+An invoice answers:
+
+> **"What should we bill?"**
+
+But your system doesn't yet fully answer:
+
+> **"Who actually worked under this contract?"**
+
+That's why **deployment comes before billing**.
+
+---
+
+## My roadmap for your MVP
+
+```
+✅ Clients
+✅ Guards
+✅ Contracts
+
+⬇
+
+⭐ Deployments
+⭐ Assignment
+⭐ Operations Dashboard
+
+⬇
+
+Billing Setup
+Invoice Generation
+
+⬇
+
+Payments
+Reports
+Payroll
+```
+
+Once **Deployments + Operations Dashboard** are complete, you'll have the core workflow that a security agency manager uses every day. Billing and invoices then become much easier because they can build on accurate deployment and contract data rather than being standalone features.
+
+
+
+
+Dashboard
+
+Clients
+
+Guards
+
+Contracts
+
+Operations
+    ├── Deployments
+    ├── Assignments
+    ├── Schedule
+    └── Attendance (later)
+
+Billing
+    ├── Invoices
+    ├── Payments
+    └── Reports

@@ -7,10 +7,10 @@
 {% block content %}
     <div class="dashboard-container ">
         <aside class="dashboard-sidebar">
-            {% include 'components/sidebar.html' %}
+            {% include '_components/sidebar.html' %}
         </aside>
         <section class="dashboard-content">
-            {% include 'components/navbar-dashboard.html' %}
+            {% include '_components/navbar-dashboard.html' %}
             <main class="container-profile profile">
                 <a href="{% url 'agency:show_clients' %}">
                     <calcite-icon icon="chevron-left"> </calcite-icon>
@@ -31,7 +31,7 @@
                             <calcite-button href="{% url 'agency:client_update' client.id %}">Edit</calcite-button>
                         </div>
                     </header>
-                    <div id="client-content">{% include "partials/content_client/overview.html" %}</div>
+                    <div id="client-content">{% include "_partials/content_client/overview.html" %}</div>
                 </div>
             </main>
         </section>

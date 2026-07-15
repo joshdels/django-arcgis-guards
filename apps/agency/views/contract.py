@@ -29,7 +29,7 @@ def show_contracts(request):
 
     context = {"contracts": contracts, "search": search, "status": status}
 
-    return render(request, "contract_page.html", context)
+    return render(request, "contract/contract_page.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -37,7 +37,7 @@ def contract_profile(request, id):
     contract = get_object_or_404(Contract, id=id)
     
     return render(
-        request, "contract_profile.html",
+        request, "contract/contract_profile.html",
         {
             "contract": contract
         }
@@ -57,7 +57,7 @@ def contract_create(request):
     else:
         form = ContractForm()
         
-    return render(request, "contract_create.html", {"form": form})
+    return render(request, "contract/contract_create.html", {"form": form})
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -78,4 +78,4 @@ def contract_update(request,id):
     else:
         form = ContractForm(instance=contract)
         
-    return render(request, "contract_update.html", {"form": form, "contract": contract})
+    return render(request, "contract/contract_update.html", {"form": form, "contract": contract})

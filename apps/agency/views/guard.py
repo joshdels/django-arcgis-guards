@@ -15,7 +15,7 @@ def guard_profile(request, id):
     guard = get_object_or_404(Guard, id=id)
     context = {"guard": guard}
 
-    return render(request, "guard_profile.html", context)
+    return render(request, "guard/guard_profile.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -43,7 +43,7 @@ def show_guards(request):
 
     return render(
         request,
-        "guard_page.html",
+        "guard/guard_page.html",
         context,
     )
 
@@ -61,7 +61,7 @@ def guard_create(request):
     else:
         form = GuardForm()
 
-    return render(request, "guard_create.html", {"form": form})
+    return render(request, "guard/guard_create.html", {"form": form})
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -81,7 +81,7 @@ def guard_update(request, id):
 
     return render(
         request,
-        "guard_update.html",
+        "guard/guard_update.html",
         {
             "form": form,
             "guard": guard,
