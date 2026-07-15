@@ -1,4 +1,6 @@
-<form action="{% url 'agency:client_create' %}" method="post">
+<form class="standard-form"
+      action="{% url 'agency:client_create' %}"
+      method="post">
     {% csrf_token %}
     <div class="form-group">
         <label for="{{ form.name.id_for_label }}">Client Name</label>
@@ -13,6 +15,9 @@
     <div class="form-group">
         <label for="{{ form.location.id_for_label }}">Location</label>
         {{ form.location }}
+        <calcite-input-message status="invalid">
+        {{ form.name.errors.0 }}
+        </calcite-input-message>
         {{ form.location.errors }}
     </div>
     <div class="form-group">
@@ -35,6 +40,6 @@
         {{ form.hourly_billing_rate }}
         {{ form.hourly_billing_rate.errors }}
     </div>
-    <button type="submit">Save Client</button>
-    <a href="{% url 'agency:show_clients' %}">Cancel</a>
+    <calcite-button href="{% url 'agency:show_clients' %}" appearance="outline-fill">Cancel</calcite-button>
+    <calcite-button type="submit">Save Client</calcite-button>
 </form>

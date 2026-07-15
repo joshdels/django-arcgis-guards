@@ -1,0 +1,17 @@
+{# djlint:off #}
+<calcite-select
+    name="{{ widget.name }}"
+    {% include "django/forms/widgets/attrs.html" %}>
+
+    {% for group_name, group_choices, group_index in widget.optgroups %}
+        {% for option in group_choices %}
+            <calcite-option
+                value="{{ option.value|default_if_none:'' }}"
+                {% if option.selected %}selected{% endif %}>
+                {{ option.label }}
+            </calcite-option>
+        {% endfor %}
+    {% endfor %}
+
+</calcite-select>
+{# djlint:on #}

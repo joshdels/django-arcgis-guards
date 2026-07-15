@@ -14,12 +14,7 @@
         <header>
             <div>
                 <h1>{{ guard.user.get_full_name }}</h1>
-                <p>{{ guard.badge_number }}</p>
-                {% if guard.is_active %}
-                    <calcite-chip appearance="outline-fill">active</calcite-chip>
-                {% else %}
-                    <calcite-chip>inactive</calcite-chip>
-                {% endif %}
+                <p> <calcite-icon icon="check-shield" scale="s"></calcite-icon> {{ guard.badge_number }}</p>
             </div>
             <div>
                 {% if guard.is_active %}

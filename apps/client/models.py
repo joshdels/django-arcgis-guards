@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 
 class Client(models.Model):
@@ -12,6 +13,8 @@ class Client(models.Model):
         null=True,
         blank=True,
     )
+    
+    client_id = models.CharField(max_length=255, blank=True, null=True)
 
     name = models.CharField(max_length=255)
     organization = models.CharField(max_length=255, blank=True)
@@ -37,3 +40,22 @@ class Client(models.Model):
         if self.organization:
             return f"{self.name} - {self.organization}"
         return self.name
+    
+    def save(self, *args, **kwargs):
+        if not self.client_id:
+            year = timezone.now().year
+
+            last = (
+                Client.objects.filter(client_id__startswith=f"C-{year}")
+                .order_by("-id")
+                .first()
+            )
+
+            if last:
+                number = int(last.client_id.split("-")[-1]) + 1
+            else:
+                number = 1
+
+            self.client_id = f"C-{year}-{number:04d}"
+
+        super().save(*args, **kwargs)

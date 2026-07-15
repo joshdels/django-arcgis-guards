@@ -1,0 +1,13 @@
+{# djlint:off #}
+<calcite-input required
+    name="{{ widget.name }}"
+    value="{{ widget.value|default_if_none:'' }}"
+    {% include "django/forms/widgets/attrs.html" %}>
+</calcite-input>
+
+{% if errors %}
+<calcite-input-message status="invalid">
+    {{ errors.0 }}
+</calcite-input-message>
+{% endif %}
+{# djlint:on #}

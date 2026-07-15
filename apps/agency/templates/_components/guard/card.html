@@ -10,7 +10,13 @@
         <div class="space-between">
             <div>
                 <div class="column">
-                    <h2>{{ guard.user.get_full_name|default:"Unknown" }}</h2>
+                    <h2>
+                        {{ guard.first_name|default:"Unknown" }}
+                        {% if guard.middle_name %}
+                            {{ guard.middle_name|slice:":1" }}.
+                        {% endif %}
+                        {{ guard.last_name }}
+                    </h2>
                     {% if guard.is_active %}
                         <calcite-chip appearance="outline-fill">active</calcite-chip>
                     {% else %}
@@ -21,19 +27,19 @@
                     <calcite-icon icon="check-shield" scale="s"></calcite-icon>
                     {{ guard.badge_number|default:"N/A" }}
                 </p>
-                <p>
-                    <calcite-icon icon="home" scale="s"></calcite-icon>
-                    {{ guard.address|default:"N/A" }}
-                </p>
             </div>
         </div>
         <div>
+            <p>
+                <calcite-icon icon="home" scale="s"></calcite-icon>
+                {{ guard.address|default:"N/A" }}
+            </p>
             <p>
                 <calcite-icon icon="phone" scale="s"></calcite-icon>
                 {{ guard.phone_number }}
             </p>
             <p>
-                <calcite-icon icon="user-plus"></calcite-icon> {{ guard.created_at|date:"M d, Y" }}
+                <calcite-icon icon="user-plus" scale="s"></calcite-icon> {{ guard.created_at|date:"M d, Y" }}
             </p>
         </div>
     </a>

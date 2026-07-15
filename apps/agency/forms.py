@@ -1,11 +1,16 @@
-from django import forms
+from core.forms.base import CalciteModelForm
+from core.forms.widgets import (
+    CalciteInputWidget,
+    CalciteNumberWidget,
+    CalciteTextareaWidget,
+)
 
 from apps.client.models import Client
 from apps.guard.models import Guard
 from apps.contract.models import Contract
 
 
-class ClientForm(forms.ModelForm):
+class ClientForm(CalciteModelForm):
     class Meta:
         model = Client
 
@@ -19,20 +24,53 @@ class ClientForm(forms.ModelForm):
             "hourly_billing_rate",
         ]
 
+        widgets = {
+            "name": CalciteInputWidget(attrs={"placeholder": "Enter client name"}),
+            "organization": CalciteInputWidget(
+                attrs={"placeholder": "Enter organization name"}
+            ),
+            "location": CalciteInputWidget(attrs={"placeholder": "Enter location"}),
+            "contact_person": CalciteInputWidget(
+                attrs={"placeholder": "Enter contact person"}
+            ),
+            "email": CalciteInputWidget(attrs={"placeholder": "example@email.com"}),
+            "phone": CalciteInputWidget(attrs={"placeholder": "09XXXXXXXXX"}),
+            "hourly_billing_rate": CalciteNumberWidget(
+                attrs={
+                    "placeholder": "0.00",
+                    "step": "1",
+                }
+            ),
+        }
 
-class GuardForm(forms.ModelForm):
+
+class GuardForm(CalciteModelForm):
     class Meta:
         model = Guard
 
         fields = [
-            "badge_number",
-            "hourly_pay_rate",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "email",
             "address",
+            "email",
             "phone_number",
         ]
 
+        widgets = {
+            "first_name": CalciteInputWidget(attrs={"placeholder": "John"}),
+            "middle_name": CalciteInputWidget(attrs={"placeholder": "Manigo"}),
+            "last_name": CalciteInputWidget(attrs={"placeholder": "Cruz"}),
+            "address": CalciteInputWidget(attrs={"placeholder": "Dumagete"}),
+            "email": CalciteInputWidget(attrs={"placeholder": "john@gmail.com"}),
+            "phone_number": CalciteInputWidget(
+                attrs={"placeholder": "09XXXXXXXXX "}
+            ),
+        }
 
-class ContractForm(forms.ModelForm):
+
+class ContractForm(CalciteModelForm):
     class Meta:
         model = Contract
 
@@ -48,11 +86,17 @@ class ContractForm(forms.ModelForm):
             "remarks",
         ]
 
-        # for select 2 later nani
-        # widgets = {
-        #     "client": forms.Select(attrs={"class": "select2"}),
-        #     "description": forms.Textarea(attrs={"rows": 4}),
-        #     "remarks": forms.Textarea(attrs={"rows": 3}),
-        #     "start_date": forms.DateInput(attrs={"type": "date"}),
-        #     "end_date": forms.DateInput(attrs={"type": "date"}),
-        # }
+        widgets = {
+            "title": CalciteInputWidget(attrs={"placeholder": "Contract Title"}),
+            "description": CalciteInputWidget(
+                attrs={"placeholder": "Enter short text"}
+            ),
+            "location": CalciteInputWidget(attrs={"placeholder": "Enter location"}),
+            "contact_person": CalciteInputWidget(
+                attrs={"placeholder": "Enter contact person"}
+            ),
+            "number_of_guards": CalciteInputWidget(
+                attrs={"placeholder": "Enter required guards"}
+            ),
+            "remarks": CalciteInputWidget(attrs={"placeholder": "Enter remarks"}),
+        }

@@ -1,0 +1,23 @@
+.standard-form {
+  min-width: 500px;
+  padding: 2rem;
+  background-color: var(--calcite-color-surface-2);
+  border: solid 1px var(--calcite-color-border-1);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 500px;
+    padding: 3rem;
+}
+
+.form-container header {
+    width: 500px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0;
+}

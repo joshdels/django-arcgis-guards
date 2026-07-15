@@ -1,5 +1,15 @@
 {% extends "_base.html" %}
+{% block title %}New Guard | Dumagete Guards{% endblock %}
 {% block content %}
-    <h2>New Guard</h2>
-    {% include "_partials/forms/guard_form.html" %}
+    {% include '_components/navbar.html' %}
+    <div class="form-container">
+        <header>
+            <a href="{% url 'agency:show_guards' %}">
+                <calcite-icon icon="chevron-left"> </calcite-icon>
+                Back to Guards
+            </a>
+            <h2>New Guard</h2>
+        </header>
+        {% include "_partials/forms/guard_form.html" %}
+    </div>
 {% endblock %}

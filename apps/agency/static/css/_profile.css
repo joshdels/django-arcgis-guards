@@ -18,6 +18,12 @@
   margin: 0 auto;
 }
 
+.profile p {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .profile a {
   text-decoration: none;
   color: inherit;

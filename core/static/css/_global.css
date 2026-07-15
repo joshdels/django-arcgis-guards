@@ -1,5 +1,6 @@
 @import url("container.css");
 @import url("navbar.css");
+@import url("forms.css");
 
 html:not(.calcite-hydrated) {
   visibility: hidden;

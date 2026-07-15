@@ -20,7 +20,8 @@
                     <header>
                         <div>
                             <h1>{{ client.name }}</h1>
-                            <p>{{ client.organization }}</p>
+                            <p> <calcite-icon icon="employee-id" scale="s"></calcite-icon> {{ client.client_id }}  </p>
+                            <p> <calcite-icon icon="organization" scale="s"></calcite-icon> {{ client.organization }}</p>
                         </div>
                         <div>
                             {% if client.is_active %}
