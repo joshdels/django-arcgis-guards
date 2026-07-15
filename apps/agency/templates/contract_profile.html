@@ -1,0 +1,68 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Guard Profile | Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+{% endblock %}
+{% block content %}
+    {% include 'components/navbar.html' %}
+    <main class="container profile">
+        <a href="{% url 'agency:show_contracts' %}">
+            <calcite-icon icon="chevron-left"> </calcite-icon>
+            Back to Contracts
+        </a>
+        <header>
+            <div>
+                <h1>{{ contract.title }}</h1>
+                <p>{{ contract.badge_number }}</p>
+                {% if guard.is_active %}
+                    <calcite-chip appearance="outline-fill">active</calcite-chip>
+                {% else %}
+                    <calcite-chip>inactive</calcite-chip>
+                {% endif %}
+            </div>
+            <div>
+                <calcite-button href="{% url 'agency:contract_update' contract.id %}">Edit Contract</calcite-button>
+            </div>
+        </header>
+        <section>
+            <h3>Current Payroll</h3>
+            <div class="space-between">
+                <h1>$ 4,000.00</h1>
+                <div class="end">
+                    <p>Billing Date</p>
+                    <h4>July 24, 2025</h4>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h3>Contact</h3>
+            <div class="grid">
+                <div>
+                    <p>email</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="envelope"></calcite-icon>  email
+                    </h4>
+                </div>
+                <div>
+                    <p>phone</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="phone"></calcite-icon>  095235235235
+                    </h4>
+                </div>
+                <div>
+                    <p>address</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="home"></calcite-icon>  My address
+                    </h4>
+                </div>
+                <div>
+                    <p>joined since</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="user-plus"></calcite-icon>  {{ guard.created_at|date:"M d, Y" }}
+                    </h4>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -72,7 +72,7 @@ def client_update(request, id):
 
         if form.is_valid():
             form.save()
-            messages.sucess(request, "Client updated sucessfully.")
+            messages.sucess(request, "Client updated successfully.")
             return redirect(
                 "agency:client_profile",
                 id=client.id,

@@ -32,5 +32,27 @@ class GuardForm(forms.ModelForm):
         ]
 
 
-class OperationForm(forms.ModelForm):
-    pass
+class ContractForm(forms.ModelForm):
+    class Meta:
+        model = Contract
+
+        fields = [
+            "client",
+            "title",
+            "description",
+            "location",
+            "number_of_guards",
+            "start_date",
+            "end_date",
+            "status",
+            "remarks",
+        ]
+
+        # for select 2 later nani
+        # widgets = {
+        #     "client": forms.Select(attrs={"class": "select2"}),
+        #     "description": forms.Textarea(attrs={"rows": 4}),
+        #     "remarks": forms.Textarea(attrs={"rows": 3}),
+        #     "start_date": forms.DateInput(attrs={"type": "date"}),
+        #     "end_date": forms.DateInput(attrs={"type": "date"}),
+        # }

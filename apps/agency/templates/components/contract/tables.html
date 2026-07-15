@@ -4,15 +4,20 @@
         <div slot="message">No contracts found.</div>
     </calcite-notice>
 {% else %}
-    <calcite-table caption="Contracts" bordered striped numbered page-size="15" current-page="0" layout="auto" interaction-mode="interactive">
+    <calcite-table 
+        caption="Contracts" 
+        bordered striped numbered page-size="20" 
+        current-page="0" 
+        layout="auto" 
+        interaction-mode="interactive"
+    >
         <calcite-table-row slot="table-header">
         <calcite-table-header heading="Contract"></calcite-table-header>
         <calcite-table-header heading="Client"></calcite-table-header>
         <calcite-table-header heading="Deployment"></calcite-table-header>
-        <calcite-table-header heading="Guards" alignment="center"></calcite-table-header>
+        <calcite-table-header heading="Required Guards" alignment="center"></calcite-table-header>
         <calcite-table-header heading="Duration"></calcite-table-header>
         <calcite-table-header heading="Status"></calcite-table-header>
-        <calcite-table-header heading="Updated"></calcite-table-header>
         <calcite-table-header alignment="end"></calcite-table-header>
     </calcite-table-row>
     {% for contract in contracts %}
@@ -37,32 +42,29 @@
             </calcite-chip>
         </calcite-table-cell>
         <calcite-table-cell>
-        {{ contract.start_date|date:"M d, Y" }}
+            {{ contract.start_date|date:"M d, Y" }}
             {% if contract.end_date %}
                 <br>
                 <small>to {{ contract.end_date|date:"M d, Y" }}</small>
             {% endif %}
-            </calcite-table-cell>
-            <calcite-table-cell>
-                {% if contract.status == "pending" %}
-                    <calcite-chip kind="warning" scale="s">Pending</calcite-chip>
-                {% elif contract.status == "ongoing" %}
-                    <calcite-chip kind="success" scale="s">Ongoing</calcite-chip>
-                {% elif contract.status == "finished" %}
-                    <calcite-chip kind="brand" scale="s">Finished</calcite-chip>
-                {% else %}
-                    <calcite-chip kind="danger" scale="s">Cancelled</calcite-chip>
-                {% endif %}
-            </calcite-table-cell>
+        </calcite-table-cell>
         <calcite-table-cell>
-            {{ contract.updated_at|date:"M d, Y" }}
+            {% if contract.status == "pending" %}
+                <calcite-chip kind="warning" scale="s">Pending</calcite-chip>
+            {% elif contract.status == "ongoing" %}
+                <calcite-chip kind="success" scale="s">Ongoing</calcite-chip>
+            {% elif contract.status == "finished" %}
+                <calcite-chip kind="brand" scale="s">Finished</calcite-chip>
+            {% else %}
+                <calcite-chip kind="inverse" scale="s">Cancelled</calcite-chip>
+            {% endif %}
         </calcite-table-cell>
         <calcite-table-cell alignment="end">
             <calcite-dropdown>
                 <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
-                <calcite-dropdown-group>
-                    <calcite-dropdown-item href=""> View Details </calcite-dropdown-item>
-                    <calcite-dropdown-item> Edit </calcite-dropdown-item>
+                <calcite-dropdown-group selection-mode="none">
+                    <calcite-dropdown-item href="{% url 'agency:contract_profile' contract.id %}"> View Details </calcite-dropdown-item>
+                    <calcite-dropdown-item href="{% url 'agency:contract_update' contract.id %}"> Edit Information</calcite-dropdown-item>
                 </calcite-dropdown-group>
             </calcite-dropdown>
         </calcite-table-cell>

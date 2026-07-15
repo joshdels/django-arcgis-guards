@@ -15,19 +15,23 @@
         <header class="header">
             <div>
                 <form method="get" class="flex">
-                    <calcite-input type="search" name="search" placeholder="Search name and location`" icon="search" value="{{ search|default:'' }}">
+                    <calcite-input type="search" name="search" placeholder="Contract Number, Company Name" icon="search" value="{{ search|default:'' }}">
                     </calcite-input>
                     <calcite-button type="submit">Search</calcite-button>
                 </form>
                 <!-- Might flag this one -->
                 <a href="{% url 'agency:show_contracts' %}"
-                   class="{% if not is_active %}active{% endif %}">All</a>
-                <a href="?status=active"
-                   class="{% if is_active == 'active' %}active{% endif %}">Active</a>
-                <a href="?status=inactive"
-                   class="{% if is_active == 'inactive' %}active{% endif %}">Inactive</a>
+                   class="{% if not status %}active{% endif %}">All</a>
+                <a href="?status=pending"
+                   class="{% if status == 'pending' %}active{% endif %}">Pending</a>
+                <a href="?status=ongoing"
+                   class="{% if status == 'ongoing' %}active{% endif %}">Ongoing</a>
+                <a href="?status=finished"
+                   class="{% if status == 'finished' %}active{% endif %}">Finished</a>
+                <a href="?status=cancelled"
+                   class="{% if status == 'cancelled' %}active{% endif %}">Cancelled</a>
             </div>
-            <calcite-button href="{% url 'agency:guard_create' %}"  icon-start="plus">Add Guard</calcite-button>
+            <calcite-button href="{% url 'agency:contract_create' %}"  icon-start="plus">Add Contract</calcite-button>
         </header>
         {% include 'components/contract/tables.html' %}
     </section>
