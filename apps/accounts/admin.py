@@ -32,3 +32,21 @@ class CustomUserAdmin(UserAdmin):
     )
 
     ordering = ("username",)
+    
+    fieldsets = UserAdmin.fieldsets + (
+        (
+            "Custom Fields",
+            {
+                "fields": ("role",),
+            },
+        ),
+    )
+
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (
+            "Custom Fields",
+            {
+                "fields": ("role",),
+            },
+        ),
+    )

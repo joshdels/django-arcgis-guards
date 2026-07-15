@@ -23,6 +23,8 @@ class Invoice(models.Model):
         Contract,
         on_delete=models.PROTECT,
         related_name="invoices",
+        null=True,
+        blank=True,
     )
 
     invoice_number = models.CharField(
@@ -30,8 +32,8 @@ class Invoice(models.Model):
         unique=True,
     )
 
-    billing_period_start = models.DateField()
-    billing_period_end = models.DateField()
+    billing_period_start = models.DateField(null=True, blank=True)
+    billing_period_end = models.DateField(null=True, blank=True)
     issue_date = models.DateField(auto_now_add=True)
 
     due_date = models.DateField()

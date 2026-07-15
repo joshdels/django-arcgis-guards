@@ -1,12 +1,6 @@
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-SECRET_KEY = "django-insecure-1hj(nx-%cv5=d2@xy&^a&%s^@o@21*zy1z*xo2k6%8o%s$+$x$"
-
-DEBUG = True
-
-ALLOWED_HOSTS = ["django-arcgis-guards.onrender.com", "*"]
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Application definition
