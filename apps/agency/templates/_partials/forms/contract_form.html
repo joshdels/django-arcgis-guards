@@ -1,12 +1,19 @@
 <form class="standard-form"
-      action="{% url 'agency:contract_create' %}"
+      action="{% if client %}{% url 'agency:contract_create_client' client.id %}{% else %}{% url 'agency:contract_create' %}{% endif %}"
       method="post">
     {% csrf_token %}
-    <div class="form-group">
-        <label for="{{ form.client.id_for_label }}">Client</label>
-        {{ form.client }}
-        {{ form.client.errors }}
-    </div>
+    {% if client %}
+        <div class="form-group">
+            <label>Client</label>
+            <calcite-input type="text" value="{{ client.name }}" disabled></calcite-input>
+        </div>
+    {% else %}
+        <div class="form-group">
+            <label for="{{ form.client.id_for_label }}">Client</label>
+            {{ form.client }}
+            {{ form.client.errors }}
+        </div>
+    {% endif %}
     <div class="form-group">
         <label for="{{ form.title.id_for_label }}">Title</label>
         {{ form.title }}
@@ -23,7 +30,7 @@
         {{ form.location.errors }}
     </div>
     <div class="form-group">
-        <label for="{{ form.number_of_guards.id_for_label }}">Number of Guards</label>
+        <label for="{{ form.number_of_guards.id_for_label }}">Required Number of Guards</label>
         {{ form.number_of_guards }}
         {{ form.number_of_guards.errors }}
     </div>
@@ -47,6 +54,8 @@
         {{ form.remarks }}
         {{ form.remarks.errors }}
     </div>
-    <calcite-button href="{% url 'agency:show_contracts' %}" appearance="outline-fill">Cancel</calcite-button>
-    <calcite-button type="submit">Save Contract</calcite-button>
+    <div class="form-button">
+        <calcite-button id="backButton" appearance="outline-fill">Cancel</calcite-button>
+        <calcite-button type="submit">Save Contract</calcite-button>
+    </div>
 </form>

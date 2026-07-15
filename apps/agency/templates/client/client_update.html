@@ -2,6 +2,18 @@
 {% block title %}Edit Client | Dumagete Guards{% endblock %}
 {% block content %}
     {% include '_components/navbar.html' %}
-    <h2>Edit Client</h2>
-    {% include "_partials/forms/client_form.html" %}
+    <div class="form-container">
+        <header>
+            <a href="{% url 'agency:client_profile' client.id %}">
+                <calcite-icon icon="chevron-left"> </calcite-icon>
+                Back to Client Profile
+            </a>
+            <h2>Edit Client</h2>
+            <p>
+                <calcite-icon icon="employee-id" scale="s"></calcite-icon>
+                {{ client.client_id |default:"N/A" }}
+            </p>
+            {% include "_partials/forms/client_form.html" %}
+        </header>
+    </div>
 {% endblock %}

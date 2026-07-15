@@ -40,6 +40,8 @@
         {{ form.hourly_billing_rate }}
         {{ form.hourly_billing_rate.errors }}
     </div>
-    <calcite-button href="{% url 'agency:show_clients' %}" appearance="outline-fill">Cancel</calcite-button>
-    <calcite-button type="submit">Save Client</calcite-button>
+    <div class="form-button">
+        <calcite-button id="backButton" appearance="outline-fill">Cancel</calcite-button>
+        <calcite-button type="submit">Save Client</calcite-button>
+    </div>
 </form>

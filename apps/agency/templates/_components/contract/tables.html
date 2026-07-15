@@ -50,9 +50,9 @@
         </calcite-table-cell>
         <calcite-table-cell>
             {% if contract.status == "pending" %}
-                <calcite-chip kind="warning" scale="s">Pending</calcite-chip>
+                <calcite-chip kind="neutral" scale="s" appearance="outline">Pending</calcite-chip>
             {% elif contract.status == "ongoing" %}
-                <calcite-chip kind="success" scale="s">Ongoing</calcite-chip>
+                <calcite-chip kind="inverse" scale="s" appearance="outline-fill">Ongoing</calcite-chip>
             {% elif contract.status == "finished" %}
                 <calcite-chip kind="brand" scale="s">Finished</calcite-chip>
             {% else %}

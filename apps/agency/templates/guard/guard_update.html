@@ -2,6 +2,18 @@
 {% block title %}Edit Guard | Dumagete Guards{% endblock %}
 {% block content %}
     {% include '_components/navbar.html' %}
-    <h2>Edit Guard Information</h2>
-    {% include "_partials/forms/guard_form.html" %}
+    <div class="form-container">
+        <header>
+            <a href="{% url 'agency:guard_profile' guard.id %}">
+                <calcite-icon icon="chevron-left"> </calcite-icon>
+                Back to Guard Profile
+            </a>
+            <h2>Edit Guard Information</h2>
+            <p>
+                <calcite-icon icon="check-shield" scale="s"></calcite-icon>
+                {{ guard.badge_number|default:"N/A" }}
+            </p>
+            {% include "_partials/forms/guard_form.html" %}
+        </header>
+    </div>
 {% endblock %}

@@ -20,14 +20,18 @@
                     <header>
                         <div>
                             <h1>{{ client.name }}</h1>
-                            <p> <calcite-icon icon="employee-id" scale="s"></calcite-icon> {{ client.client_id }}  </p>
-                            <p> <calcite-icon icon="organization" scale="s"></calcite-icon> {{ client.organization }}</p>
+                            <p>
+                                <calcite-icon icon="employee-id" scale="s"></calcite-icon> {{ client.client_id }}
+                            </p>
+                            <p>
+                                <calcite-icon icon="organization" scale="s"></calcite-icon> {{ client.organization }}
+                            </p>
                         </div>
                         <div>
                             {% if client.is_active %}
-                                <calcite-button href="{% url 'agency:client_toggle_status' client.id %}" appearance="outline-fill">Deactivate Client</calcite-button>
+                                <calcite-button href="{% url 'agency:client_toggle_status' client.id %}" appearance="outline-fill" kind="danger">Deactivate Client</calcite-button>
                             {% else %}
-                                <calcite-button href="{% url 'agency:client_toggle_status' client.id %}" appearance="outline-fill">Activate Client</calcite-button>
+                                <calcite-button href="{% url 'agency:client_toggle_status' client.id %}" appearance="outline-fill" kind="brand">Activate Client</calcite-button>
                             {% endif %}
                             <calcite-button href="{% url 'agency:client_update' client.id %}">Edit</calcite-button>
                         </div>
@@ -40,4 +44,5 @@
 {% endblock %}
 {% block extra_script %}
     <script src="{% static 'js/highlight.js' %}"></script>
+    <script src="{% static 'js/back.js' %}"></script>
 {% endblock %}

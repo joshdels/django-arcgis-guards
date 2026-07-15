@@ -27,6 +27,8 @@
         {{ form.address }}
         {{ form.address.errors }}
     </div>
-    <calcite-button href="{% url 'agency:show_guards' %}" appearance="outline-fill">Cancel</calcite-button>
-    <calcite-button type="submit">Save Guard</calcite-button>
+    <div class="form-button">
+        <calcite-button id="backButton" appearance="outline-fill">Cancel</calcite-button>
+        <calcite-button type="submit">Save Guard</calcite-button>
+    </div>
 </form>

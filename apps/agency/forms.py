@@ -64,13 +64,12 @@ class GuardForm(CalciteModelForm):
             "last_name": CalciteInputWidget(attrs={"placeholder": "Cruz"}),
             "address": CalciteInputWidget(attrs={"placeholder": "Dumagete"}),
             "email": CalciteInputWidget(attrs={"placeholder": "john@gmail.com"}),
-            "phone_number": CalciteInputWidget(
-                attrs={"placeholder": "09XXXXXXXXX "}
-            ),
+            "phone_number": CalciteInputWidget(attrs={"placeholder": "09XXXXXXXXX "}),
         }
 
 
 class ContractForm(CalciteModelForm):
+
     class Meta:
         model = Contract
 
@@ -88,7 +87,37 @@ class ContractForm(CalciteModelForm):
 
         widgets = {
             "title": CalciteInputWidget(attrs={"placeholder": "Contract Title"}),
-            "description": CalciteInputWidget(
+            "description": CalciteTextareaWidget(
+                attrs={"placeholder": "Enter short text"}
+            ),
+            "location": CalciteInputWidget(attrs={"placeholder": "Enter location"}),
+            "contact_person": CalciteInputWidget(
+                attrs={"placeholder": "Enter contact person"}
+            ),
+            "number_of_guards": CalciteInputWidget(
+                attrs={"placeholder": "Enter required guards"}
+            ),
+            "remarks": CalciteInputWidget(attrs={"placeholder": "Enter remarks"}),
+        }
+
+
+class ClientContractForm(CalciteModelForm):
+    class Meta:
+        model = Contract
+        fields = [
+            "title",
+            "description",
+            "location",
+            "number_of_guards",
+            "start_date",
+            "end_date",
+            "status",
+            "remarks",
+        ]
+
+        widgets = {
+            "title": CalciteInputWidget(attrs={"placeholder": "Contract Title"}),
+            "description": CalciteTextareaWidget(
                 attrs={"placeholder": "Enter short text"}
             ),
             "location": CalciteInputWidget(attrs={"placeholder": "Enter location"}),

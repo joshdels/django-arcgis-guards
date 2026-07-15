@@ -14,13 +14,15 @@
         <header>
             <div>
                 <h1>{{ guard.user.get_full_name }}</h1>
-                <p> <calcite-icon icon="check-shield" scale="s"></calcite-icon> {{ guard.badge_number }}</p>
+                <p>
+                    <calcite-icon icon="check-shield" scale="s"></calcite-icon> {{ guard.badge_number }}
+                </p>
             </div>
             <div>
                 {% if guard.is_active %}
-                    <calcite-button href="{% url 'agency:guard_toggle_status' guard.id %}" appearance="outline-fill">Deactivate Guard</calcite-button>
+                    <calcite-button href="{% url 'agency:guard_toggle_status' guard.id %}" appearance="outline-fill" kind="danger">Deactivate Guard</calcite-button>
                 {% else %}
-                    <calcite-button href="{% url 'agency:guard_toggle_status' guard.id %}" appearance="outline-fill">Activate Guard</calcite-button>
+                    <calcite-button href="{% url 'agency:guard_toggle_status' guard.id %}" appearance="outline-fill" kind="brand">Activate Guard</calcite-button>
                 {% endif %}
                 <calcite-button href="{% url 'agency:guard_update' guard.id %}">Edit</calcite-button>
             </div>

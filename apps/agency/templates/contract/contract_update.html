@@ -2,6 +2,18 @@
 {% block title %}Edit Contract | Dumagete Guards{% endblock %}
 {% block content %}
     {% include '_components/navbar.html' %}
-    <h2>Edit Contract</h2>
-    {% include "_partials/forms/contract_form.html" %}
+    <div class="form-container">
+        <header>
+            <a href="{% url 'agency:contract_profile' contract.id %}">
+                <calcite-icon icon="chevron-left"></calcite-icon>
+                Back to Contract Profile
+            </a>
+            <h2>Edit Contract</h2>
+            <p>
+                <calcite-icon icon="check-shield" scale="s"></calcite-icon>
+                {{ contract.contract_id|default:"N/A" }}
+            </p>
+            {% include "_partials/forms/contract_form.html" %}
+        </header>
+    </div>
 {% endblock %}
