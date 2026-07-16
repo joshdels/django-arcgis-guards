@@ -16,9 +16,14 @@
                     <calcite-icon icon="chevron-left"> </calcite-icon>
                     Back to Agency Dashboard
                 </a>
-                <div>
-                    <div id="operation-content">{% include "_partials/content_operation/overview.html" %}</div>
+                <div id="operation-content">
+                    {% if content_template %}
+                        {% include content_template %}
+                    {% else %}
+                        {% include "_partials/content_operation/overview.html" %}
+                    {% endif %}
                 </div>
+                
             </main>
         </section>
     </div>

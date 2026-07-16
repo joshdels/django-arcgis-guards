@@ -13,7 +13,6 @@ class ContractAdmin(admin.ModelAdmin):
         "number_of_guards",
         "start_date",
         "end_date",
-        "location",
         "created_at",
     )
 
@@ -33,7 +32,6 @@ class ContractAdmin(admin.ModelAdmin):
         "contract_number",
         "title",
         "client__name",
-        "location",
     )
 
     ordering = ("-created_at",)

@@ -1,0 +1,25 @@
+<main class="profile">
+    <section>
+        <h2>Information</h2>
+        <div class="grid">
+            <div>
+                <p>email</p>
+                <h4>
+                    <calcite-icon scale="s" icon="envelope"></calcite-icon>
+                    {{ client.email }}
+                </h4>
+            </div>
+            <div>
+                <p>phone</p>
+                <h4>
+                    <calcite-icon scale="s" icon="phone"></calcite-icon>
+                    {{ client.phone }}
+                </h4>
+            </div>
+            <div>
+                <p>client since</p>
+                <h4>{{ client.created_at|date:"M d, Y" }}</h4>
+            </div>
+        </div>
+    </section>
+</main>

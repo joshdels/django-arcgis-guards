@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "apps.guard",
     "apps.billing",
     "apps.contract",
+    "apps.operations",
     # 3rd party
     "django_htmx",
 ]

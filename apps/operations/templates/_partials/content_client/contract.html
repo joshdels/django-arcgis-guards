@@ -1,0 +1,50 @@
+<main class="profile">
+    <section>
+        <h2>Genral Contract</h2>
+        <div class="grid">
+            <div>
+                <p>total contract</p>
+                <h4>
+                    <calcite-icon scale="s" icon="files"></calcite-icon>
+                    12
+                </h4>
+            </div>
+            <div>
+                <p>active contract</p>
+                <h4>
+                    <calcite-icon scale="s" icon="date-time"></calcite-icon>
+                    2
+                </h4>
+            </div>
+            <div>
+                <p>finished contract</p>
+                <h4>
+                    <calcite-icon scale="s" icon="register"></calcite-icon>
+                    4
+                </h4>
+            </div>
+            <div>
+                <p>cancelled contract</p>
+                <h4>
+                    <calcite-icon scale="s" icon="unregister"></calcite-icon>
+                    5
+                </h4>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="space-between">
+            <h2>Active Contracts</h2>
+            <calcite-button icon-start="plus" label="Add New Contract"  scale="s" appearance="outline-fill" href="{% url 'agency:contract_create_client' client.id %}">Add Contract</calcite-button>
+        </div>
+        <div>
+            <h4>contract 1</h4>
+            <h4>contract 2</h4>
+        </div>
+    </section>
+    <section>
+        <h2>Contract History</h2>
+        <h4>contract 1</h4>
+        <h4>contract 2</h4>
+    </section>
+</main>

@@ -1,0 +1,16 @@
+<nav class="profile-navbar">
+    <main>
+        <section>
+            <div>
+                <h4>{{ request.user.first_name|default:request.user.username }}</h4>
+                <p>{{ request.user.get_role_display|capfirst }}</p>
+            </div>
+            <div>
+                <form method="post" action="{% url 'accounts:staff_logout' %}">
+                    {% csrf_token %}
+                    <calcite-button type="submit" scale="l">Logout</calcite-button>
+                </form>
+            </div>
+        </section>
+    </main>
+</nav>

@@ -14,9 +14,9 @@
         <calcite-table-row slot="table-header">
         <calcite-table-header heading="Contract"></calcite-table-header>
         <calcite-table-header heading="Client"></calcite-table-header>
-        <calcite-table-header heading="Deployment"></calcite-table-header>
         <calcite-table-header heading="Required Guards" alignment="center"></calcite-table-header>
         <calcite-table-header heading="Duration"></calcite-table-header>
+        <calcite-table-header heading="Created on"></calcite-table-header>
         <calcite-table-header heading="Status"></calcite-table-header>
         <calcite-table-header alignment="end"></calcite-table-header>
     </calcite-table-row>
@@ -32,11 +32,7 @@
             <br>
             <small>{{ contract.client.organization }}</small>
         </calcite-table-cell>
-            <calcite-table-cell>
-            <calcite-icon icon="pin" scale="s"></calcite-icon>
-            {{ contract.location }}
-        </calcite-table-cell>
-            <calcite-table-cell alignment="center">
+        <calcite-table-cell alignment="center">
             <calcite-chip appearance="outline-fill" scale="s">
                 {{ contract.number_of_guards }}
             </calcite-chip>
@@ -49,8 +45,13 @@
             {% endif %}
         </calcite-table-cell>
         <calcite-table-cell>
-            {% if contract.status == "pending" %}
-                <calcite-chip kind="neutral" scale="s" appearance="outline">Pending</calcite-chip>
+            <span>{{ contract.created_at|date:"m/d/Y" }}</span>
+        </calcite-table-cell>
+        <calcite-table-cell>
+            {% if contract.status == "draft" %}
+                <calcite-chip kind="neutral" scale="s" appearance="outline">Draft</calcite-chip>
+            {% elif contract.status == "pending" %}
+                <calcite-chip kind="neutral" scale="s" appearance="outline-fill">Pending</calcite-chip>
             {% elif contract.status == "ongoing" %}
                 <calcite-chip kind="inverse" scale="s" appearance="outline-fill">Ongoing</calcite-chip>
             {% elif contract.status == "finished" %}

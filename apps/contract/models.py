@@ -5,7 +5,9 @@ from apps.client.models import Client
 
 
 class ContractStatus(models.TextChoices):
+    DRAFT = "draft", "Draft"
     PENDING = "pending", "Pending"
+    APPROVED = "approved", "Approved"
     ONGOING = "ongoing", "Ongoing"
     FINISHED = "finished", "Finished"
     CANCELLED = "cancelled", "Cancelled"
@@ -19,7 +21,6 @@ class Contract(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    location = models.CharField(max_length=255)
 
     number_of_guards = models.PositiveIntegerField(
         default=1,

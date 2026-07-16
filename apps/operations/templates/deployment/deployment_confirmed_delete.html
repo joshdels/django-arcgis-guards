@@ -1,0 +1,19 @@
+<h1>Delete Deployment</h1>
+
+<p>
+  Are you sure you want to delete
+
+  <strong> {{ deployment.name }} </strong>
+
+  ?
+</p>
+
+<form method="post">
+  {% csrf_token %}
+
+  <button type="submit">Yes, Delete</button>
+</form>
+
+<p>
+  <a href="{% url 'operations:deployment_detail' deployment.pk %}"> Cancel </a>
+</p>

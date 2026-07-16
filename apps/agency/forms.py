@@ -17,7 +17,6 @@ class ClientForm(CalciteModelForm):
         fields = [
             "name",
             "organization",
-            "location",
             "contact_person",
             "email",
             "phone",
@@ -29,7 +28,6 @@ class ClientForm(CalciteModelForm):
             "organization": CalciteInputWidget(
                 attrs={"placeholder": "Enter organization name"}
             ),
-            "location": CalciteInputWidget(attrs={"placeholder": "Enter location"}),
             "contact_person": CalciteInputWidget(
                 attrs={"placeholder": "Enter contact person"}
             ),
@@ -77,7 +75,6 @@ class ContractForm(CalciteModelForm):
             "client",
             "title",
             "description",
-            "location",
             "number_of_guards",
             "start_date",
             "end_date",
@@ -107,7 +104,6 @@ class ClientContractForm(CalciteModelForm):
         fields = [
             "title",
             "description",
-            "location",
             "number_of_guards",
             "start_date",
             "end_date",
@@ -120,7 +116,6 @@ class ClientContractForm(CalciteModelForm):
             "description": CalciteTextareaWidget(
                 attrs={"placeholder": "Enter short text"}
             ),
-            "location": CalciteInputWidget(attrs={"placeholder": "Enter location"}),
             "contact_person": CalciteInputWidget(
                 attrs={"placeholder": "Enter contact person"}
             ),

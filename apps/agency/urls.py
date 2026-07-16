@@ -9,7 +9,6 @@ urlpatterns = [
     path("client-page/", views.show_clients, name="show_clients"),
     path("guard-page/", views.show_guards, name="show_guards"),
     path("contract-page/", views.show_contracts, name="show_contracts"),
-    path("operation-dashboard/", views.show_operations, name="show_operations"),
     
     path("client-profile/overview/<int:id>", views.client_overview, name="client_overview"),
     path("client-profile/information/<int:id>", views.client_information, name="client_information"),
@@ -32,8 +31,4 @@ urlpatterns = [
     path("contract-profile/create/", views.contract_create, name="contract_create"),
     path("contract-profile/create/<int:client_id>/", views.contract_create, name="contract_create_client"),
     path("contract-profile/update/<int:id>/", views.contract_update, name="contract_update"),
-    
-    path("operation-dashboard/overview/", views.operation_overview, name="operation_overview"),
-    path("operation-dashboard/deployment/", views.operation_deployment, name="operation_deployment"),
-    path("operation-dashboard/assignment/", views.operation_assignment, name="operation_assignment"),
 ]

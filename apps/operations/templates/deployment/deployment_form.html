@@ -1,0 +1,17 @@
+<h1>
+    {% if form.instance.pk %}
+        Edit Deployment
+    {% else %}
+        Create Deployment
+    {% endif %}
+</h1>
+
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+
+  <button type="submit">Save</button>
+</form>
+
+<p>
+  <a href="{% url 'operations:deployment_list' %}"> Back </a>
+</p>
