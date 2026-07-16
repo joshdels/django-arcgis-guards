@@ -1,13 +1,13 @@
 {% extends '_base.html' %}
 {% load static %}
-{% block title %}My Client Portal | Dumagete Guards{% endblock %}
+{% block title %}Operations Dashboard | Dumagete Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
 {% endblock %}
 {% block content %}
     <div class="dashboard-container ">
         <aside class="dashboard-sidebar">
-            {% include 'components/client-sidebar.html' %}
+            {% include '_components/sidebar-operation.html' %}
         </aside>
         <section class="dashboard-content">
             {% include 'components/client-navbar-dashboard.html' %}
@@ -22,7 +22,7 @@
                             <calcite-button icon-start="plus" scale="l" appearance="outline" kind="brand">New Contract</calcite-button>
                         </div>
                     </header>
-                    <div id="client-content">{% include "_partials/content_client/overview.html" %}</div>
+                    <div id="operation-content">{% include "_partials/content_operation/overview.html" %}</div>
                 </div>
             </main>
         </section>

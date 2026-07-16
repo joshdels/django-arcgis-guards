@@ -1,6 +1,7 @@
 {# djlint:off #}
 <calcite-text-area
     name="{{ widget.name }}"
-    {% include "django/forms/widgets/attrs.html" %}>{{ widget.value|default_if_none:'' }}
+    {% include "django/forms/widgets/attrs.html" %}>
+    {{ widget.value|default_if_none:'' }}
 </calcite-text-area>
 {# djlint:on #}
