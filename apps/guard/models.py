@@ -55,23 +55,3 @@ class Guard(models.Model):
 
         super().save(*args, **kwargs)
 
-
-class GuardAssignment(models.Model):
-    contract = models.ForeignKey(
-        Contract,
-        related_name="assignments",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-    )
-
-    guard = models.ForeignKey(
-        Guard,
-        related_name="assignment",
-        on_delete=models.CASCADE,
-    )
-
-    assigned_at = models.DateField()
-    relieved_at = models.DateField(null=True, blank=True)
-
-    is_active = models.BooleanField(default=True)

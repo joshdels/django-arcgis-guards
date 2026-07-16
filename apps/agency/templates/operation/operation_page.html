@@ -12,16 +12,11 @@
         <section class="dashboard-content">
             {% include 'components/client-navbar-dashboard.html' %}
             <main class="container-profile profile">
+                <a href="{% url 'agency:home' %}">
+                    <calcite-icon icon="chevron-left"> </calcite-icon>
+                    Back to Agency Dashboard
+                </a>
                 <div>
-                    <header>
-                        <div>
-                            <h1>{{ client.name }}</h1>
-                            <p>{{ client.organization }}</p>
-                        </div>
-                        <div>
-                            <calcite-button icon-start="plus" scale="l" appearance="outline" kind="brand">New Contract</calcite-button>
-                        </div>
-                    </header>
                     <div id="operation-content">{% include "_partials/content_operation/overview.html" %}</div>
                 </div>
             </main>
