@@ -35,7 +35,7 @@ def deployment_create_view(request):
             "Deployment created successfully.",
         )
 
-        return redirect("deployment_list")
+        return redirect("operations:deployment_list")
 
     return render(
         request,
@@ -77,7 +77,7 @@ def deployment_update_view(request, pk):
             "Deployment updated successfully.",
         )
 
-        return redirect("deployment_list")
+        return redirect("operations:deployment_list")
 
     return render(
         request,
@@ -99,7 +99,7 @@ def deployment_delete_view(request, pk):
             "Deployment deleted.",
         )
 
-        return redirect("deployment_list")
+        return redirect("operations:deployment_list")
 
     return render(
         request,

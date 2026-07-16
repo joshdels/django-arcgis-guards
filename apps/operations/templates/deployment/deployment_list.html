@@ -1,52 +1,36 @@
 <h1>Deployments</h1>
-
-<a href="{% url 'operations:deployment_create' %}"> Create Deployment </a>
-
+<a href="{% url 'operations:deployment_create' %}">Create Deployment</a>
 <table border="1">
-  <thead>
-    <tr>
-      <th>Contract</th>
-      <th>Client</th>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Required Guards</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    {% for deployment in deployments %}
-    <tr>
-      <td>{{ deployment.contract.contract_number }}</td>
-
-      <td>{{ deployment.contract.client.name }}</td>
-
-      <td>{{ deployment.name }}</td>
-
-      <td>{{ deployment.location }}</td>
-
-      <td>{{ deployment.required_guards }}</td>
-
-      <td>
-        {% if deployment.is_active %} Active {% else %} Inactive {% endif %}
-      </td>
-
-      <td>
-        <a href="{% url 'operations:deployment_detail' deployment.pk %}"> View </a>
-
-        <a href="{% url 'operations:deployment_update' deployment.pk %}"> Edit </a>
-
-        <a href="{% url 'operations:deployment_delete' deployment.pk %}"> Delete </a>
-      </td>
-    </tr>
-
-    {% empty %}
-
-    <tr>
-      <td colspan="7">No deployments found.</td>
-    </tr>
-
-    {% endfor %}
-  </tbody>
+    <thead>
+        <tr>
+            <th>Contract</th>
+            <th>Client</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Required Guards</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for deployment in deployments %}
+            <tr>
+                <td>{{ deployment.contract.contract_number }}</td>
+                <td>{{ deployment.contract.client.name }}</td>
+                <td>{{ deployment.name }}</td>
+                <td>{{ deployment.location }}</td>
+                <td>{{ deployment.required_guards }}</td>
+                <td>{% if deployment.is_active %} Active {% else %} Inactive {% endif %}</td>
+                <td>
+                    <a href="{% url 'operations:deployment_detail' deployment.pk %}">View</a>
+                    <a href="{% url 'operations:deployment_update' deployment.pk %}">Edit</a>
+                    <a href="{% url 'operations:deployment_delete' deployment.pk %}">Delete</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7">No deployments found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
 </table>

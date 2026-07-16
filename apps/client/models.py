@@ -27,10 +27,6 @@ class Client(models.Model):
     invoice_cycle_days = models.PositiveIntegerField(default=30)
     next_billing_date = models.DateField(null=True, blank=True)
 
-    hourly_billing_rate = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-    )
     is_active = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)

@@ -8,7 +8,7 @@ from apps.contract.models import Contract, ContractStatus
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def operation_overview(request):
-    return render_operation_tab(request, "_partials/content_operation/overview.html")
+    return render_operation_tab(request, "_partials/overview/_overview.html")
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -26,7 +26,7 @@ def operation_queue(request):
 
     return render_operation_tab(
         request,
-        "_partials/content_operation/queue.html",
+        "_partials/queue/_queue.html",
         {
             "contracts": contracts,
         },
@@ -35,9 +35,9 @@ def operation_queue(request):
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def operation_deployment(request):
-    return render_operation_tab(request, "_partials/content_operation/deployment.html")
+    return render_operation_tab(request, "_partials/deployment/_deployment.html")
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def operation_assignment(request):
-    return render_operation_tab(request, "_partials/content_operation/assignment.html")
+    return render_operation_tab(request, "_partials/assignment/_assignment.html")

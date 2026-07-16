@@ -9,7 +9,6 @@ class ClientAdmin(admin.ModelAdmin):
         "organization",
         "contact_person",
         "phone",
-        "hourly_billing_rate",
         "is_active",
         "created_at",
     )

@@ -1,0 +1,116 @@
+{# djlint:off #}
+{% if not contracts %}
+
+<calcite-notice open kind="info">
+    <div slot="message">
+        No approved contracts are ready for deployment.
+    </div>
+</calcite-notice>
+
+{% else %}
+
+<calcite-table
+    caption="Contracts Ready for Deployment"
+    bordered
+    striped
+    numbered
+    page-size="10"
+    current-page="0"
+    layout="auto"
+    interaction-mode="interactive"
+>
+
+    <calcite-table-row slot="table-header">
+        <calcite-table-header heading="Contract"></calcite-table-header>
+        <calcite-table-header heading="Client"></calcite-table-header>
+        <calcite-table-header heading="Required Guards" alignment="center"></calcite-table-header>
+        <calcite-table-header heading="Contract Period"></calcite-table-header>
+        <calcite-table-header heading="Created"></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+        <calcite-table-header alignment="end" heading="Action"></calcite-table-header>
+    </calcite-table-row>
+
+    {% for contract in contracts %}
+
+    <calcite-table-row>
+        <calcite-table-cell>
+            <strong>{{ contract.contract_number }}</strong>
+            <br>
+            <small>{{ contract.title }}</small>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>{{ contract.client.name }}</strong>
+            <br>
+            <small>{{ contract.client.organization }}</small>
+        </calcite-table-cell>
+
+        <calcite-table-cell alignment="center">
+            <calcite-chip appearance="outline-fill" scale="s">
+                {{ contract.number_of_guards }}
+            </calcite-chip>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ contract.start_date|date:"M d, Y" }}
+            {% if contract.end_date %}
+                <br>
+                <small>to {{ contract.end_date|date:"M d, Y" }}</small>
+            {% endif %}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ contract.created_at|date:"M d, Y" }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {% if contract.status == "draft" %}
+                <calcite-chip kind="neutral" appearance="outline" scale="s">
+                    Draft
+                </calcite-chip>
+
+            {% elif contract.status == "pending" %}
+                <calcite-chip kind="neutral" appearance="outline-fill" scale="s">
+                    Pending
+                </calcite-chip>
+
+            {% elif contract.status == "approved" %}
+                <calcite-chip kind="brand" appearance="outline-fill" scale="s">
+                    Approved
+                </calcite-chip>
+
+            {% elif contract.status == "ongoing" %}
+                <calcite-chip kind="inverse" appearance="outline-fill" scale="s">
+                    Ongoing
+                </calcite-chip>
+
+            {% elif contract.status == "finished" %}
+                <calcite-chip kind="brand" scale="s">
+                    Finished
+                </calcite-chip>
+
+            {% else %}
+                <calcite-chip kind="inverse" scale="s">
+                    Cancelled
+                </calcite-chip>
+            {% endif %}
+        </calcite-table-cell>
+
+        <calcite-table-cell alignment="end">
+            <calcite-button
+                href="{% url 'operations:deployment_create' %}"
+                appearance="solid"
+                scale="s"
+                icon-start="plus">
+                Create Deployment
+            </calcite-button>
+        </calcite-table-cell>
+
+    </calcite-table-row>
+
+    {% endfor %}
+
+</calcite-table>
+
+{% endif %}
+{# djlint:on #}

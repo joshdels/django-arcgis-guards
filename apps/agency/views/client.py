@@ -2,12 +2,13 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 
+
 from apps.accounts.decorators import roles_required
 from apps.accounts.models import User
-
 from apps.client.models import Client
-
 from apps.agency.forms import ClientForm
+
+from ..services import create_client
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -21,7 +22,7 @@ def show_clients(request):
         clients = clients.filter(
             Q(name__icontains=search)
             | Q(organization__icontains=search)
-            | Q(email__icontains=search)
+            | Q(client_id__icontains=search)
         )
     if status == "active":
         clients = clients.filter(is_active=True)
@@ -54,6 +55,8 @@ def client_create(request):
 
         if form.is_valid():
             form.save()
+            create_client(form.cleaned_data)
+
             messages.success(request, "Client created sucessfully.")
             return redirect("agency:show_clients")
 
@@ -72,7 +75,7 @@ def client_update(request, id):
 
         if form.is_valid():
             form.save()
-            messages.sucess(request, "Client updated successfully.")
+            messages.success(request, "Client updated successfully.")
             return redirect(
                 "agency:client_profile",
                 id=client.id,
@@ -81,7 +84,9 @@ def client_update(request, id):
     else:
         form = ClientForm(instance=client)
 
-    return render(request, "client/client_update.html", {"form": form, "client": client})
+    return render(
+        request, "client/client_update.html", {"form": form, "client": client}
+    )
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)

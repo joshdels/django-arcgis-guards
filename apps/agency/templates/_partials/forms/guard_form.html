@@ -1,5 +1,5 @@
 <form class="standard-form"
-      action="{% url 'agency:guard_create' %}"
+      action="{% if guard %}{% url 'agency:guard_update' guard.id %}{% else %}{% url 'agency:guard_create' %}{% endif %}"
       method="post">
     {% csrf_token %}
     <div class="form-group">

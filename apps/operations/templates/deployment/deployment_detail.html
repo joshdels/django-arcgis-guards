@@ -1,65 +1,40 @@
 <h1>Deployment Details</h1>
-
 <p>
-  <strong>Contract</strong>
-
-  <br />
-
-  {{ deployment.contract.contract_number }}
+    <strong>Contract</strong>
+    <br />
+    {{ deployment.contract.contract_number }}
 </p>
-
 <p>
-  <strong>Client</strong>
-
-  <br />
-
-  {{ deployment.contract.client.name }}
+    <strong>Client</strong>
+    <br />
+    {{ deployment.contract.client.name }}
 </p>
-
 <p>
-  <strong>Name</strong>
-
-  <br />
-
-  {{ deployment.name }}
+    <strong>Name</strong>
+    <br />
+    {{ deployment.name }}
 </p>
-
 <p>
-  <strong>Location</strong>
-
-  <br />
-
-  {{ deployment.location }}
+    <strong>Location</strong>
+    <br />
+    {{ deployment.location }}
 </p>
-
 <p>
-  <strong>Required Guards</strong>
-
-  <br />
-
-  {{ deployment.required_guards }}
+    <strong>Required Guards</strong>
+    <br />
+    {{ deployment.required_guards }}
 </p>
-
 <p>
-  <strong>Status</strong>
-
-  <br />
-
-  {% if deployment.is_active %} Active {% else %} Inactive {% endif %}
+    <strong>Status</strong>
+    <br />
+    {% if deployment.is_active %} Active {% else %} Inactive {% endif %}
 </p>
-
 <p>
-  <strong>Remarks</strong>
-
-  <br />
-
-  {{ deployment.remarks|default:"-" }}
+    <strong>Remarks</strong>
+    <br />
+    {{ deployment.remarks|default:"-" }}
 </p>
-
 <hr />
-
-<a href="{% url 'operations:deployment_update' deployment.pk %}"> Edit </a>
-
-<a href="{% url 'operations:deployment_delete' deployment.pk %}"> Delete </a>
-
-<a href="{% url 'operations:deployment_list' %}"> Back </a>
+<a href="{% url 'operations:deployment_update' deployment.pk %}">Edit</a>
+<a href="{% url 'operations:deployment_delete' deployment.pk %}">Delete</a>
+<a href="{% url 'operations:deployment_list' %}">Back</a>

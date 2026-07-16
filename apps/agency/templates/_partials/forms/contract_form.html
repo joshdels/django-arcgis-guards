@@ -1,5 +1,5 @@
 <form class="standard-form"
-      action="{% if client %}{% url 'agency:contract_create_client' client.id %}{% else %}{% url 'agency:contract_create' %}{% endif %}"
+      action="{% if contract %}{% url 'agency:contract_update' contract.id %}{% elif client %}{% url 'agency:contract_create_client' client.id %}{% else %}{% url 'agency:contract_create' %}{% endif %}"
       method="post">
     {% csrf_token %}
     {% if client %}

@@ -17,10 +17,10 @@ class ClientForm(CalciteModelForm):
         fields = [
             "name",
             "organization",
+            "location",
             "contact_person",
             "email",
             "phone",
-            "hourly_billing_rate",
         ]
 
         widgets = {
@@ -28,17 +28,14 @@ class ClientForm(CalciteModelForm):
             "organization": CalciteInputWidget(
                 attrs={"placeholder": "Enter organization name"}
             ),
+            "location": CalciteInputWidget(
+                attrs={"placeholder": "Dumagete City"}
+            ),
             "contact_person": CalciteInputWidget(
                 attrs={"placeholder": "Enter contact person"}
             ),
             "email": CalciteInputWidget(attrs={"placeholder": "example@email.com"}),
             "phone": CalciteInputWidget(attrs={"placeholder": "09XXXXXXXXX"}),
-            "hourly_billing_rate": CalciteNumberWidget(
-                attrs={
-                    "placeholder": "0.00",
-                    "step": "1",
-                }
-            ),
         }
 
 

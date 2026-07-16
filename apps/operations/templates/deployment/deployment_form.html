@@ -5,13 +5,10 @@
         Create Deployment
     {% endif %}
 </h1>
-
 <form method="post">
-  {% csrf_token %} {{ form.as_p }}
-
-  <button type="submit">Save</button>
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Save</button>
 </form>
-
 <p>
-  <a href="{% url 'operations:deployment_list' %}"> Back </a>
+    <a href="{% url 'operations:deployment_list' %}">Back</a>
 </p>
