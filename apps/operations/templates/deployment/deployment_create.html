@@ -1,0 +1,150 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}New Deployment | Dumagete Guards{% endblock %}
+
+{% block etra_head %} {% endblock %}
+  <link rel="stylesheet" href="{% static 'css/create_deployment.css' %}">
+{% block content %}
+
+{% include "_components/navbar.html" %}
+
+<div class="form-container">
+
+    <header class="page-header">
+
+        <a href="{% url 'agency:show_contracts' %}">
+            <calcite-icon icon="chevron-left"></calcite-icon>
+            Back to Contracts
+        </a>
+
+        <h2>New Deployment</h2>
+
+    </header>
+
+    <div class="deployment-layout">
+
+        <!-- LEFT -->
+         <!-- FORM!!! -->
+          {{ formset.non_form_errors }}
+
+          {% for form in formset %}
+              {{ form.errors }}
+          {% endfor %}
+
+          <form class="standard-form" method="post" action="">
+
+              {% csrf_token %}
+
+              {{ formset.management_form }}
+
+              <div id="deployment-forms">
+
+                  {% for form in formset %}
+
+                      <div class="deployment-card">
+
+                          <h3>
+                              Deployment {{ forloop.counter }}
+                          </h3>
+
+                          {% include "_partials/_forms/deployment_form.html" with form=form %}
+
+                      </div>
+
+                  {% endfor %}
+
+              </div>
+
+              <!-- Hidden Template -->
+              <template id="empty-form">
+
+                  <div class="deployment-card">
+
+                      <h3>
+                          Deployment
+                      </h3>
+
+                      {% include "_partials/_forms/deployment_form.html" with form=formset.empty_form %}
+
+                  </div>
+
+              </template>
+
+              <div class="form-button">
+
+                  <calcite-button
+                      id="add-deployment"
+                      appearance="outline"
+                      type="button">
+
+                      + Add Deployment
+
+                  </calcite-button>
+
+                  <calcite-button type="submit">
+                      Save All Deployments
+                  </calcite-button>
+
+              </div>
+
+          </form>
+
+        <!-- RIGHT -->
+        <div>
+
+            <calcite-card>
+
+                <h3>Contract Details</h3>
+
+                <div class="detail-item">
+                    <strong>Contract No.</strong>
+                    <p>{{ contract.contract_number }}</p>
+                </div>
+
+                <div class="detail-item">
+                    <strong>Client</strong>
+                    <p>{{ contract.client.name }}</p>
+                </div>
+
+                <div class="detail-item">
+                    <strong>Organization</strong>
+                    <p>{{ contract.client.organization }}</p>
+                </div>
+
+                <div class="detail-item">
+                    <strong>Status</strong>
+                    <p>{{ contract.get_status_display }}</p>
+                </div>
+
+                <div class="detail-item">
+                    <strong>Required Guards</strong>
+                    <p>{{ contract.number_of_guards }}</p>
+                </div>
+
+                <div class="detail-item">
+                    <strong>Start Date</strong>
+                    <p>{{ contract.start_date }}</p>
+                </div>
+
+                <div class="detail-item">
+                    <strong>End Date</strong>
+                    <p>{{ contract.end_date }}</p>
+                </div>
+
+                <div class="detail-item">
+                    <strong>Description</strong>
+                    <p>{{ contract.description }}</p>
+                </div>
+
+            </calcite-card>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+{% block extra_script %} 
+  <script src="{% static 'js/addForm.js' %}"></script>
+{% endblock %}

@@ -98,7 +98,7 @@
 
         <calcite-table-cell alignment="end">
             <calcite-button
-                href="{% url 'operations:deployment_create' %}"
+                href="{% url 'operations:deployment_create_contract' contract.id %}"
                 appearance="solid"
                 scale="s"
                 icon-start="plus">
@@ -109,7 +109,7 @@
     </calcite-table-row>
 
     {% endfor %}
-
+`1
 </calcite-table>
 
 {% endif %}

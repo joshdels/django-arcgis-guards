@@ -1,37 +1,4 @@
-<h1>
-    {% if form.instance.pk %}
-        Edit Deployment
-    {% else %}
-        Create Deployment
-    {% endif %}
-</h1>
-
-{% if contract %}
-    <calcite-notice open kind="info" icon>
-        <div slot="title">Contract Selected</div>
-        <div slot="message">
-            {{ contract.title }} - {{ contract.client }}
-        </div>
-    </calcite-notice>
-{% endif %}
-
-<form
-    class="standard-form"
-    method="post"
->
-
-    {% csrf_token %}
-
-    {% if form.contract %}
-    <div class="form-group">
-        <label for="{{ form.contract.id_for_label }}">
-            Contract
-        </label>
-
-        {{ form.contract }}
-        {{ form.contract.errors }}
-    </div>
-    {% endif %}
+<div class="deployment-card">
 
     <div class="form-group">
         <label for="{{ form.name.id_for_label }}">
@@ -78,16 +45,6 @@
         {{ form.is_active.errors }}
     </div>
 
-    <div class="form-button">
-        <calcite-button
-            appearance="outline-fill"
-            href="{% url 'operations:deployment_list' %}">
-            Cancel
-        </calcite-button>
+    <hr>
 
-        <calcite-button type="submit">
-            Save Deployment
-        </calcite-button>
-    </div>
-
-</form>
+</div>
