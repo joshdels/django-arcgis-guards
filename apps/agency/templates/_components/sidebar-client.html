@@ -6,33 +6,39 @@
         <a class="sidebar-link active"
            hx-get="{% url 'agency:client_overview' client.id %}"
            hx-target="#client-content"
-           hx-push-url="true">
+           hx-replace-url="true"
+           None="true">
             <calcite-icon icon="dashboard-graph"></calcite-icon> Overview
         </a>
         <a class="sidebar-link"
            hx-get="{% url 'agency:client_information' client.id %}"
            hx-target="#client-content"
-           hx-push-url="true">
+           hx-replace-url="true"
+           None="true">
         <calcite-icon icon="user"></calcite-icon>Information</a>
         <a class="sidebar-link"
            hx-get="{% url 'agency:client_contract' client.id %}"
            hx-target="#client-content"
-           hx-push-url="true">
+           hx-replace-url="true"
+           None="true">
         <calcite-icon icon="pen"></calcite-icon>Contract</a>
         <a class="sidebar-link"
            hx-get="{% url 'agency:client_guard' client.id %}"
            hx-target="#client-content"
-           hx-push-url="true">
+           hx-replace-url="true"
+           None="true">
         <calcite-icon icon="security"></calcite-icon>Guard</a>
         <a class="sidebar-link"
            hx-get="{% url 'agency:client_billing' client.id %}"
            hx-target="#client-content"
-           hx-push-url="true">
+           hx-replace-url="true"
+           None="true">
         <calcite-icon icon="script"></calcite-icon>Billing</a>
         <a class="sidebar-link"
            hx-get="{% url 'agency:client_report' client.id %}"
            hx-target="#client-content"
-           hx-push-url="true">
+           hx-replace-url="true"
+           None="true">
         <calcite-icon icon="file-report"></calcite-icon>Reports</a>
     </main>
 </div>

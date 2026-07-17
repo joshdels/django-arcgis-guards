@@ -1,16 +1,13 @@
 from django import forms
-from core.forms.widgets import (
-    CalciteInputWidget,
-    CalciteNumberWidget,
-    CalciteTextareaWidget,
-)
+from django.forms import modelformset_factory
 
 from apps.contract.models import Contract, ContractStatus
 from apps.operations.models import Deployment
-from django.forms import modelformset_factory
+
+from core.forms.base import CalciteModelForm
 
 
-class DeploymentForm(forms.ModelForm):
+class DeploymentForm(CalciteModelForm):
     class Meta:
         model = Deployment
         fields = [
@@ -19,19 +16,7 @@ class DeploymentForm(forms.ModelForm):
             "location",
             "required_guards",
             "remarks",
-            "is_active",
         ]
-
-        widgets = {
-            "name": CalciteInputWidget(attrs={"placeholder": "Deployment Name"}),
-            "location": CalciteInputWidget(
-                attrs={"placeholder": "Deployment Location"}
-            ),
-            "required_guards": CalciteNumberWidget(
-                attrs={"placeholder": "Required Guards"}
-            ),
-            "remarks": CalciteTextareaWidget(attrs={"placeholder": "Enter remarks"}),
-        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,6 +28,18 @@ class DeploymentForm(forms.ModelForm):
                     ContractStatus.ONGOING,
                 ]
             ).select_related("client")
+
+
+class DeploymentUpdateForm(CalciteModelForm):
+    class Meta:
+        model = Deployment
+        fields = [
+            "name",
+            "location",
+            "required_guards",
+            "remarks",
+            "is_active",
+        ]
 
 
 class ContractDeploymentForm(DeploymentForm):

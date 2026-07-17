@@ -6,24 +6,24 @@
         <a class="sidebar-link active"
            hx-get="{% url 'operations:operation_overview' %}"
            hx-target="#operation-content"
-           hx-push-url="true">
+           hx-replace-url="true">
             <calcite-icon icon="dashboard-graph"></calcite-icon> Overview
         </a>
         <a class="sidebar-link"
            hx-get="{% url 'operations:operation_queue' %}"
            hx-target="#operation-content"
-           hx-push-url="true">
+           hx-replace-url="true">
             <calcite-icon icon="list-number"></calcite-icon> Queues
         </a>
         <a class="sidebar-link"
            hx-get="{% url 'operations:operation_deployment' %}"
            hx-target="#operation-content"
-           hx-push-url="true">
+           hx-replace-url="true">
         <calcite-icon icon="pushpin"></calcite-icon>Deployments</a>
         <a class="sidebar-link"
            hx-get="{% url 'operations:operation_assignment' %}"
            hx-target="#operation-content"
-           hx-push-url="true">
+           hx-replace-url="true">
         <calcite-icon icon="user-plus"></calcite-icon>Assignments</a>
     </main>
 </div>

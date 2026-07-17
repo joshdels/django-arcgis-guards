@@ -6,6 +6,7 @@ from .widgets import (
     CalciteNumberWidget,
     CalciteSelectWidget,
     CalciteTextareaWidget,
+    CalciteCheckboxWidget,
 )
 
 
@@ -16,43 +17,43 @@ class CalciteModelForm(forms.ModelForm):
         for name, field in self.fields.items():
             attrs = field.widget.attrs.copy()
 
-            # Mark invalid fields for Calcite
-            if name in self.errors:
-                attrs["status"] = "invalid"
+            if field.widget.attrs.get("status"):
+                attrs["status"] = field.widget.attrs["status"]
 
-            # ModelChoiceField (ForeignKey)
-            if isinstance(field, forms.ModelChoiceField):
-                field.widget = CalciteSelectWidget(
-                    attrs=attrs,
-                    choices=field.widget.choices,
-                )
+            self.apply_calcite_widget(field, attrs)
 
-            # ChoiceField
-            elif isinstance(field, forms.ChoiceField):
-                field.widget = CalciteSelectWidget(
-                    attrs=attrs,
-                    choices=field.widget.choices,
-                )
+    def apply_calcite_widget(self, field, attrs):
 
-            # DateField
-            elif isinstance(field, forms.DateField):
-                field.widget = CalciteDateWidget(attrs=attrs)
+        if isinstance(field, forms.BooleanField):
+            field.widget = CalciteCheckboxWidget(attrs=attrs)
 
-            # IntegerField, DecimalField, FloatField
-            elif isinstance(
-                field,
-                (
-                    forms.IntegerField,
-                    forms.DecimalField,
-                    forms.FloatField,
-                ),
-            ):
-                field.widget = CalciteNumberWidget(attrs=attrs)
+        elif isinstance(field, forms.ModelChoiceField):
+            field.widget = CalciteSelectWidget(
+                attrs=attrs,
+                choices=field.choices,
+            )
 
-            # Textarea
-            elif isinstance(field.widget, forms.Textarea):
-                field.widget = CalciteTextareaWidget(attrs=attrs)
+        elif isinstance(field, forms.ChoiceField):
+            field.widget = CalciteSelectWidget(
+                attrs=attrs,
+                choices=field.choices,
+            )
 
-            # Everything else (CharField, EmailField, URLField, etc.)
-            else:
-                field.widget = CalciteInputWidget(attrs=attrs)
+        elif isinstance(field, forms.DateField):
+            field.widget = CalciteDateWidget(attrs=attrs)
+
+        elif isinstance(
+            field,
+            (
+                forms.IntegerField,
+                forms.DecimalField,
+                forms.FloatField,
+            ),
+        ):
+            field.widget = CalciteNumberWidget(attrs=attrs)
+
+        elif isinstance(field.widget, forms.Textarea):
+            field.widget = CalciteTextareaWidget(attrs=attrs)
+
+        else:
+            field.widget = CalciteInputWidget(attrs=attrs)

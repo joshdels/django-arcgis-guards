@@ -1,16 +1,14 @@
-<form class="standard-form" method="post" action="{% url 'operations:deployment_update' deployment.pk %}">
+<form class="standard-form"
+      method="post"
+      action="{% url 'operations:deployment_update' deployment.pk %}">
     {% csrf_token %}
-    
     {% if deployment %}
         <div class="form-group">
             <label>Contract</label>
-            <calcite-input
-                value="{{ deployment.contract.contract_number }} - {{ deployment.contract.client }}"
-                disabled>
+            <calcite-input value="{{ deployment.contract.contract_number }} - {{ deployment.contract.client }}" disabled>
             </calcite-input>
         </div>
     {% endif %}
-
     <div class="form-group">
         <label for="{{ form.name.id_for_label }}">Deployment Name</label>
         {{ form.name }}
@@ -37,7 +35,6 @@
         {{ form.is_active.errors }}
     </div>
     <div class="form-button">
-
         <calcite-button type="submit">
         Save Deployment
         </calcite-button>

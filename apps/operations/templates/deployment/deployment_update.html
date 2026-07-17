@@ -10,10 +10,8 @@
                 Back to Deployment Detail
             </a>
             <h2>Edit Deployment</h2>
-            <p>
-                {{ deployment.name }} | {{ deployment.location }}
-            </p>
-            <p> {{ deployment.client_name }}{{ deployment.client_organization }}</p>
+            <p>{{ deployment.name }} | {{ deployment.location }}</p>
+            <p>{{ deployment.client_name }}{{ deployment.client_organization }}</p>
             <p>{{ deployment.contract_number }}</p>
             {% include "_partials/_forms/deployment_update_form.html" %}
         </header>

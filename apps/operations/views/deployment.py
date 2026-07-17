@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
 from django.db import transaction
+from django.db.models import Q
 
 from apps.contract.models import Contract
 from apps.operations.models import Deployment
-from apps.operations.forms import DeploymentForm, DeploymentFormSet
+from apps.operations.forms import ContractDeploymentForm, DeploymentFormSet
 
 
 from ..selectors import (
@@ -115,7 +116,7 @@ def deployment_detail_view(request, pk):
 def deployment_update_view(request, pk):
     deployment = deployment_detail(pk)
 
-    form = DeploymentForm(
+    form = ContractDeploymentForm(
         request.POST or None,
         instance=deployment,
     )
@@ -131,9 +132,7 @@ def deployment_update_view(request, pk):
             "Deployment updated successfully.",
         )
 
-        return redirect(
-            "operations:deployment_detail", deployment.id
-        )
+        return redirect("operations:deployment_detail", deployment.id)
 
     return render(
         request,
