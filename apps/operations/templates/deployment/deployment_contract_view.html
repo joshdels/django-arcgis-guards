@@ -1,19 +1,13 @@
-<div>
+<div class="contract_content">
     {% if contract %}
-        <calcite-card>
-        <h3>Contract Details</h3>
-        <div class="detail-item">
-            <strong>Contract No.</strong>
-            <p>{{ contract.contract_number }}</p>
-        </div>
+        <h2>Contract Details</h2>
         <div class="detail-item">
             <strong>Client</strong>
             <p>{{ contract.client.name }}</p>
-        </div>
-        <div class="detail-item">
-            <strong>Organization</strong>
             <p>{{ contract.client.organization }}</p>
+            <p>{{ contract.contract_number }}</p>
         </div>
+
         <div class="detail-item">
             <strong>Status</strong>
             <p>{{ contract.get_status_display }}</p>
@@ -23,17 +17,12 @@
             <p>{{ contract.number_of_guards }}</p>
         </div>
         <div class="detail-item">
-            <strong>Start Date</strong>
-            <p>{{ contract.start_date }}</p>
-        </div>
-        <div class="detail-item">
-            <strong>End Date</strong>
-            <p>{{ contract.end_date }}</p>
+            <strong>Date</strong>
+            <p>{{ contract.start_date }} - {{ contract.end_date }}</p>
         </div>
         <div class="detail-item">
             <strong>Description</strong>
             <p>{{ contract.description }}</p>
         </div>
-        </calcite-card>
     {% endif %}
 </div>

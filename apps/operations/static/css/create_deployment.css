@@ -1,20 +1,14 @@
-.deployment-layout{
-    display:grid;
-    grid-template-columns:1fr 360px;
-    gap:2rem;
-    align-items:start;
+.deployment-create-container {
+    display: flex;
+    gap: 1rem;
 }
 
-.detail-item{
-    margin-bottom:1rem;
+.contract_content {
+    background-color: var(--calcite-color-surface-2);
+    border: solid 1px var(--calcite-color-border-1);
+    padding: 1rem;
 }
 
-.detail-item strong{
-    display:block;
-    margin-bottom:.25rem;
-}
-
-.detail-item p{
-    margin:0;
-    color:var(--calcite-ui-text-2);
+.contract_content .detail-item {
+    margin-top: 1rem;
 }

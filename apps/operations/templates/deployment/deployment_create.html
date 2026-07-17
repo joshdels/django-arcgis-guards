@@ -1,8 +1,9 @@
 {% extends "_base.html" %}
 {% load static %}
 {% block title %}New Deployment | Dumagete Guards{% endblock %}
-{% block etra_head %}{% endblock %}
-  <link rel="stylesheet" href="{% static 'css/create_deployment.css' %}">
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/create_deployment.css' %}">
+{% endblock %}
 {% block content %}
     {% include "_components/navbar.html" %}
     <div class="form-container">
@@ -14,47 +15,10 @@
             <h2>New Deployment</h2>
         </header>
         <div class="deployment-create-container">
-            <div class="deployment-layout">
-                <!-- LEFT -->
-                <!-- FORM!!! -->
-                {{ formset.non_form_errors }}
-                {% for form in formset %}
-                    {{ form.errors }}
-                {% endfor %}
-                
-                <form class="standard-form"
-                      method="post"
-                      action=" {% if contract %} {% url 'operations:deployment_create_contract' contract.id %} {% else %} {% url 'operations:deployment_create' %} {% endif %} ">
-                    {% csrf_token %}
-                    {{ formset.management_form }}
-                    <div id="deployment-forms">
-                        {% for form in formset %}
-                            <div class="deployment-card">
-                                <h3>Deployment {{ forloop.counter }}</h3>
-                                {% include "_partials/_forms/deployment_form.html" with form=form %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <!-- Hidden Template -->
-                    <template id="empty-form">
-                        <div class="deployment-card">
-                            <h3>Deployment</h3>
-                            {% include "_partials/_forms/deployment_form.html" with form=formset.empty_form %}
-                        </div>
-                    </template>
-                    <div class="form-button">
-                        <calcite-button id="add-deployment" appearance="outline" type="button">
-                        + Add Deployment
-                        </calcite-button>
-                        <calcite-button type="submit">
-                        Save All Deployments
-                        </calcite-button>
-                    </div>
-                </form>
-            </div>
-            <div class="contract-list">
-              {% include 'deployment/deployment_contract_view.html' %}
-            </div>
+            <div class="deployment-layout">{% include '_partials/_forms/deployment_formset.html' %}</div>
+            {% if contract %}
+            <div class="contract-list">{% include 'deployment/deployment_contract_view.html' %}</div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
