@@ -1,11 +1,14 @@
 <main class="profile">
-    <h1>Deployment</h1>
-    <section>
-        <h2>Deploy</h2>
-        <div class="grid">
-            <div>
-                <p>Comming Soon</p>
-            </div>
-        </div>
-    </section>
+    <div class="page-header">
+        <h1>Deployments</h1>
+
+        <calcite-button
+            icon-start="plus"
+            href="{% url 'operations:deployment_create' %}">
+            Create Deployment
+        </calcite-button>
+    </div>
+
+    {% include '_partials/deployment/table.html' %}
+    
 </main>

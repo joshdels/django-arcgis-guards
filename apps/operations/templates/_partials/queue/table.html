@@ -1,12 +1,10 @@
 {# djlint:off #}
 {% if not contracts %}
-
-<calcite-notice open kind="info">
-    <div slot="message">
-        No approved contracts are ready for deployment.
-    </div>
-</calcite-notice>
-
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No approved contracts are ready for deployment.
+        </div>
+    </calcite-notice>
 {% else %}
 
 <calcite-table
@@ -27,7 +25,7 @@
         <calcite-table-header heading="Contract Period"></calcite-table-header>
         <calcite-table-header heading="Created"></calcite-table-header>
         <calcite-table-header heading="Status"></calcite-table-header>
-        <calcite-table-header alignment="end" heading="Action"></calcite-table-header>
+        <calcite-table-header heading="Action" alignment="end"></calcite-table-header>
     </calcite-table-row>
 
     {% for contract in contracts %}

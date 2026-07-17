@@ -1,0 +1,96 @@
+{# djlint:off #}
+{% if not deployments %}
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No approved contracts are ready for deployment.
+        </div>
+    </calcite-notice>
+{% endif %}
+
+<calcite-table
+    caption="Contracts Ready for Deployment"
+    bordered
+    striped
+    numbered
+    page-size="10"
+    current-page="0"
+    layout="auto"
+    interaction-mode="interactive"
+>
+
+    <calcite-table-row slot="table-header">
+        <calcite-table-header heading="Contract"></calcite-table-header>
+        <calcite-table-header heading="Client"></calcite-table-header>
+        <calcite-table-header heading="Deployment"></calcite-table-header>
+        <calcite-table-header heading="Location"></calcite-table-header>
+        <calcite-table-header heading="Required Guards"></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+        <calcite-table-header heading="Actions"></calcite-table-header>
+    </calcite-table-row>
+
+    {% for deployment in deployments %}
+        <calcite-table-row>
+            <calcite-table-cell> 
+                {{ deployment.contract.contract_number }}
+            </calcite-table-cell>
+            <calcite-table-cell>
+                {{ deployment.contract.client.name }}
+            </calcite-table-cell>
+            <calcite-table-cell>
+                {{ deployment.name }}
+            </calcite-table-cell>
+            <calcite-table-cell>
+                {{ deployment.location }}
+            </calcite-table-cell>
+            <calcite-table-cell>
+                <calcite-chip appearance="outline-fill" scale="s">
+                    {{ deployment.required_guards }}
+                </calcite-chip>
+            </calcite-table-cell>
+
+            <calcite-table-cell>
+                {% if deployment.is_active %}
+                    <calcite-chip appearance="solid" kind="success">
+                        Active
+                    </calcite-chip>
+                {% else %}
+                    <calcite-chip appearance="solid" kind="danger">
+                        Inactive
+                    </calcite-chip>
+                {% endif %}
+            </calcite-table-cell>
+
+            <calcite-table-cell alignment="center">
+                <calcite-dropdown placement="bottom-end">
+                    <calcite-action
+                        slot="trigger"
+                        icon="ellipsis"
+                        text="Actions">
+                    </calcite-action>
+
+                    <calcite-dropdown-group>
+                        <calcite-dropdown-item
+                            icon-start="view"
+                            href="{% url 'operations:deployment_detail' deployment.pk %}">
+                            View
+                        </calcite-dropdown-item>
+
+                        <calcite-dropdown-item
+                            icon-start="pencil"
+                            href="{% url 'operations:deployment_update' deployment.pk %}">
+                            Edit
+                        </calcite-dropdown-item>
+
+                        <calcite-dropdown-item
+                            icon-start="trash"
+                            href="{% url 'operations:deployment_delete' deployment.pk %}">
+                            Delete
+                        </calcite-dropdown-item>
+                    </calcite-dropdown-group>
+                </calcite-dropdown>
+            </calcite-table-cell>
+
+        </calcite-table-row>
+    {% endfor %}
+</calcite-table>
+{# djlint:on #}

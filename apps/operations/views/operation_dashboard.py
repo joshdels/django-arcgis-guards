@@ -6,6 +6,11 @@ from apps.accounts.models import User
 from apps.contract.models import Contract, ContractStatus
 
 
+from ..selectors import (
+    deployment_list,
+)
+
+
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def operation_overview(request):
     return render_operation_tab(request, "_partials/overview/_overview.html")
@@ -35,7 +40,15 @@ def operation_queue(request):
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def operation_deployment(request):
-    return render_operation_tab(request, "_partials/deployment/_deployment.html")
+    deployments = deployment_list()
+
+    context = {
+        "deployments": deployments,
+    }
+
+    return render_operation_tab(
+        request, "_partials/deployment/_deployment.html", context
+    )
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
