@@ -23,9 +23,9 @@
     {% for contract in contracts %}
         <calcite-table-row>
             <calcite-table-cell>
-            <strong>{{ contract.contract_number }}</strong>
+            <strong>{{ contract.title }}</strong>
             <br>
-            <small>{{ contract.title }}</small>
+            <small>{{ contract.contract_number }}</small>
         </calcite-table-cell>
             <calcite-table-cell>
             <strong>{{ contract.client.name }}</strong>

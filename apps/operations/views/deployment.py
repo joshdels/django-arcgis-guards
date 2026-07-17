@@ -27,36 +27,78 @@ def deployment_list_view(request):
     return render(request, "deployment/deployment_list.html", context)
 
 
-def deployment_create_view(request, contract_id):
+def deployment_create_view(request):
+    if request.method == "POST":
+        formset = DeploymentFormSet(
+            request.POST,
+            queryset=Deployment.objects.none(),
+        )
+
+        if formset.is_valid():
+            with transaction.atomic():
+                for form in formset:
+                    if not form.has_changed():
+                        continue
+
+                    form.save()
+
+            messages.success(
+                request,
+                "Deployments created successfully.",
+            )
+
+            return redirect("operations:deployment_create")
+
+    else:
+        formset = DeploymentFormSet(
+            queryset=Deployment.objects.none(),
+        )
+
+    return render(
+        request,
+        "deployment/deployment_create.html",
+        {
+            "formset": formset,
+            "contract": None,
+        },
+    )
+
+
+def deployment_create_contract_view(request, contract_id):
     contract = get_object_or_404(
         Contract,
         id=contract_id,
     )
 
-    formset = DeploymentFormSet(
-        request.POST or None,
-        queryset=Deployment.objects.none(),
-    )
-
-    if request.method == "POST" and formset.is_valid():
-        with transaction.atomic():
-            for form in formset:
-                # Skip empty forms
-                if not form.cleaned_data:
-                    continue
-
-                deployment = form.save(commit=False)
-                deployment.contract = contract
-                deployment.save()
-
-        messages.success(
-            request,
-            "Deployments created successfully.",
+    if request.method == "POST":
+        formset = DeploymentFormSet(
+            request.POST,
+            queryset=Deployment.objects.none(),
         )
 
-        return redirect(
-            "operations:deployment_create_contract",
-            contract_id=contract.id,
+        if formset.is_valid():
+            with transaction.atomic():
+                for form in formset:
+                    if not form.has_changed():
+                        continue
+
+                    deployment = form.save(commit=False)
+                    deployment.contract = contract
+                    deployment.save()
+
+            messages.success(
+                request,
+                "Deployments created successfully.",
+            )
+
+            return redirect(
+                "operations:deployment_create_contract",
+                contract_id=contract.id,
+            )
+
+    else:
+        formset = DeploymentFormSet(
+            queryset=Deployment.objects.none(),
         )
 
     return render(

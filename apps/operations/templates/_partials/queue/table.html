@@ -34,9 +34,9 @@
 
     <calcite-table-row>
         <calcite-table-cell>
-            <strong>{{ contract.contract_number }}</strong>
+            <strong>{{ contract.title }}</strong>
             <br>
-            <small>{{ contract.title }}</small>
+            <small>{{ contract.contract_number }}</small>
         </calcite-table-cell>
 
         <calcite-table-cell>
@@ -60,7 +60,7 @@
         </calcite-table-cell>
 
         <calcite-table-cell>
-            {{ contract.created_at|date:"M d, Y" }}
+            {{ contract.created_at|date:"m/d/Y" }}
         </calcite-table-cell>
 
         <calcite-table-cell>
@@ -99,7 +99,7 @@
         <calcite-table-cell alignment="end">
             <calcite-button
                 href="{% url 'operations:deployment_create_contract' contract.id %}"
-                appearance="solid"
+                appearance="outline-fill"
                 scale="s"
                 icon-start="plus">
                 Create Deployment
@@ -109,7 +109,6 @@
     </calcite-table-row>
 
     {% endfor %}
-`1
 </calcite-table>
 
 {% endif %}

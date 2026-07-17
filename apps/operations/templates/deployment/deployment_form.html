@@ -5,89 +5,52 @@
         Create Deployment
     {% endif %}
 </h1>
-
 {% if contract %}
     <calcite-notice open kind="info" icon>
-        <div slot="title">Contract Selected</div>
-        <div slot="message">
-            {{ contract.title }} - {{ contract.client }}
-        </div>
+    <div slot="title">Contract Selected</div>
+    <div slot="message">{{ contract.title }} - {{ contract.client }}</div>
     </calcite-notice>
 {% endif %}
-
-<form
-    class="standard-form"
-    method="post"
->
-
+<form class="standard-form" method="post">
     {% csrf_token %}
-
     {% if form.contract %}
-    <div class="form-group">
-        <label for="{{ form.contract.id_for_label }}">
-            Contract
-        </label>
-
-        {{ form.contract }}
-        {{ form.contract.errors }}
-    </div>
+        <div class="form-group">
+            <label for="{{ form.contract.id_for_label }}">Contract</label>
+            {{ form.contract }}
+            {{ form.contract.errors }}
+        </div>
     {% endif %}
-
     <div class="form-group">
-        <label for="{{ form.name.id_for_label }}">
-            Deployment Name
-        </label>
-
+        <label for="{{ form.name.id_for_label }}">Deployment Name</label>
         {{ form.name }}
         {{ form.name.errors }}
     </div>
-
     <div class="form-group">
-        <label for="{{ form.location.id_for_label }}">
-            Location
-        </label>
-
+        <label for="{{ form.location.id_for_label }}">Location</label>
         {{ form.location }}
         {{ form.location.errors }}
     </div>
-
     <div class="form-group">
-        <label for="{{ form.required_guards.id_for_label }}">
-            Required Guards
-        </label>
-
+        <label for="{{ form.required_guards.id_for_label }}">Required Guards</label>
         {{ form.required_guards }}
         {{ form.required_guards.errors }}
     </div>
-
     <div class="form-group">
-        <label for="{{ form.remarks.id_for_label }}">
-            Remarks
-        </label>
-
+        <label for="{{ form.remarks.id_for_label }}">Remarks</label>
         {{ form.remarks }}
         {{ form.remarks.errors }}
     </div>
-
     <div class="form-group">
-        <label for="{{ form.is_active.id_for_label }}">
-            Active
-        </label>
-
+        <label for="{{ form.is_active.id_for_label }}">Active</label>
         {{ form.is_active }}
         {{ form.is_active.errors }}
     </div>
-
     <div class="form-button">
-        <calcite-button
-            appearance="outline-fill"
-            href="{% url 'operations:deployment_list' %}">
-            Cancel
+        <calcite-button appearance="outline-fill" href="{% url 'operations:deployment_list' %}">
+        Cancel
         </calcite-button>
-
         <calcite-button type="submit">
-            Save Deployment
+        Save Deployment
         </calcite-button>
     </div>
-
 </form>

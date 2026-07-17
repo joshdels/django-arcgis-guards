@@ -10,7 +10,6 @@
             <a href="{% url 'operations:operation_queue' %}"
                class="{% if not status %}clear{% endif %}">Reset</a>
         </div>
-        <calcite-button href="{% url 'agency:contract_create' %}"  icon-start="plus">Add Contract</calcite-button>
     </header>
     {% include "_partials/queue/table.html" %}
 </div>
