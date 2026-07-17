@@ -4,7 +4,8 @@
     {% include '_components/navbar.html' %}
     <div class="form-container">
         <header>
-            <a href="#" id="backButton">
+            <a href="{% url 'agency:contract_profile' contract.id %}"
+               id="backButton">
                 <calcite-icon icon="chevron-left"></calcite-icon>
                 Back to Contract Profile
             </a>

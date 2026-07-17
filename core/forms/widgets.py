@@ -17,6 +17,10 @@ class CalciteNumberWidget(forms.NumberInput):
     template_name = "widgets/calcite/number.html"
 
 
+class CalciteTelephoneWidget(forms.TextInput):
+    template_name = "widgets/calcite/tel.html"
+
+
 class CalciteDateWidget(forms.DateInput):
     template_name = "widgets/calcite/date.html"
 

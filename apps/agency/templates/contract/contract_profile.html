@@ -15,8 +15,12 @@
             <div>
                 <div class="column">
                     <h2>{{ contract.title }}</h2>
-                    {% if contract.status == "pending" %}
-                        <calcite-chip kind="neutral" appearance="outline">Pending</calcite-chip>
+                    {% if contract.status == "draft" %}
+                        <calcite-chip kind="neutral" appearance="outline">Draft</calcite-chip>
+                    {% elif contract.status == "pending" %}
+                        <calcite-chip kind="neutral" appearance="outline-fill">Pending</calcite-chip>
+                    {% elif contract.status == "approved" %}
+                        <calcite-chip kind="brand" appearance="outline-fill">Approved</calcite-chip>
                     {% elif contract.status == "ongoing" %}
                         <calcite-chip kind="inverse" appearance="outline-fill">Ongoing</calcite-chip>
                     {% elif contract.status == "finished" %}

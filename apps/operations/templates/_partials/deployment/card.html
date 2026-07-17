@@ -1,0 +1,56 @@
+{# djlint:off #}
+{% for contract in contracts %}
+
+<div class="contract-deployment-card">
+
+    <div class="contract-header">
+        <div>
+            <div class="column">
+                <h3>{{ contract.client.name }}</h3> 
+                <p>{{ contract.client.organization }}</p>
+            </div>
+            <p>{{ contract.contract_number }} </p>
+        </div>
+
+        <calcite-button
+            icon-start="plus"
+            appearance="outline"
+            href="{% url 'operations:deployment_create_contract' contract.id %}">
+            Add Deployment
+        </calcite-button>
+    </div>
+
+    <div class="contract-summary">
+
+        <calcite-chip>
+            {{ contract.deployments.count }} Deployments
+        </calcite-chip>
+
+        <calcite-chip>
+            {{ contract.number_of_guards }} Guards
+        </calcite-chip>
+
+        {% if contract.status == "ongoing" %}
+            <calcite-chip kind="success">
+                Active
+            </calcite-chip>
+        {% else %}
+            <calcite-chip>
+                {{ contract.get_status_display }}
+            </calcite-chip>
+        {% endif %}
+
+    </div>
+
+    {% include '_partials/deployment/table.html' %}
+
+</div>
+
+{% empty %}
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No contracts found.
+        </div>
+    </calcite-notice>
+{% endfor %}
+{# djlint:on #}

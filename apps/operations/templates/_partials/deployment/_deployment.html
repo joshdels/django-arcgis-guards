@@ -1,14 +1,16 @@
-<main class="profile">
-    <div class="page-header">
-        <h1>Deployments</h1>
-
-        <calcite-button
-            icon-start="plus"
-            href="{% url 'operations:deployment_create' %}">
-            Create Deployment
-        </calcite-button>
-    </div>
-
-    {% include '_partials/deployment/table.html' %}
-    
+<main class="dashboard">
+    <h1>Deployment</h1>
+    <header class="header">
+        <div>
+            <form method="get" class="flex">
+                <calcite-input type="search" name="search" placeholder="Client Name, Organization" icon="search" value="{{ search|default:'' }}">
+                </calcite-input>
+                <calcite-button type="submit">Search</calcite-button>
+            </form>
+            <!-- Might flag this one -->
+            <a href="#" class="{% if not status %}active{% endif %}">All</a>
+        </div>
+        <calcite-button href="{% url 'operations:deployment_create' %}"  icon-start="plus">New Deployment</calcite-button>
+    </header>
+    {% include '_partials/deployment/card.html' %}
 </main>

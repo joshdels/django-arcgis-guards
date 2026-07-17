@@ -1,40 +1,57 @@
-<h1>Deployment Details</h1>
-<p>
-    <strong>Contract</strong>
-    <br />
-    {{ deployment.contract.contract_number }}
-</p>
-<p>
-    <strong>Client</strong>
-    <br />
-    {{ deployment.contract.client.name }}
-</p>
-<p>
-    <strong>Name</strong>
-    <br />
-    {{ deployment.name }}
-</p>
-<p>
-    <strong>Location</strong>
-    <br />
-    {{ deployment.location }}
-</p>
-<p>
-    <strong>Required Guards</strong>
-    <br />
-    {{ deployment.required_guards }}
-</p>
-<p>
-    <strong>Status</strong>
-    <br />
-    {% if deployment.is_active %} Active {% else %} Inactive {% endif %}
-</p>
-<p>
-    <strong>Remarks</strong>
-    <br />
-    {{ deployment.remarks|default:"-" }}
-</p>
-<hr />
-<a href="{% url 'operations:deployment_update' deployment.pk %}">Edit</a>
-<a href="{% url 'operations:deployment_delete' deployment.pk %}">Delete</a>
-<a href="{% url 'operations:deployment_list' %}">Back</a>
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}Deployment Detail | Dumagete Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "_components/navbar.html" %}
+    <main class="container profile">
+        <a href="#" id="backButton">
+            <calcite-icon icon="chevron-left"> </calcite-icon>
+            Back to Operation Dashboard
+        </a>
+        <header>
+            <div>
+                <div class="column">
+                    <h2>{{ deployment.name }}</h2>
+                    {% if contract.status == "draft" %}
+                        <calcite-chip kind="neutral" appearance="outline">Draft</calcite-chip>
+                    {% elif contract.status == "pending" %}
+                        <calcite-chip kind="neutral" appearance="outline-fill">Pending</calcite-chip>
+                    {% elif contract.status == "approved" %}
+                        <calcite-chip kind="brand" appearance="outline-fill">Approved</calcite-chip>
+                    {% elif contract.status == "ongoing" %}
+                        <calcite-chip kind="inverse" appearance="outline-fill">Ongoing</calcite-chip>
+                    {% elif contract.status == "finished" %}
+                        <calcite-chip kind="brand">Finished</calcite-chip>
+                    {% else %}
+                        <calcite-chip kind="inverse">Cancelled</calcite-chip>
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                <calcite-button href="{% url 'operations:deployment_update' deployment.pk %}">Edit Deployment</calcite-button>
+            </div>
+        </header>
+        <section>
+            <h2>Contract Information</h2>
+            <h4>{{ deployment.contract.contract_number }}</h4>
+            {{ deployment.contract.client.name }}
+            {{ deployment.contract.client.name }}
+        </section>
+        <section>
+            <h2>Deployment Information</h2>
+            {{ deployment.name }}
+            {{ deployment.location }}
+            {{ deployment.remarks|default:"-" }}
+        </section>
+        <section>
+            <h2>Require Number of Guards</h2>
+            {{ deployment.required_guards }}
+        </section>
+    {% endblock %}
+</main>
+{% block extra_script %}
+    <script src="{% static 'js/addForm.js' %}"></script>
+{% endblock %}

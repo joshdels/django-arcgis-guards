@@ -33,10 +33,9 @@ def show_guards(request):
 
     if search:
         guards = guards.filter(
-            Q(user__first_name__icontains=search)
-            | Q(user__last_name__icontains=search)
-            | Q(user__username__icontains=search)
-            | Q(user__email__icontains=search)
+            Q(badge_number__icontains=search)
+            | Q(first_name__icontains=search)
+            | Q(last_name__icontains=search)
         )
 
     context = {"guards": guards, "search": search, "is_active": status}

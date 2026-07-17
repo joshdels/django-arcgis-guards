@@ -35,7 +35,7 @@ class ClientForm(CalciteModelForm):
                 attrs={"placeholder": "Enter contact person"}
             ),
             "email": CalciteInputWidget(attrs={"placeholder": "example@email.com"}),
-            "phone": CalciteInputWidget(attrs={"placeholder": "09XXXXXXXXX"}),
+            "phone": CalciteNumberWidget(attrs={"placeholder": "09XXXXXXXXX"}),
         }
 
 

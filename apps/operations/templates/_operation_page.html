@@ -3,29 +3,32 @@
 {% block title %}Operations Dashboard | Dumagete Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
-    <link rel="stylesheet" href="{% static 'css/_page.css' %}" {% endblock %} {% block content %}
-        <div class="dashboard-container ">
-            <aside class="dashboard-sidebar">
-                {% include '_components/sidebar-operation.html' %}
-            </aside>
-            <section class="dashboard-content">
-                {% include 'components/client-navbar-dashboard.html' %}
-                <main class="container-profile profile">
-                    <a href="{% url 'agency:home' %}">
-                        <calcite-icon icon="chevron-left"> </calcite-icon>
-                        Back to Agency Dashboard
-                    </a>
-                    <div id="operation-content">
-                        {% if content_template %}
-                            {% include content_template %}
-                        {% else %}
-                            {% include "_partials/overview/_overview.html" %}
-                        {% endif %}
-                    </div>
-                </main>
-            </section>
-        </div>
-    {% endblock %}
-    {% block extra_script %}
-        <script src="{% static 'js/highlight.js' %}"></script>
-    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/_page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/deployment.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="dashboard-container ">
+        <aside class="dashboard-sidebar">
+            {% include '_components/sidebar-operation.html' %}
+        </aside>
+        <section class="dashboard-content">
+            {% include 'components/client-navbar-dashboard.html' %}
+            <main class="container-profile profile">
+                <a href="{% url 'agency:home' %}">
+                    <calcite-icon icon="chevron-left"> </calcite-icon>
+                    Back to Agency Dashboard
+                </a>
+                <div id="operation-content">
+                    {% if content_template %}
+                        {% include content_template %}
+                    {% else %}
+                        {% include "_partials/overview/_overview.html" %}
+                    {% endif %}
+                </div>
+            </main>
+        </section>
+    </div>
+{% endblock %}
+{% block extra_script %}
+    <script src="{% static 'js/highlight.js' %}"></script>
+{% endblock %}

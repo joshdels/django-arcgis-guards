@@ -1,0 +1,39 @@
+.deployment-create-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.contract_content {
+    background-color: var(--calcite-color-surface-2);
+    border: solid 1px var(--calcite-color-border-1);
+    padding: 1rem;
+}
+
+.contract_content .detail-item {
+    margin-top: 1rem;
+}
+/* Card */
+.deployment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contract-deployment-card {
+    background: var(--calcite-color-surface-2);
+    border: 1px solid var(--calcite-color-border-1);
+    padding: 1rem;
+}
+
+.contract-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.contract-summary {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}

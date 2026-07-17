@@ -54,7 +54,6 @@ def client_create(request):
         form = ClientForm(request.POST)
 
         if form.is_valid():
-            form.save()
             create_client(form.cleaned_data)
 
             messages.success(request, "Client created sucessfully.")

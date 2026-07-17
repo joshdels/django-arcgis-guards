@@ -9,22 +9,11 @@ from apps.operations.forms import DeploymentForm, DeploymentFormSet
 
 from ..selectors import (
     deployment_detail,
-    deployment_list,
 )
 from ..services import (
     delete_deployment,
     update_deployment,
 )
-
-
-def deployment_list_view(request):
-    deployments = deployment_list()
-
-    context = {
-        "deployments": deployments,
-    }
-
-    return render(request, "deployment/deployment_list.html", context)
 
 
 def deployment_create_view(request):
@@ -142,13 +131,16 @@ def deployment_update_view(request, pk):
             "Deployment updated successfully.",
         )
 
-        return redirect("operations:deployment_list")
+        return redirect(
+            "operations:deployment_detail", deployment.id
+        )
 
     return render(
         request,
-        "deployment/deployment_form.html",
+        "deployment/deployment_update.html",
         {
             "form": form,
+            "deployment": deployment,
         },
     )
 

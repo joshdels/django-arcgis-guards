@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}New Deployment | Dumagete Guards{% endblock %}
 {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'css/create_deployment.css' %}">
+    <link rel="stylesheet" href="{% static 'css/deployment.css' %}">
 {% endblock %}
 {% block content %}
     {% include "_components/navbar.html" %}
@@ -17,7 +17,7 @@
         <div class="deployment-create-container">
             <div class="deployment-layout">{% include '_partials/_forms/deployment_formset.html' %}</div>
             {% if contract %}
-            <div class="contract-list">{% include 'deployment/deployment_contract_view.html' %}</div>
+                <div class="contract-list">{% include 'deployment/deployment_contract_view.html' %}</div>
             {% endif %}
         </div>
     </div>

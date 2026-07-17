@@ -6,9 +6,7 @@ from apps.accounts.models import User
 from apps.contract.models import Contract, ContractStatus
 
 
-from ..selectors import (
-    deployment_list,
-)
+from ..selectors import contract_deployment_list
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -40,10 +38,10 @@ def operation_queue(request):
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def operation_deployment(request):
-    deployments = deployment_list()
+    contracts = contract_deployment_list()
 
     context = {
-        "deployments": deployments,
+        "contracts": contracts,
     }
 
     return render_operation_tab(

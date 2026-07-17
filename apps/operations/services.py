@@ -1,5 +1,8 @@
+from django.db.models import Prefetch
+
 from .models import Deployment
 
+from apps.contract.models import Contract
 
 def create_deployment(**data):
     return Deployment.objects.create(**data)
@@ -25,3 +28,5 @@ def activate_deployment(deployment):
 def deactivate_deployment(deployment):
     deployment.is_active = False
     deployment.save(update_fields=["is_active"])
+
+
