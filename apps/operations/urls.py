@@ -10,7 +10,6 @@ urlpatterns = [
     path("dashboard/deployment/", views.operation_deployment, name="operation_deployment"),
     path("dashboard/assignment/", views.operation_assignment, name="operation_assignment"),
 
-
     path("deployment/create/", views.deployment_create_view, name="deployment_create"),
     path("deployment/create/<int:contract_id>/", views.deployment_create_contract_view, name="deployment_create_contract"),
     path("deployment/<int:pk>/", views.deployment_detail_view, name="deployment_detail"),

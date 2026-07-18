@@ -32,8 +32,21 @@
     margin-bottom: 1rem;
 }
 
+.contract-header .divider {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contract-header .divider small {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
 .contract-summary {
     display: flex;
     gap: .5rem;
     margin-bottom: 1rem;
 }
+

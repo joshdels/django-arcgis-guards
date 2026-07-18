@@ -82,8 +82,7 @@ def deployment_create_contract_view(request, contract_id):
             )
 
             return redirect(
-                "operations:deployment_create_contract",
-                contract_id=contract.id,
+                "operations:operation_deployment",
             )
 
     else:

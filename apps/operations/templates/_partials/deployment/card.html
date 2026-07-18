@@ -5,37 +5,37 @@
 
     <div class="contract-header">
         <div>
-            <div class="column">
-                <h3>{{ contract.client.name }}</h3> 
-                <p>{{ contract.client.organization }}</p>
-            </div>
+            <h3>{{ contract.client.name }}</h3> 
+            <p>{{ contract.client.organization }}</p>
             <p>{{ contract.contract_number }} </p>
         </div>
-
-        <calcite-button
-            icon-start="plus"
-            appearance="outline"
-            href="{% url 'operations:deployment_create_contract' contract.id %}">
-            Add Deployment
-        </calcite-button>
+        <div class="divider">
+            <calcite-button
+                icon-start="plus"
+                appearance="outline"
+                href="{% url 'operations:deployment_create_contract' contract.id %}">
+                Add Deployment
+            </calcite-button>
+            <small> <calcite-icon icon="date-time" scale="s"></calcite-icon>  {{ contract.start_date|date:"m/d/y" }} -- {{ contract.end_date|date:"m/d/y" }}</small>
+        </div>
     </div>
 
     <div class="contract-summary">
 
-        <calcite-chip>
+        <calcite-chip scale="s">
             {{ contract.deployments.count }} Deployments
         </calcite-chip>
 
-        <calcite-chip>
+        <calcite-chip scale="s">
             {{ contract.number_of_guards }} Guards
         </calcite-chip>
 
         {% if contract.status == "ongoing" %}
-            <calcite-chip kind="success">
+            <calcite-chip kind="success" scale="s">
                 Active
             </calcite-chip>
         {% else %}
-            <calcite-chip>
+            <calcite-chip scale="s">
                 {{ contract.get_status_display }}
             </calcite-chip>
         {% endif %}

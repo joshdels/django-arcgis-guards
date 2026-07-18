@@ -49,7 +49,6 @@ class ContractDeploymentForm(DeploymentForm):
             "location",
             "required_guards",
             "remarks",
-            "is_active",
         ]
 
 

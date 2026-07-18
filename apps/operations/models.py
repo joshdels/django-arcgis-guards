@@ -13,7 +13,7 @@ class Deployment(models.Model):
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     required_guards = models.PositiveIntegerField(default=1)
-    remarks=models.TextField()
+    remarks = models.TextField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
