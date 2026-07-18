@@ -1,0 +1,63 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}Assignment Detail | Dumagete Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "_components/navbar.html" %}
+    <main class="container profile">
+        <a href="#" id="backButton">
+            <calcite-icon icon="chevron-left"> </calcite-icon>
+            Back to Operation Dashboard
+        </a>
+        <header>
+            <div >
+                <div class="column">
+                    <h1>Assignment Detail</h1>
+                    {% if assignment.status == "ACTIVE" %}
+                        <calcite-chip kind="brand" appearance="solid">
+                        Active
+                        </calcite-chip>
+                    {% elif assignment.status == "ENDED" %}
+                        <calcite-chip kind="inverse" appearance="outline-fill">
+                        Ended
+                        </calcite-chip>
+                    {% else %}
+                        <calcite-chip kind="neutral" appearance="outline">
+                        Cancelled
+                        </calcite-chip>
+                    {% endif %}
+                </div>
+                <div>
+                    <div> {{ assignment.start_date}} - {{ assignment.end_date }}</div> 
+                </div>
+            </div>
+            <div>
+                <calcite-button href="{% url 'operations:assignment_edit_view' assignment.pk %}">Edit Assignment</calcite-button>
+            </div>
+        </header>
+        <section>
+            <h2>Assigned Guard</h2>
+            <div>{{ assignment.guard }}</div>
+        </section>
+        <section>
+            <h2>Deployment Information</h2>
+            <p>{{ assignment.deployment.name }}</p>
+            <p>{{ assignment.deployment.remarks }}</p>
+        </section>
+        <section>
+            <h2>Contract Information</h2>
+            <p>{{ assignment.deployment.contract.client.name }}</p>
+            <p>{{ assignment.deployment.contract.client.organization }}</p>
+            <p>{{ assignment.deployment.contract.contract_number }}</p>
+            <p>
+                {{ assignment.deployment.contract.start_date|date:'m/d/y' }} - {{ assignment.deployment.contract.end_date|date:'m/d/y' }}
+            </p>
+            <p>{{ assignment.deployment.contract.remarks }}</p>
+        </section>
+    {% endblock %}
+</main>
+{% block extra_script %}
+    <script src="{% static 'js/addForm.js' %}"></script>
+{% endblock %}

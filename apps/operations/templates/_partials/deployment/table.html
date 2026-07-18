@@ -9,7 +9,7 @@
             <calcite-table-header heading="Deployment"></calcite-table-header>
             <calcite-table-header heading="Location"></calcite-table-header>
             <calcite-table-header heading="Required Guards"></calcite-table-header>
-            <calcite-table-header heading="Assign Guards"></calcite-table-header>
+            <calcite-table-header heading="Assigned Guards"></calcite-table-header>
             <calcite-table-header heading="Created at"></calcite-table-header>
             <calcite-table-header heading="Status"></calcite-table-header>
             <calcite-table-header heading="Actions"></calcite-table-header>
@@ -29,18 +29,18 @@
                 {{ deployment.required_guards }}
             </calcite-table-cell>
             <calcite-table-cell>
-                <p>To fill python</p>
+                <p>{{ deployment.assignments.count }}</p>
             </calcite-table-cell>
             <calcite-table-cell>
                 {{ deployment.created_at|date:"m/d/Y" }}
             </calcite-table-cell>
             <calcite-table-cell>
                 {% if deployment.is_active %}
-                    <calcite-chip kind="success">
+                    <calcite-chip kind="brand">
                         Active
                     </calcite-chip>
                 {% else %}
-                    <calcite-chip kind="danger">
+                    <calcite-chip kind="neutral" appearance="outline-fill">
                         Inactive
                     </calcite-chip>
                 {% endif %}

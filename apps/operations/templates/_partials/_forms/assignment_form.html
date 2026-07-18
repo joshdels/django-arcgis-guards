@@ -6,12 +6,11 @@
             </calcite-input>
         </div>
     {% else %}
-
-    <div class="form-group">
-        <label for="{{ form.deployment.id_for_label }}">Deployment</label>
-        {{ form.deployment }}
-        {{ form.deployment.errors }}
-    </div>
+        <div class="form-group">
+            <label for="{{ form.deployment.id_for_label }}">Deployment</label>
+            {{ form.deployment }}
+            {{ form.deployment.errors }}
+        </div>
     {% endif %}
     <div class="form-group">
         <label for="{{ form.guard.id_for_label }}">Guard</label>

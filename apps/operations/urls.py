@@ -17,6 +17,6 @@ urlpatterns = [
     
     path("assignment/create/", views.assignment_create_view, name="assignment_create"),
     path("assignment/create/<int:deployment_id>/", views.assignment_create_deployment_view, name="assignment_create_deployment"),
-    # path("assignment/<int:pk>/", views.deployment_detail_view, name="deployment_detail"),
-    # path("assignment/edit/<int:pk>/", views.deployment_update_view, name="deployment_update"),
+    path("assignment/<int:pk>/", views.assignment_detail_view, name="assignment_detail_view"),
+    path("assignment/edit/<int:pk>/", views.assignment_edit_view, name="assignment_edit_view"),
 ]

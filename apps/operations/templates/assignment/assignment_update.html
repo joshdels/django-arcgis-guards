@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+{% block title %}Edit Assignment | Dumagete Guards{% endblock %}
+{% block content %}
+    {% include '_components/navbar.html' %}
+    <div class="form-container">
+        <header>
+            <a href="{% url 'operations:assignment_edit_view' assignment.pk %}"
+               id="backButton">
+                <calcite-icon icon="chevron-left"></calcite-icon>
+                Back to Assignment Detail
+            </a>
+            <h2>Edit Assignment</h2>
+            <p>{{ deployment.client_name }}{{ deployment.client_organization }}</p>
+            <p>{{ deployment.contract_number }}</p>
+            {% include "_partials/_forms/assignment_update_form.html" %}
+        </header>
+    </div>
+{% endblock %}

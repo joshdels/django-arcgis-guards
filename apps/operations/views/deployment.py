@@ -29,14 +29,20 @@ from ..services import (
 def operation_deployment(request):
     contracts, search = contract_deployment_list(request)
 
-    context = {
-        "contracts": contracts,
-        "search": search,
-    }
+    context = {"contracts": contracts, "search": search}
 
     return render_operation_tab(
         request, "_partials/deployment/_deployment.html", context
     )
+
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def deployment_detail_view(request, pk):
+    deployment = deployment_detail(pk)
+
+    context = {"deployment": deployment}
+
+    return render(request, "deployment/deployment_detail.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -67,14 +73,9 @@ def deployment_create_view(request):
             queryset=Deployment.objects.none(),
         )
 
-    return render(
-        request,
-        "deployment/deployment_create.html",
-        {
-            "formset": formset,
-            "contract": None,
-        },
-    )
+        context = {"formset": formset, "contract": None}
+
+    return render(request, "deployment/deployment_create.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -114,25 +115,9 @@ def deployment_create_contract_view(request, contract_id):
             queryset=Deployment.objects.none(),
         )
 
-    context = {
-        "formset": formset,
-        "contract": contract,
-    }
+    context = {"formset": formset, "contract": contract}
 
     return render(request, "deployment/deployment_create.html", context)
-
-
-@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
-def deployment_detail_view(request, pk):
-    deployment = deployment_detail(pk)
-
-    return render(
-        request,
-        "deployment/deployment_detail.html",
-        {
-            "deployment": deployment,
-        },
-    )
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -143,9 +128,6 @@ def deployment_update_view(request, pk):
         request.POST or None,
         instance=deployment,
     )
-
-    print(deployment.is_active)
-    print(form["is_active"].value())
 
     if request.method == "POST" and form.is_valid():
         update_deployment(
@@ -160,14 +142,9 @@ def deployment_update_view(request, pk):
 
         return redirect("operations:deployment_detail", deployment.id)
 
-    return render(
-        request,
-        "deployment/deployment_update.html",
-        {
-            "form": form,
-            "deployment": deployment,
-        },
-    )
+    context = {"form": form, "deployment": deployment}
+
+    return render(request, "deployment/deployment_update.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -177,17 +154,10 @@ def deployment_delete_view(request, pk):
     if request.method == "POST":
         delete_deployment(deployment)
 
-        messages.success(
-            request,
-            "Deployment deleted.",
-        )
+        messages.success(request, "Deployment deleted.")
 
         return redirect("operations:deployment_list")
 
-    return render(
-        request,
-        "deployment/deployment_confirm_delete.html",
-        {
-            "deployment": deployment,
-        },
-    )
+    context = {"deployment": deployment}
+
+    return render(request, "deployment/deployment_confirm_delete.html", context)

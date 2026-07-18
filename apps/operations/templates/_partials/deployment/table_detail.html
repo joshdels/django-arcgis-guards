@@ -1,0 +1,74 @@
+{# djlint:off #}
+<calcite-table bordered striped layout="fixed">
+
+    <calcite-table-row slot="table-header">
+        <calcite-table-header heading="Deployment"></calcite-table-header>
+        <calcite-table-header heading="Location"></calcite-table-header>
+        <calcite-table-header heading="Required Guards"></calcite-table-header>
+        <calcite-table-header heading="Assigned Guards"></calcite-table-header>
+        <calcite-table-header heading="Created at"></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+        <calcite-table-header heading="Actions"></calcite-table-header>
+    </calcite-table-row>
+
+    {% for deployment in contract.deployments.all %}
+
+    <calcite-table-row>
+
+        <calcite-table-cell>
+            {{ deployment.name }}
+        </calcite-table-cell>
+        <calcite-table-cell>
+            {{ deployment.location }}
+        </calcite-table-cell>
+        <calcite-table-cell>
+            {{ deployment.required_guards }}
+        </calcite-table-cell>
+        <calcite-table-cell>
+            <p>{{ deployment.assignments.count }}</p>
+        </calcite-table-cell>
+        <calcite-table-cell>
+            {{ deployment.created_at|date:"m/d/Y" }}
+        </calcite-table-cell>
+        <calcite-table-cell>
+            {% if deployment.is_active %}
+                <calcite-chip kind="brand">
+                    Active
+                </calcite-chip>
+            {% else %}
+                <calcite-chip kind="neutral" appearance="outline-fill">
+                    Inactive
+                </calcite-chip>
+            {% endif %}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <calcite-dropdown placement="bottom-end">
+                <calcite-action
+                    slot="trigger"
+                    icon="ellipsis">
+                </calcite-action>
+                <calcite-dropdown-group selection-mode="none">
+                    <calcite-dropdown-item
+                        href="{% url 'operations:deployment_detail' deployment.id %}">
+                        View
+                    </calcite-dropdown-item>
+                    <calcite-dropdown-item
+                        href="{% url 'operations:deployment_update' deployment.id %}">
+                        Edit
+                    </calcite-dropdown-item>
+                </calcite-dropdown-group>
+            </calcite-dropdown>
+        </calcite-table-cell>
+    </calcite-table-row>
+
+    {% empty %}
+    <calcite-table-row>
+        <calcite-table-cell colspan="5">
+            No deployments yet.
+        </calcite-table-cell>
+    </calcite-table-row>
+    {% endfor %}
+
+</calcite-table>
+{# djlint:on #}

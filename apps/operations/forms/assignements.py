@@ -1,6 +1,6 @@
-from django.forms import modelformset_factory, inlineformset_factory
+from django.forms import modelformset_factory
 
-from apps.operations.models import Assignment, Deployment
+from apps.operations.models import Assignment
 from core.forms.base import CalciteModelForm
 
 
@@ -45,8 +45,7 @@ AssignmentFormSet = modelformset_factory(
 )
 
 
-DeploymentAssignmentFormSet = inlineformset_factory(
-    Deployment,
+DeploymentAssignmentFormSet = modelformset_factory(
     Assignment,
     form=DeploymentAssignmentForm,
     extra=1,

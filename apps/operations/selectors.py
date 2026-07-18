@@ -1,4 +1,5 @@
 from django.db.models import Prefetch, Q
+from django.db.models import Count
 
 from .models import Deployment
 
@@ -8,7 +9,12 @@ from apps.contract.models import Contract
 def contract_deployment_list(request):
     search = request.GET.get("search", "").strip()
 
-    contracts = Contract.objects.all()
+    contracts = Contract.objects.annotate(
+        assigned_guard_count=Count(
+            "deployments__assignments",
+            distinct=True,
+        )
+    )
 
     if search:
         contracts = contracts.filter(

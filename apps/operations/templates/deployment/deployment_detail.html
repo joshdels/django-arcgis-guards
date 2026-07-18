@@ -15,18 +15,10 @@
             <div>
                 <div class="column">
                     <h2>{{ deployment.name }}</h2>
-                    {% if contract.status == "draft" %}
-                        <calcite-chip kind="neutral" appearance="outline">Draft</calcite-chip>
-                    {% elif contract.status == "pending" %}
-                        <calcite-chip kind="neutral" appearance="outline-fill">Pending</calcite-chip>
-                    {% elif contract.status == "approved" %}
-                        <calcite-chip kind="brand" appearance="outline-fill">Approved</calcite-chip>
-                    {% elif contract.status == "ongoing" %}
-                        <calcite-chip kind="inverse" appearance="outline-fill">Ongoing</calcite-chip>
-                    {% elif contract.status == "finished" %}
-                        <calcite-chip kind="brand">Finished</calcite-chip>
+                    {% if deployment.is_active %}
+                        <calcite-chip kind="brand" appearance="solid">Active</calcite-chip>
                     {% else %}
-                        <calcite-chip kind="inverse">Cancelled</calcite-chip>
+                        <calcite-chip kind="inverse" appearance="outline-fill">Inactive</calcite-chip>
                     {% endif %}
                 </div>
             </div>
@@ -46,15 +38,21 @@
             {{ deployment.location }}
             {{ deployment.remarks|default:"-" }}
         </section>
+
         <section>
-            <h2>Require Number of Guards</h2>
-            <a href="{% url 'operations:assignment_create_deployment' deployment.id %}">Add</a>
+            <header>
+                <h2>Guards Section</h2>
+                <calcite-button icon-start="plus" appearance="outline-fill" scale="s" href="{% url 'operations:assignment_create_deployment' deployment.id %}">Assign Guard</calcite-button>             
+            </header>
 
-            {{ deployment.required_guards }}
+            <calcite-chip>
+                {{ deployment.required_guards }}  Required Guards  
+            </calcite-chip>
 
-            
+            {% include '_partials/deployment/table_detail.html' %}
         </section>
-    {% endblock %}
+    
+        {% endblock %}
 </main>
 {% block extra_script %}
     <script src="{% static 'js/addForm.js' %}"></script>

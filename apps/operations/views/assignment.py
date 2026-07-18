@@ -1,13 +1,3 @@
-"""
-3. Assignment edit
-4. Assignment deactivate
-5. Deployment detail page
-    |
-    |-- assigned guards table
-    |-- add guard button
-6. Schedule/calendar later
-"""
-
 from apps.accounts.models import User
 from apps.accounts.decorators import roles_required
 
@@ -17,11 +7,14 @@ from django.db.models import Q
 from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
 
-from apps.contract.models import Contract
 from apps.operations.models import Deployment, Assignment
 
 from apps.operations.helpers import render_operation_tab
-from apps.operations.forms import AssignmentFormSet, DeploymentAssignmentFormSet
+from apps.operations.forms import (
+    AssignmentFormSet,
+    DeploymentAssignmentFormSet,
+    AssignmentUpdateForm,
+)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -44,15 +37,22 @@ def operation_assignment(request):
             | Q(deployment__contract__contract_number__icontains=search)
         )
 
-    context = {
-        "assignments": assignments,
-    }
+    context = {"assignments": assignments}
 
     return render_operation_tab(
         request,
         "_partials/assignment/_assignment.html",
         context,
     )
+
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def assignment_detail_view(request, pk):
+    assignment = Assignment.objects.select_related("deployment").get(pk=pk)
+
+    context = {"assignment": assignment}
+
+    return render(request, "assignment/assignment_detail.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -99,11 +99,8 @@ def assignment_create_deployment_view(request, deployment_id):
     if request.method == "POST":
         formset = DeploymentAssignmentFormSet(
             request.POST,
-            instance=deployment,
+            queryset=Assignment.objects.none(),
         )
-        
-        print(formset.total_form_count())
-        print(formset.initial_form_count())
 
         if formset.is_valid():
             with transaction.atomic():
@@ -126,9 +123,30 @@ def assignment_create_deployment_view(request, deployment_id):
 
     else:
         formset = DeploymentAssignmentFormSet(
-            instance=deployment,
+            queryset=Assignment.objects.none(),
         )
 
     context = {"formset": formset, "deployment": deployment}
 
     return render(request, "assignment/assignment_create.html", context)
+
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def assignment_edit_view(request, pk):
+    assignment = Assignment.objects.select_related("deployment").get(pk=pk)
+
+    form = AssignmentUpdateForm(request.POST or None, instance=assignment)
+
+    if request.method == "POST" and form.is_valid():    
+        form.save()
+
+        messages.success(
+            request,
+            "Assignment update sucessfully.",
+        )
+
+        return redirect("operations:assignment_detail_view", assignment.id)
+
+    context = {"form": form, "assignment": assignment}
+
+    return render(request, "assignment/assignment_update.html", context)

@@ -25,7 +25,8 @@ def operation_queue(request):
             status__in=[
                 ContractStatus.APPROVED,
                 ContractStatus.ONGOING,
-            ]
+            ],
+            deployments__isnull=True,
         )
         .select_related("client")
         .order_by("-created_at")

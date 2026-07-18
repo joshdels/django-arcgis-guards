@@ -28,9 +28,7 @@
     </calcite-table-row>
 
     {% for assignment in assignments %}
-
     <calcite-table-row>
-        <!-- Guard -->
         <calcite-table-cell>
             <strong>
                 {{ assignment.guard.first_name }}
@@ -45,7 +43,6 @@
             {% endif %}
         </calcite-table-cell>
 
-        <!-- Deployment -->
         <calcite-table-cell>
             <strong>
                 {{ assignment.deployment.name }}
@@ -56,7 +53,6 @@
             </small>
         </calcite-table-cell>
 
-        <!-- Contract -->
         <calcite-table-cell>
             <strong>
                 {{ assignment.deployment.contract.title }}
@@ -67,7 +63,6 @@
             </small>
         </calcite-table-cell>
 
-        <!-- Dates -->
         <calcite-table-cell>
             {{ assignment.start_date|date:"M d, Y" }}
             {% if assignment.end_date %}
@@ -83,34 +78,38 @@
             {% endif %}
         </calcite-table-cell>
 
-        <!-- Created -->
         <calcite-table-cell>
-            {{ assignment.created_at|date:"m/d/Y" }}
+            {{ assignment.created_at|date:"m/d/y" }}
         </calcite-table-cell>
 
-        <!-- Status -->
         <calcite-table-cell>
-            {% if assignment.is_active %}
+            {% if assignment.status == "ACTIVE" %}
                 <calcite-chip
                     kind="brand"
-                    appearance="outline-fill"
+                    appearance="solid"
                     scale="s">
                     Active
+                </calcite-chip>
+            {% elif assignment.status == "ENDED" %}
+                <calcite-chip
+                    kind="inverse"
+                    appearance="outline-fill"
+                    scale="s">
+                    Ended
                 </calcite-chip>
             {% else %}
                 <calcite-chip
                     kind="neutral"
                     appearance="outline"
                     scale="s">
-                    Inactive
+                    Cancelled
                 </calcite-chip>
             {% endif %}
         </calcite-table-cell>
 
-        <!-- Actions -->
         <calcite-table-cell alignment="end">
             <calcite-button
-                href="#"
+                href="{% url 'operations:assignment_detail_view' assignment.id %}"
                 appearance="outline-fill"
                 scale="s"
                 icon-start="pencil">
@@ -119,7 +118,6 @@
         </calcite-table-cell>
 
     </calcite-table-row>
-
     {% endfor %}
 
 </calcite-table>
