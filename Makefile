@@ -11,7 +11,7 @@ migrate:
 		python manage.py migrate
 
 superuser:
-		python manage.py createsuperuser --username admin --email admin@email.com
+		python manage.py create_admin
 
 shell:
 		python manage.py shell
