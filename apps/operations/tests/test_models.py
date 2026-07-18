@@ -9,7 +9,6 @@ from apps.operations.models import Deployment
 
 
 class DeploymentModelTest(TestCase):
-
     def test_create_deployment(self):
         user = User.objects.create_user(
             username="admin",

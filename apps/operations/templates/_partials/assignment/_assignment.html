@@ -1,11 +1,11 @@
-<main class="profile">
+<main class="dashboard">
     <h1>Guard Assignment</h1>
-    <section>
-        <h2>List of guards</h2>
-        <div class="grid">
-            <div>
-                <p>Coming Soon</p>
-            </div>
-        </div>
-    </section>
+    <header>
+        <form method="get" class="flex">
+            <calcite-input type="search" name="search" placeholder="Contract Number, Company Name" icon="search" value="{{ search|default:'' }}">
+            </calcite-input>
+            <calcite-button type="submit">Search</calcite-button>
+        </form>
+    </header>
+    {% include "_partials/assignment/table.html" %}
 </main>

@@ -1,0 +1,153 @@
+{# djlint:off #}
+{% if not assignments %}
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No guard assignments found.
+        </div>
+    </calcite-notice>
+{% else %}
+
+<calcite-table
+    caption="Guard Assignments"
+    bordered
+    striped
+    numbered
+    page-size="10"
+    current-page="0"
+    layout="auto"
+    interaction-mode="interactive"
+>
+
+    <calcite-table-row slot="table-header">
+        <calcite-table-header heading="Guard"></calcite-table-header>
+        <calcite-table-header heading="Deployment"></calcite-table-header>
+        <calcite-table-header heading="Contract"></calcite-table-header>
+        <calcite-table-header heading="Assignment Period"></calcite-table-header>
+        <calcite-table-header heading="Created"></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+        <calcite-table-header heading="Action" alignment="end"></calcite-table-header>
+    </calcite-table-row>
+
+
+    {% for assignment in assignments %}
+
+    <calcite-table-row>
+        <!-- Guard -->
+        <calcite-table-cell>
+
+            <strong>
+                {{ assignment.guard.first_name }}
+                {{ assignment.guard.last_name }}
+            </strong>
+
+            {% if assignment.guard.badge_number %}
+                <br>
+                <small>
+                    Badge: {{ assignment.guard.badge_number }}
+                </small>
+            {% endif %}
+        </calcite-table-cell>
+
+        <!-- Deployment -->
+        <calcite-table-cell>
+            <strong>
+                {{ assignment.deployment.name }}
+            </strong>
+
+            <br>
+
+            <small>
+                {{ assignment.deployment.location }}
+            </small>
+        </calcite-table-cell>
+
+        <!-- Contract -->
+        <calcite-table-cell>
+            <strong>
+                {{ assignment.deployment.contract.title }}
+            </strong>
+
+            <br>
+
+            <small>
+                {{ assignment.deployment.contract.contract_number }}
+            </small>
+        </calcite-table-cell>
+
+
+        <!-- Dates -->
+        <calcite-table-cell>
+
+            {{ assignment.start_date|date:"M d, Y" }}
+            {% if assignment.end_date %}
+                <br>
+                <small>
+                    to {{ assignment.end_date|date:"M d, Y" }}
+                </small>
+            {% else %}
+                <br>
+                <small>
+                    Ongoing
+                </small>
+            {% endif %}
+
+        </calcite-table-cell>
+
+
+        <!-- Created -->
+        <calcite-table-cell>
+
+            {{ assignment.created_at|date:"m/d/Y" }}
+
+        </calcite-table-cell>
+
+
+        <!-- Status -->
+        <calcite-table-cell>
+
+            {% if assignment.is_active %}
+
+                <calcite-chip
+                    kind="brand"
+                    appearance="outline-fill"
+                    scale="s">
+                    Active
+                </calcite-chip>
+
+            {% else %}
+
+                <calcite-chip
+                    kind="neutral"
+                    appearance="outline"
+                    scale="s">
+                    Inactive
+                </calcite-chip>
+
+            {% endif %}
+
+        </calcite-table-cell>
+
+
+        <!-- Actions -->
+        <calcite-table-cell alignment="end">
+
+            <calcite-button
+                href="#"
+                appearance="outline-fill"
+                scale="s"
+                icon-start="pencil">
+                Edit
+            </calcite-button>
+
+        </calcite-table-cell>
+
+
+    </calcite-table-row>
+
+    {% endfor %}
+
+
+</calcite-table>
+
+{% endif %}
+{# djlint:on #}

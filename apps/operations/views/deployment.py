@@ -1,20 +1,42 @@
-from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
+
+from django.contrib import messages
+
 from django.db import transaction
 from django.db.models import Q
 
+from apps.accounts.models import User
 from apps.contract.models import Contract
 from apps.operations.models import Deployment
+
 from apps.operations.forms import DeploymentUpdateForm, DeploymentFormSet
+
+from apps.operations.helpers import render_operation_tab
+from apps.accounts.decorators import roles_required
 
 
 from ..selectors import (
+    contract_deployment_list,
     deployment_detail,
 )
 from ..services import (
     delete_deployment,
     update_deployment,
 )
+
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def operation_deployment(request):
+    contracts, search = contract_deployment_list(request)
+
+    context = {
+        "contracts": contracts,
+        "search": search,
+    }
+
+    return render_operation_tab(
+        request, "_partials/deployment/_deployment.html", context
+    )
 
 
 def deployment_create_view(request):
@@ -119,7 +141,7 @@ def deployment_update_view(request, pk):
         request.POST or None,
         instance=deployment,
     )
-    
+
     print(deployment.is_active)
     print(form["is_active"].value())
 
