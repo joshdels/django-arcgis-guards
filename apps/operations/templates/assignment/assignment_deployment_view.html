@@ -1,0 +1,19 @@
+<div class="contract_content">
+    {% if deployment %}
+        <h2>Deployment Details</h2>
+
+        <div class="detail-item">
+            <strong>Deployment</strong>
+            <p>{{ deployment.name }}</p>
+            <p>{{ deployment.location }}</p>
+
+            <strong>Client</strong>
+            <p>{{ deployment.contract.client.name }}</p>
+            <p>{{ deployment.contract.client.organization }}</p>
+
+            <strong>Contract</strong>
+            <p>{{ deployment.contract.title }}</p>
+            <p>{{ deployment.contract.contract_number }}</p>
+        </div>
+    {% endif %}
+</div>

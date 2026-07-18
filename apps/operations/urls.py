@@ -14,4 +14,9 @@ urlpatterns = [
     path("deployment/create/<int:contract_id>/", views.deployment_create_contract_view, name="deployment_create_contract"),
     path("deployment/<int:pk>/", views.deployment_detail_view, name="deployment_detail"),
     path("deployment/edit/<int:pk>/", views.deployment_update_view, name="deployment_update"),
+    
+    path("assignment/create/", views.assignment_create_view, name="assignment_create"),
+    path("assignment/create/<int:deployment_id>/", views.assignment_create_deployment_view, name="assignment_create_deployment"),
+    # path("assignment/<int:pk>/", views.deployment_detail_view, name="deployment_detail"),
+    # path("assignment/edit/<int:pk>/", views.deployment_update_view, name="deployment_update"),
 ]

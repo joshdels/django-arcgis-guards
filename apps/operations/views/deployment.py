@@ -39,6 +39,7 @@ def operation_deployment(request):
     )
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def deployment_create_view(request):
     if request.method == "POST":
         formset = DeploymentFormSet(
@@ -76,6 +77,7 @@ def deployment_create_view(request):
     )
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def deployment_create_contract_view(request, contract_id):
     contract = get_object_or_404(
         Contract,
@@ -112,16 +114,15 @@ def deployment_create_contract_view(request, contract_id):
             queryset=Deployment.objects.none(),
         )
 
-    return render(
-        request,
-        "deployment/deployment_create.html",
-        {
-            "formset": formset,
-            "contract": contract,
-        },
-    )
+    context = {
+        "formset": formset,
+        "contract": contract,
+    }
+
+    return render(request, "deployment/deployment_create.html", context)
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def deployment_detail_view(request, pk):
     deployment = deployment_detail(pk)
 
@@ -134,6 +135,7 @@ def deployment_detail_view(request, pk):
     )
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def deployment_update_view(request, pk):
     deployment = deployment_detail(pk)
 
@@ -168,6 +170,7 @@ def deployment_update_view(request, pk):
     )
 
 
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def deployment_delete_view(request, pk):
     deployment = deployment_detail(pk)
 

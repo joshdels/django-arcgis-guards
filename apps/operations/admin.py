@@ -43,7 +43,7 @@ class AssignmentAdmin(admin.ModelAdmin):
         "contract",
         "start_date",
         "end_date",
-        "is_active",
+        "status",
         "created_at",
     )
 
@@ -58,7 +58,7 @@ class AssignmentAdmin(admin.ModelAdmin):
     )
 
     list_filter = (
-        "is_active",
+        "status",
         "created_at",
         "start_date",
         "deployment",

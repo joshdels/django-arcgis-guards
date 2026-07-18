@@ -1,0 +1,27 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}New Assignment | Dumagete Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/deployment.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "_components/navbar.html" %}
+    <div class="form-container">
+        <header class="page-header">
+            <a href="#" id="backButton">
+                <calcite-icon icon="chevron-left"></calcite-icon>
+                Back to Assignments
+            </a>
+            <h2>New Assignment</h2>
+        </header>
+        <div class="deployment-create-container">
+            <div class="deployment-layout">{% include '_partials/_forms/assignment_formset.html' %}</div>
+            {% if deployment %}
+                <div class="contract-list">{% include 'assignment/assignment_deployment_view.html' %}</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block extra_script %}
+    <script src="{% static 'js/addForm.js' %}"></script>
+{% endblock %}

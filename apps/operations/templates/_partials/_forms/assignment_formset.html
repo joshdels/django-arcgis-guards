@@ -1,0 +1,33 @@
+{# djlint:off #}
+<form class="standard-form"
+      method="post"
+      action=" {% if deployment %} {% url 'operations:assignment_create_deployment' deployment.id %} {% else %} {% url 'operations:assignment_create' %} {% endif %} ">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <div id="deployment-forms">
+        {% for form in formset %}
+            <div class="deployment-card">
+                <h3>{{ forloop.counter }}</h3>
+                {% include "_partials/_forms/assignment_form.html" with form=form %}
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Hidden Template -->
+    <template id="empty-form">
+        <div class="deployment-card">
+            <h3></h3>
+            {% include "_partials/_forms/assignment_form.html" with form=formset.empty_form %}
+        </div>
+    </template>
+
+    {{ formset.non_form_errors }}
+    {% for form in formset %}
+        {{ form.errors }}
+    {% endfor %}
+
+    <div class="form-button">
+        <calcite-button id="add-deployment" appearance="outline" type="button" icon="plus">Add Assignment</calcite-button>
+        <calcite-button type="submit">Save All Assignment</calcite-button>
+    </div>
+</form>
+{# djlint:on #}

@@ -17,7 +17,6 @@
     layout="auto"
     interaction-mode="interactive"
 >
-
     <calcite-table-row slot="table-header">
         <calcite-table-header heading="Guard"></calcite-table-header>
         <calcite-table-header heading="Deployment"></calcite-table-header>
@@ -28,13 +27,11 @@
         <calcite-table-header heading="Action" alignment="end"></calcite-table-header>
     </calcite-table-row>
 
-
     {% for assignment in assignments %}
 
     <calcite-table-row>
         <!-- Guard -->
         <calcite-table-cell>
-
             <strong>
                 {{ assignment.guard.first_name }}
                 {{ assignment.guard.last_name }}
@@ -53,9 +50,7 @@
             <strong>
                 {{ assignment.deployment.name }}
             </strong>
-
             <br>
-
             <small>
                 {{ assignment.deployment.location }}
             </small>
@@ -66,18 +61,14 @@
             <strong>
                 {{ assignment.deployment.contract.title }}
             </strong>
-
             <br>
-
             <small>
                 {{ assignment.deployment.contract.contract_number }}
             </small>
         </calcite-table-cell>
 
-
         <!-- Dates -->
         <calcite-table-cell>
-
             {{ assignment.start_date|date:"M d, Y" }}
             {% if assignment.end_date %}
                 <br>
@@ -90,47 +81,34 @@
                     Ongoing
                 </small>
             {% endif %}
-
         </calcite-table-cell>
-
 
         <!-- Created -->
         <calcite-table-cell>
-
             {{ assignment.created_at|date:"m/d/Y" }}
-
         </calcite-table-cell>
-
 
         <!-- Status -->
         <calcite-table-cell>
-
             {% if assignment.is_active %}
-
                 <calcite-chip
                     kind="brand"
                     appearance="outline-fill"
                     scale="s">
                     Active
                 </calcite-chip>
-
             {% else %}
-
                 <calcite-chip
                     kind="neutral"
                     appearance="outline"
                     scale="s">
                     Inactive
                 </calcite-chip>
-
             {% endif %}
-
         </calcite-table-cell>
-
 
         <!-- Actions -->
         <calcite-table-cell alignment="end">
-
             <calcite-button
                 href="#"
                 appearance="outline-fill"
@@ -138,14 +116,11 @@
                 icon-start="pencil">
                 Edit
             </calcite-button>
-
         </calcite-table-cell>
-
 
     </calcite-table-row>
 
     {% endfor %}
-
 
 </calcite-table>
 

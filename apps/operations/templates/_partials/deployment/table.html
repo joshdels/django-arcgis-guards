@@ -8,7 +8,8 @@
         <calcite-table-row slot="table-header">
             <calcite-table-header heading="Deployment"></calcite-table-header>
             <calcite-table-header heading="Location"></calcite-table-header>
-            <calcite-table-header heading="To Assign Guards"></calcite-table-header>
+            <calcite-table-header heading="Required Guards"></calcite-table-header>
+            <calcite-table-header heading="Assign Guards"></calcite-table-header>
             <calcite-table-header heading="Created at"></calcite-table-header>
             <calcite-table-header heading="Status"></calcite-table-header>
             <calcite-table-header heading="Actions"></calcite-table-header>
@@ -26,6 +27,9 @@
             </calcite-table-cell>
             <calcite-table-cell>
                 {{ deployment.required_guards }}
+            </calcite-table-cell>
+            <calcite-table-cell>
+                <p>To fill python</p>
             </calcite-table-cell>
             <calcite-table-cell>
                 {{ deployment.created_at|date:"m/d/Y" }}

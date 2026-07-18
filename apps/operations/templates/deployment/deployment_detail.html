@@ -48,7 +48,11 @@
         </section>
         <section>
             <h2>Require Number of Guards</h2>
+            <a href="{% url 'operations:assignment_create_deployment' deployment.id %}">Add</a>
+
             {{ deployment.required_guards }}
+
+            
         </section>
     {% endblock %}
 </main>
