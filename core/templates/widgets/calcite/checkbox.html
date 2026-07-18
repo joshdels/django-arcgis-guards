@@ -1,7 +1,6 @@
 {# djlint:off #}
-<calcite-checkbox 
-  name="{{ widget.name }}" 
-  value="true" 
-  {% if widget.value %}checked{% endif %} check>
+<calcite-checkbox
+  name="{{ widget.name }}"
+  {% if widget.attrs.checked %}checked{% endif %}>
 </calcite-checkbox>
 {# djlint:on #}

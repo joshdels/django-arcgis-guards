@@ -18,3 +18,8 @@ uv sync
 python manage.py seed
 python manage.py runserver
 ```
+
+## testing
+```
+python manage.py test apps.operations.tests
+```

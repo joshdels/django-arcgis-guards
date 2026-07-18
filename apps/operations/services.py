@@ -1,5 +1,3 @@
-from django.db.models import Prefetch
-
 from .models import Deployment
 
 from apps.contract.models import Contract

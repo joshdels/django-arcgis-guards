@@ -24,6 +24,12 @@ class CalciteTelephoneWidget(forms.TextInput):
 class CalciteCheckboxWidget(forms.CheckboxInput):
     template_name = "widgets/calcite/checkbox.html"
 
+    # debuging purposes :)
+    # def get_context(self, name, value, attrs):
+    #     context = super().get_context(name, value, attrs)
+    #     print(context["widget"])
+    #     return context
+
 
 class CalciteDateWidget(forms.DateInput):
     template_name = "widgets/calcite/date.html"

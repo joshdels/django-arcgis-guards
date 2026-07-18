@@ -1,7 +1,4 @@
-{{ formset.non_form_errors }}
-{% for form in formset %}
-    {{ form.errors }}
-{% endfor %}
+{# djlint:off #}
 <form class="standard-form"
       method="post"
       action=" {% if contract %} {% url 'operations:deployment_create_contract' contract.id %} {% else %} {% url 'operations:deployment_create' %} {% endif %} ">
@@ -22,8 +19,15 @@
             {% include "_partials/_forms/deployment_form.html" with form=formset.empty_form %}
         </div>
     </template>
+
+    {{ formset.non_form_errors }}
+    {% for form in formset %}
+        {{ form.errors }}
+    {% endfor %}
+
     <div class="form-button">
         <calcite-button id="add-deployment" appearance="outline" type="button" icon="plus">Add Deployment</calcite-button>
         <calcite-button type="submit">Save All Deployments</calcite-button>
     </div>
 </form>
+{# djlint:on #}

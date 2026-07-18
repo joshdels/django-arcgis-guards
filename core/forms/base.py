@@ -57,3 +57,6 @@ class CalciteModelForm(forms.ModelForm):
 
         else:
             field.widget = CalciteInputWidget(attrs=attrs)
+
+
+

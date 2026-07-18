@@ -5,7 +5,7 @@ from django.db.models import Q
 
 from apps.contract.models import Contract
 from apps.operations.models import Deployment
-from apps.operations.forms import ContractDeploymentForm, DeploymentFormSet
+from apps.operations.forms import DeploymentUpdateForm, DeploymentFormSet
 
 
 from ..selectors import (
@@ -115,10 +115,13 @@ def deployment_detail_view(request, pk):
 def deployment_update_view(request, pk):
     deployment = deployment_detail(pk)
 
-    form = ContractDeploymentForm(
+    form = DeploymentUpdateForm(
         request.POST or None,
         instance=deployment,
     )
+    
+    print(deployment.is_active)
+    print(form["is_active"].value())
 
     if request.method == "POST" and form.is_valid():
         update_deployment(
