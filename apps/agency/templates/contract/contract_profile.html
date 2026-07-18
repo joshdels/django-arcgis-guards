@@ -38,40 +38,82 @@
             </div>
         </header>
         <section>
-            <h3>Current Payroll</h3>
-            <div class="space-between">
-                <h1>$ 4,000.00</h1>
-                <div class="end">
-                    <p>Billing Date</p>
-                    <h4>July 24, 2025</h4>
+            <h2>General Information</h2>
+            <div class="grid">
+                <div>
+                    <p>Contract Name</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="envelope"></calcite-icon>  {{ contract.title }}
+                    </h4>
+                </div>
+                <div>
+                    <p>Contract Number</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="inspection"></calcite-icon> {{ contract.contract_number }}
+                    </h4>
+                </div>
+                <div>
+                    <p>Start Date</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="clock"></calcite-icon> {{ contract.start_date }}
+                    </h4>
+                </div>
+                <div>
+                    <p>End Date</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="clock"></calcite-icon> {{ contract.end_date }}
+                    </h4>
                 </div>
             </div>
         </section>
         <section>
-            <h3>Contact</h3>
+            <h2>Contract Description</h2>
             <div class="grid">
+                <div>
+                    <p>Required Guards</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="users"></calcite-icon> {{ contract.number_of_guards }}
+                    </h4>
+                </div>
+                <div>
+                    <p>Contract Description</p>
+                    <h4>
+                        <h4>{{ contract.description }}</h4>
+                    </h4>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Client Information</h2>
+            <div class="grid">
+                <div>
+                    <p>client name</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="address-book"></calcite-icon> {{ contract.client.name }}
+                    </h4>
+                </div>
+                <div>
+                    <p>client organization</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="users"></calcite-icon> {{ contract.client.organization }}
+                    </h4>
+                </div>
                 <div>
                     <p>email</p>
                     <h4>
-                        <calcite-icon scale="s" icon="envelope"></calcite-icon>  email
+                        <calcite-icon scale="s" icon="envelope"></calcite-icon>  {{ contract.client.email }}
                     </h4>
                 </div>
                 <div>
                     <p>phone</p>
                     <h4>
-                        <calcite-icon scale="s" icon="phone"></calcite-icon>  095235235235
+                        <calcite-icon scale="s" icon="phone"></calcite-icon>  {{ contract.client.phone }}
                     </h4>
                 </div>
                 <div>
-                    <p>address</p>
+                    <p>Contact Person</p>
                     <h4>
-                        <calcite-icon scale="s" icon="home"></calcite-icon>  My address
-                    </h4>
-                </div>
-                <div>
-                    <p>joined since</p>
-                    <h4>
-                        <calcite-icon scale="s" icon="user-plus"></calcite-icon>  {{ guard.created_at|date:"M d, Y" }}
+                        <calcite-icon scale="s" icon="user"></calcite-icon>  {{ contract.client.contact_person }}
                     </h4>
                 </div>
             </div>

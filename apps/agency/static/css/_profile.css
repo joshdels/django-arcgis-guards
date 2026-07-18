@@ -55,8 +55,9 @@
 
 .profile .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  column-gap: 2rem;
+  row-gap: 1rem
 }
 
 .profile .grid p {

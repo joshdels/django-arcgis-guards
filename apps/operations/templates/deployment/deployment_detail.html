@@ -1,6 +1,6 @@
 {% extends "_base.html" %}
 {% load static %}
-{% block title %}Deployment Detail | Dumagete Guards{% endblock %}
+{% block title %}Deployment Details | Dumagete Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
 {% endblock %}
@@ -13,6 +13,7 @@
         </a>
         <header>
             <div>
+                <h1>Deployment Details</h1>
                 <div class="column">
                     <h2>{{ deployment.name }}</h2>
                     {% if deployment.is_active %}
@@ -29,30 +30,27 @@
         <section>
             <h2>Contract Information</h2>
             <h4>{{ deployment.contract.contract_number }}</h4>
-            {{ deployment.contract.client.name }}
-            {{ deployment.contract.client.name }}
+            <p>{{ deployment.contract.client.name }}</p>
+            <p>{{ deployment.contract.client.organization }}</p>
+            <p>{{ deployment.contract.remarks }}</p>
         </section>
         <section>
             <h2>Deployment Information</h2>
-            {{ deployment.name }}
-            {{ deployment.location }}
-            {{ deployment.remarks|default:"-" }}
+            <p>{{ deployment.name }}</p>
+            <p>{{ deployment.location }}</p>
+            <p>{{ deployment.remarks|default:"-" }}</p>
         </section>
-
         <section>
             <header>
                 <h2>Guards Section</h2>
-                <calcite-button icon-start="plus" appearance="outline-fill" scale="s" href="{% url 'operations:assignment_create_deployment' deployment.id %}">Assign Guard</calcite-button>             
+                <calcite-button icon-start="plus" appearance="outline-fill" scale="s" href="{% url 'operations:assignment_create_deployment' deployment.id %}">Assign Guard</calcite-button>
             </header>
-
             <calcite-chip>
-                {{ deployment.required_guards }}  Required Guards  
+            {{ deployment.required_guards }}  Required Guards
             </calcite-chip>
-
             {% include '_partials/deployment/table_detail.html' %}
         </section>
-    
-        {% endblock %}
+    {% endblock %}
 </main>
 {% block extra_script %}
     <script src="{% static 'js/addForm.js' %}"></script>

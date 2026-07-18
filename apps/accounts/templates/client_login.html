@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Client Login</title>
-    </head>
-    <body>
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Client Login - Dumagete Guards Agency{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+{% block content %} 
+<div class="auth-container">
+    <div class="auth-form">
         <h1>Client Portal</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.non_field_errors }}
-            <div>
-                <label>Username</label>
-                {{ form.username }}
-            </div>
-            <div>
-                <label>Password</label>
-                {{ form.password }}
-            </div>
-            <button type="submit">Login</button>
-            <input type="hidden" name="next" value="{{ next }}">
-        </form>
-    </body>
-</html>
+        {% include '_partials/_forms/login.html' %}
+    </div>
+</div>
+{% endblock %}

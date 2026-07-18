@@ -3,6 +3,27 @@
         <h2>Genral Information</h2>
         <div class="grid">
             <div>
+                <p>client name</p>
+                <h4>
+                    <calcite-icon scale="s" icon="address-book"></calcite-icon>
+                    {{ client.name }}
+                </h4>
+            </div>
+            <div>
+                <p>client organization</p>
+                <h4>
+                    <calcite-icon scale="s" icon="pin"></calcite-icon>
+                    {{ client.organization }}
+                </h4>
+            </div>
+            <div>
+                <p>client id</p>
+                <h4>
+                    <calcite-icon scale="s" icon="license"></calcite-icon>
+                    {{ client.client_id }}
+                </h4>
+            </div>
+            <div>
                 <p>location</p>
                 <h4>
                     <calcite-icon scale="s" icon="pin"></calcite-icon>
@@ -10,7 +31,7 @@
                 </h4>
             </div>
             <div>
-                <p>client since</p>
+                <p>joined at</p>
                 <h4>{{ client.created_at|date:"M d, Y" }}</h4>
             </div>
         </div>
@@ -20,10 +41,13 @@
         <div class="grid">
             <div>
                 <p>contact person</p>
-                <h4>joshua</h4>
+                <h4>
+                    <calcite-icon scale="s" icon="user"></calcite-icon>
+                    {{ client.contact_person }}
+                </h4>
             </div>
             <div>
-                <p>primary email</p>
+                <p>email</p>
                 <h4>
                     <calcite-icon scale="s" icon="email-address"></calcite-icon>
                     {{ client.email }}

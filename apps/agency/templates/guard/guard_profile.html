@@ -13,7 +13,7 @@
         </a>
         <header>
             <div>
-                <h1>{{ guard.user.get_full_name }}</h1>
+                <h1>{{ guard.first_name }} {{ guard.middle_name }} {{ guard.last_name }}</h1>
                 <p>
                     <calcite-icon icon="check-shield" scale="s"></calcite-icon> {{ guard.badge_number }}
                 </p>
@@ -28,56 +28,72 @@
             </div>
         </header>
         <section>
-            <h3>Current Payroll</h3>
-            <div class="space-between">
-                <h1>$ 4,000.00</h1>
-                <div class="end">
-                    <p>Billing Date</p>
-                    <h4>July 24, 2025</h4>
-                </div>
-            </div>
-        </section>
-        <section>
-            <h3>Contact</h3>
+            <h2>General Information</h2>
             <div class="grid">
                 <div>
-                    <p>email</p>
+                    <p>First Name</p>
+                    <h4>{{ guard.first_name }}</h4>
+                </div>
+                <div>
+                    <p>Middle Name</p>
+                    <h4>{{ guard.middle_name }}</h4>
+                </div>
+                <div>
+                    <p>Last Name</p>
+                    <h4>{{ guard.last_name }}</h4>
+                </div>
+                <div>
+                    <p>Bage Number</p>
                     <h4>
-                        <calcite-icon scale="s" icon="envelope"></calcite-icon>  email
+                        <calcite-icon scale="s" icon="check-shield"></calcite-icon> {{ guard.badge_number }}
                     </h4>
                 </div>
                 <div>
-                    <p>phone</p>
+                    <p>Address</p>
                     <h4>
-                        <calcite-icon scale="s" icon="phone"></calcite-icon>  095235235235
+                        <calcite-icon scale="s" icon="pin-tear"></calcite-icon> {{ guard.address }}
                     </h4>
                 </div>
+            </section>
+            <section>
+                <h2>Contact</h2>
+                <div class="grid">
+                    <div>
+                        <p>email</p>
+                        <h4>
+                            <calcite-icon scale="s" icon="envelope"></calcite-icon>  email
+                        </h4>
+                    </div>
+                    <div>
+                        <p>phone</p>
+                        <h4>
+                            <calcite-icon scale="s" icon="phone"></calcite-icon>  {{ guard.phone_number }}
+                        </h4>
+                    </div>
+                    <div>
+                        <p>address</p>
+                        <h4>
+                            <calcite-icon scale="s" icon="home"></calcite-icon>  My address
+                        </h4>
+                    </div>
+                    <div>
+                        <p>joined since</p>
+                        <h4>
+                            <calcite-icon scale="s" icon="user-plus"></calcite-icon>  {{ guard.created_at|date:"M d, Y" }}
+                        </h4>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Job History</h2>
+                <p>guard 1</p>
+                <p>guard 2</p>
+            </section>
+            <section>
+                <h2>Invoice History</h2>
                 <div>
-                    <p>address</p>
-                    <h4>
-                        <calcite-icon scale="s" icon="home"></calcite-icon>  My address
-                    </h4>
+                    <p>Coming Soon</p>
                 </div>
-                <div>
-                    <p>joined since</p>
-                    <h4>
-                        <calcite-icon scale="s" icon="user-plus"></calcite-icon>  {{ guard.created_at|date:"M d, Y" }}
-                    </h4>
-                </div>
-            </div>
-        </section>
-        <section>
-            <h3>Job History</h3>
-            <p>guard 1</p>
-            <p>guard 2</p>
-        </section>
-        <section>
-            <h3>Invoice History</h3>
-            <div>
-                <p>kust 1</p>
-                <p>kust 1</p>
-                <p>kust 1</p>
-            </div>
-        </section>
-    </main>
-{% endblock %}
+            </section>
+        </main>
+    {% endblock %}

@@ -22,17 +22,17 @@
                     {% endif %}
                 </div>
                 <p>
-                    <calcite-icon icon="organization" scale="s"></calcite-icon>{{ client.organization }}
+                    <calcite-icon icon="users" scale="s"></calcite-icon>{{ client.organization }}
                 </p>
                 <p>
-                    <calcite-icon icon="user" scale="s"></calcite-icon>{{ client.client_id }}
+                    <calcite-icon icon="license" scale="s"></calcite-icon>{{ client.client_id }}
                 </p>
             </div>
         </div>
         <div>
             {% if client.location %}
                 <p>
-                    <calcite-icon icon="pin-tear" scale="s"></calcite-icon>{{ client.location }}
+                    <calcite-icon icon="pin" scale="s"></calcite-icon>{{ client.location }}
                 </p>
             {% endif %}
             <p>
@@ -40,7 +40,7 @@
                 {{ client.email }}
             </p>
             <p>
-                <calcite-icon icon="date-time" scale="s"></calcite-icon>
+                <calcite-icon icon="user-plus" scale="s"></calcite-icon>
                 {{ client.created_at|date:"m/d/Y" }}
             </p>
         </div>

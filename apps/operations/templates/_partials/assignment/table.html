@@ -38,7 +38,7 @@
             {% if assignment.guard.badge_number %}
                 <br>
                 <small>
-                    Badge: {{ assignment.guard.badge_number }}
+                    {{ assignment.guard.badge_number }}
                 </small>
             {% endif %}
         </calcite-table-cell>
@@ -112,8 +112,8 @@
                 href="{% url 'operations:assignment_detail_view' assignment.id %}"
                 appearance="outline-fill"
                 scale="s"
-                icon-start="pencil">
-                Edit
+                icon-start="view-visible">
+                View
             </calcite-button>
         </calcite-table-cell>
 

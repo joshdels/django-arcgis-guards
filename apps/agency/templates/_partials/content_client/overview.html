@@ -28,8 +28,11 @@
             <calcite-button icon-start="plus" label="Add New Contract" appearance="outline-fill" scale="s" href="{% url 'agency:contract_create_client' client.id %}">Add Contract</calcite-button>
         </div>
         <div>
-            <h4>contract 1</h4>
-            <h4>contract 2</h4>
+            {% for contract in active_contracts %}
+                <h4>{{ contract.contract_number }}</h4>
+            {% empty %}
+                <p>No active contracts.</p>
+            {% endfor %}
         </div>
     </section>
     <section>
@@ -38,19 +41,19 @@
             <div>
                 <p>Total Guard Hired</p>
                 <h4>
-                    <calcite-icon icon="users" scale="s"></calcite-icon>  13
+                    <calcite-icon icon="users" scale="s"></calcite-icon> {{ total_guards }}
                 </h4>
             </div>
             <div>
                 <p>Active Guards</p>
                 <h4>
-                    <calcite-icon icon="user" scale="s"></calcite-icon> 5
+                    <calcite-icon icon="user" scale="s"></calcite-icon> {{ active_guards }}
                 </h4>
             </div>
             <div>
                 <p>Inactive Guards</p>
                 <h4>
-                    <calcite-icon icon="user-x" scale="s"></calcite-icon> 2
+                    <calcite-icon icon="user-x" scale="s"></calcite-icon> {{ inactive_guards }}
                 </h4>
             </div>
         </div>
@@ -58,17 +61,11 @@
     <section>
         <h2>Billing Overview</h2>
         <div class="grid">
-            <div>
-                <p>Current Billing</p>
-                <h4>Php 43,000.00</h4>
-            </div>
-            <div>
-                <p>Total Spent</p>
-                <h4>Php 43,000.00</h4>
-            </div>
+            <p>Coming Soon</p>
         </div>
     </section>
     <section>
         <h2>Report</h2>
+        <p>Coming Soon</p>
     </section>
 </main>

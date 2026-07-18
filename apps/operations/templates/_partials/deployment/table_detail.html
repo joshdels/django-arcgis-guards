@@ -2,42 +2,43 @@
 <calcite-table bordered striped layout="fixed">
 
     <calcite-table-row slot="table-header">
-        <calcite-table-header heading="Deployment"></calcite-table-header>
-        <calcite-table-header heading="Location"></calcite-table-header>
-        <calcite-table-header heading="Required Guards"></calcite-table-header>
-        <calcite-table-header heading="Assigned Guards"></calcite-table-header>
-        <calcite-table-header heading="Created at"></calcite-table-header>
+        <calcite-table-header heading="Guard Name"></calcite-table-header>
+        <calcite-table-header heading="Assigned at"></calcite-table-header>
         <calcite-table-header heading="Status"></calcite-table-header>
         <calcite-table-header heading="Actions"></calcite-table-header>
     </calcite-table-row>
 
-    {% for deployment in contract.deployments.all %}
+    {% for assignment in assignments %}
 
     <calcite-table-row>
+        <calcite-table-cell>
+            <strong>
+                {{assignment.guard.first_name}} 
+                    {% if assignment.guard.middle_name %}
+                        {{ assignment.guard.middle_name|slice:":1" }}.
+                    {% endif %}
+                {{assignment.guard.last_name}}</strong>
+            <br>
+            <small>
+                {{ assignment.guard.badge_number }}
+            </small>
+        </calcite-table-cell>
 
         <calcite-table-cell>
-            {{ deployment.name }}
+            {{ assignment.created_at|date:"m/d/y" }}
         </calcite-table-cell>
         <calcite-table-cell>
-            {{ deployment.location }}
-        </calcite-table-cell>
-        <calcite-table-cell>
-            {{ deployment.required_guards }}
-        </calcite-table-cell>
-        <calcite-table-cell>
-            <p>{{ deployment.assignments.count }}</p>
-        </calcite-table-cell>
-        <calcite-table-cell>
-            {{ deployment.created_at|date:"m/d/Y" }}
-        </calcite-table-cell>
-        <calcite-table-cell>
-            {% if deployment.is_active %}
+            {% if assignment.status == "ACTIVE" %}
                 <calcite-chip kind="brand">
                     Active
                 </calcite-chip>
+            {% elif assignment.status == "ENDED" %}
+                <calcite-chip kind="inverse" appearance="outline-fill">
+                    Ended
+                </calcite-chip>
             {% else %}
                 <calcite-chip kind="neutral" appearance="outline-fill">
-                    Inactive
+                    Cancelled
                 </calcite-chip>
             {% endif %}
         </calcite-table-cell>

@@ -39,8 +39,14 @@ def operation_deployment(request):
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def deployment_detail_view(request, pk):
     deployment = deployment_detail(pk)
+    
+    assignments = (
+        deployment.assignments
+        .select_related("guard")
+        .order_by("guard__last_name", "guard__first_name")
+    )
 
-    context = {"deployment": deployment}
+    context = {"deployment": deployment, "assignments": assignments}
 
     return render(request, "deployment/deployment_detail.html", context)
 

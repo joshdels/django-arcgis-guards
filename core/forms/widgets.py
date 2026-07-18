@@ -29,6 +29,9 @@ class CalciteCheckboxWidget(forms.CheckboxInput):
     #     context = super().get_context(name, value, attrs)
     #     print(context["widget"])
     #     return context
+    
+class CalcitePasswordWidget(forms.PasswordInput):
+    template_name = "widgets/calcite/password.html"
 
 
 class CalciteDateWidget(forms.DateInput):

@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 
 from ..models import User
 
+from apps.accounts.forms import LoginForm
+
 
 class BaseRoleLoginView(LoginView):
     """
@@ -25,6 +27,7 @@ class BaseRoleLoginView(LoginView):
 
 class StaffLoginView(BaseRoleLoginView):
     template_name = "staff_login.html"
+    authentication_form = LoginForm
     required_roles = [User.ROLE_STAFF, User.ROLE_ADMIN]
     redirect_authenticated_user = True
 
@@ -34,6 +37,7 @@ class StaffLoginView(BaseRoleLoginView):
 
 class ClientLoginView(BaseRoleLoginView):
     template_name = "client_login.html"
+    authentication_form = LoginForm
     required_roles = [User.ROLE_CLIENT]
     redirect_authenticated_user = True
 
@@ -43,6 +47,7 @@ class ClientLoginView(BaseRoleLoginView):
 
 class GuardLoginView(BaseRoleLoginView):
     template_name = "guard_login.html"
+    authentication_form = LoginForm
     required_roles = [User.ROLE_GUARD]
     redirect_authenticated_user = True
 
