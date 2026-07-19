@@ -23,7 +23,6 @@ def render_client_tab(request, id, partial_template):
 
     cancelled_contracts = contracts.filter(status=ContractStatus.CANCELLED)
 
-    print(active_contracts)
 
     guards = Guard.objects.filter(
         assignments__deployment__contract__client=client

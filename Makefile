@@ -9,6 +9,7 @@ run:
 migrate:
 		python manage.py makemigrations
 		python manage.py migrate
+		python manage.py showmigrations
 
 superuser:
 		python manage.py create_admin

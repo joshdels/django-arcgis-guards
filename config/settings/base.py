@@ -17,8 +17,8 @@ INSTALLED_APPS = [
     "apps.agency",
     "apps.client",
     "apps.guard",
-    "apps.billing",
     "apps.contract",
+    "apps.finances",
     "apps.operations",
     # 3rd party
     "django_htmx",
