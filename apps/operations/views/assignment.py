@@ -57,7 +57,6 @@ def assignment_detail_view(request, pk):
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def assignment_create_view(request):
-
     if request.method == "POST":
         formset = AssignmentFormSet(
             request.POST,

@@ -20,12 +20,6 @@ class Billing(models.Model):
         editable=False,
     )
 
-    client = models.ForeignKey(
-        Client,
-        on_delete=models.CASCADE,
-        related_name="billings",
-    )
-
     contract = models.ForeignKey(
         Contract,
         on_delete=models.PROTECT,
