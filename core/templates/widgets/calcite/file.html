@@ -1,0 +1,54 @@
+{# djlint:off #}
+
+<div class="calcite-file-upload">
+
+    <input
+        id="{{ widget.attrs.id }}"
+        type="file"
+        name="{{ widget.name }}"
+        hidden
+        {% include "django/forms/widgets/attrs.html" %}
+    >
+
+    <calcite-button
+        appearance="outline"
+        icon-start="upload"
+        width="full"
+        onclick="document.getElementById('{{ widget.attrs.id }}').click();">
+
+        Upload File
+
+    </calcite-button>
+
+    <div
+        id="{{ widget.attrs.id }}-filename"
+        class="file-name">
+
+        {% if widget.value %}
+            {{ widget.value.name|cut:"payments/proofs/" }}
+        {% else %}
+            No file selected
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script>
+(function () {
+    const input = document.getElementById("{{ widget.attrs.id }}");
+    const output = document.getElementById("{{ widget.attrs.id }}-filename");
+
+    if (!input || !output) return;
+
+    input.addEventListener("change", function () {
+        if (this.files.length) {
+            output.textContent = this.files[0].name;
+        } else {
+            output.textContent = "No file selected";
+        }
+    });
+})();
+</script>
+
+{# djlint:on #}

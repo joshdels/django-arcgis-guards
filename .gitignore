@@ -58,3 +58,4 @@ build/
 data
 
 staticfiles
+static

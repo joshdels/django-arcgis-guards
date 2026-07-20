@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}Edit Billing | Dumagete Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/deployment.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "_components/navbar.html" %}
+    <div class="form-container">
+        <header class="page-header">
+            <a href="#" id="backButton">
+                <calcite-icon icon="chevron-left"></calcite-icon>
+                Back
+            </a>
+            <h2>Edit Billing</h2>
+        </header>
+        <div class="deployment-create-container">
+            <div class="deployment-layout">{% include 'billings/form_update.html' %}</div>
+        </div>
+    </div>
+{% endblock %}

@@ -9,7 +9,7 @@
             </form>
             <a href="#" class="{% if not status %}active{% endif %}">All</a>
         </div>
-        <calcite-button href="{% url 'operations:deployment_create' %}"  icon-start="plus">Manual Invoice</calcite-button>
+        <calcite-button href="{% url 'finances:invoice_create' %}"  icon-start="plus">Manual Invoice</calcite-button>
     </header>
     {% include 'invoices/tables.html' %}
 </main>

@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}Edit Invoice | Dumagete Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/deployment.css' %}">
+{% endblock %}
+{% block content %}
+    {% include "_components/navbar.html" %}
+    <div class="form-container">
+        <header class="page-header">
+            <a href="#" id="backButton">
+                <calcite-icon icon="chevron-left"></calcite-icon>
+                Back to Invoices
+            </a>
+            <h2>Edit Invoice</h2>
+        </header>
+        <div class="deployment-create-container">
+            <div class="deployment-layout">{% include 'invoices/form_create.html' %}</div>
+        </div>
+    </div>
+{% endblock %}

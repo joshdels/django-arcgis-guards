@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+
 from django.db.models import Q
+from django.db import transaction
 
 from apps.finances.models import Billing
 from apps.finances.forms import BillingForm, BillingUpdateForm
 
 from apps.accounts.decorators import roles_required
+
 from apps.accounts.models import User
 
 from apps.finances.helpers import render_finances_tab
@@ -31,8 +34,8 @@ def billing_details(request, pk):
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def billing_create(request):
-    if request.mthod == "POST":
-        form = BillingForm(request.POST, queryset=Billing.objects.none())
+    if request.method == "POST":
+        form = BillingForm(request.POST)
 
         if form.is_valid():
             form.save()
@@ -42,23 +45,19 @@ def billing_create(request):
                 "Billing created successfully.",
             )
 
-            return redirect("finances:billing_create")
+            return redirect("finances:finances_billings")
 
     else:
-        form = BillingForm(
-            queryset=Billing.objects.none(),
-        )
+        form = BillingForm()
 
-    context = {"form": form, "billings": None}
+    context = {"form": form}
 
-    return render(request, "billing/billing_create.html", context)
+    return render(request, "billings/create.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
-def billing_edit(request, pk):
-    billing = Billing.objects.select_for_update("contract", "contract__client").get(
-        pk=pk
-    )
+def billing_edit(request, billing_id):
+    billing = get_object_or_404(Billing, pk=billing_id)
 
     form = BillingUpdateForm(
         request.POST or None,
@@ -66,15 +65,16 @@ def billing_edit(request, pk):
     )
 
     if request.method == "POST" and form.is_valid():
-        form.save()
+        with transaction.atomic():
+            form.save()
 
-        messages.success(
-            request,
-            "Billing update successfully.",
-        )
+            messages.success(
+                request,
+                "Billing update successfully.",
+            )
 
-        return redirect("finances:billing_detail", billing.id)
+            return redirect("finances:billing_details", billing.id)
 
     context = {"form": form, "billing": billing}
 
-    return render(request, "billing/billing_update.html", context)
+    return render(request, "billings/update.html", context)

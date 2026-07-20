@@ -42,12 +42,6 @@ class Invoice(models.Model):
         blank=True,
     )
 
-    pdf = models.FileField(
-        upload_to="invoices/",
-        blank=True,
-        null=True,
-    )
-
     created_at = models.DateTimeField(
         auto_now_add=True,
     )

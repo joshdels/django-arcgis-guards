@@ -1,9 +1,9 @@
 <main class="profile">
-  <h1>Billing Detail</h1>
-  <section>
-    <h2>{{ billing.billing_number}}</h2>
-    <div class="grid">
-      <a href="">Edit</a>
-    </div>
-  </section>
+    <h1>Billing Detail</h1>
+    <section>
+        <h2>{{ billing.billing_number }}</h2>
+        <div class="grid">
+            <a href="{% url 'finances:billing_edit' billing.id %}">Edit</a>
+        </div>
+    </section>
 </main>

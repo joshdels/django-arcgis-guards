@@ -1,0 +1,63 @@
+<form class="standard-form"
+      action="{% url 'finances:billing_create' %}"
+      method="post">
+    {% csrf_token %}
+    <div class="deployment-card">
+        <div class="form-group">
+            <label for="{{ form.contract.id_for_label }}">Contract</label>
+            {{ form.contract }}
+            {{ form.contract.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.billing_period_start.id_for_label }}">Billing Period Start</label>
+            {{ form.billing_period_start }}
+            {{ form.billing_period_start.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.billing_period_end.id_for_label }}">Billing Period End</label>
+            {{ form.billing_period_end }}
+            {{ form.billing_period_end.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.billing_date.id_for_label }}">Billing Date</label>
+            {{ form.billing_date }}
+            {{ form.billing_date.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.due_date.id_for_label }}">Due Date</label>
+            {{ form.due_date }}
+            {{ form.due_date.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.subtotal.id_for_label }}">Subtotal</label>
+            {{ form.subtotal }}
+            {{ form.subtotal.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.tax.id_for_label }}">Tax</label>
+            {{ form.tax }}
+            {{ form.tax.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.total_amount.id_for_label }}">Total Amount</label>
+            {{ form.total_amount }}
+            {{ form.total_amount.errors }}
+        </div>
+        {% if form.status %}
+            <div class="form-group">
+                <label for="{{ form.status.id_for_label }}">Status</label>
+                {{ form.status }}
+                {{ form.status.errors }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            <label for="{{ form.remarks.id_for_label }}">Remarks</label>
+            {{ form.remarks }}
+            {{ form.remarks.errors }}
+        </div>
+    </div>
+    <div class="form-button">
+        <calcite-button id="backButton1" appearance="outline-fill">Cancel</calcite-button>
+        <calcite-button type="submit">Save Billing</calcite-button>
+    </div>
+</form>

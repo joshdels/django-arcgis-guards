@@ -1,9 +1,9 @@
 <main class="profile">
-  <h1>Invoice Detail</h1>
-  <section>
-    <h2>{{ invoice}}</h2>
-    <div class="grid">
-      <a href="">Edit</a>
-    </div>
-  </section>
+    <h1>Invoice Detail</h1>
+    <section>
+        <h2>{{ invoice }}</h2>
+        <div class="grid">
+            <a href="{% url 'finances:invoice_edit' invoice.id %}">Edit</a>
+        </div>
+    </section>
 </main>

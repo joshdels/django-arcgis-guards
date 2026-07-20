@@ -7,6 +7,7 @@ from .widgets import (
     CalciteSelectWidget,
     CalciteTextareaWidget,
     CalciteCheckboxWidget,
+    CalciteFileWidget,
 )
 
 
@@ -42,6 +43,9 @@ class CalciteModelForm(forms.ModelForm):
         elif isinstance(field, forms.DateField):
             field.widget = CalciteDateWidget(attrs=attrs)
 
+        elif isinstance(field, forms.FileField):
+            field.widget = CalciteFileWidget(attrs=attrs)
+
         elif isinstance(
             field,
             (
@@ -57,6 +61,3 @@ class CalciteModelForm(forms.ModelForm):
 
         else:
             field.widget = CalciteInputWidget(attrs=attrs)
-
-
-
