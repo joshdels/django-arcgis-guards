@@ -3,11 +3,12 @@
       method="post">
     {% csrf_token %}
     <div class="deployment-card">
-        <div class="form-group">
+        {% comment %} Dapat ani kay naka disable  {% endcomment %}
+        {% comment %} <div class="form-group">
             <label for="{{ form.contract.id_for_label }}">Contract</label>
             {{ form.contract }}
             {{ form.contract.errors }}
-        </div>
+        </div> {% endcomment %}
         <div class="form-group">
             <label for="{{ form.billing_period_start.id_for_label }}">Billing Period Start</label>
             {{ form.billing_period_start }}

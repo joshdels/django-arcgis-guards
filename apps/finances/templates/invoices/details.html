@@ -1,9 +1,28 @@
-<main class="profile">
-    <h1>Invoice Detail</h1>
-    <section>
-        <h2>{{ invoice }}</h2>
-        <div class="grid">
-            <a href="{% url 'finances:invoice_edit' invoice.id %}">Edit</a>
-        </div>
-    </section>
-</main>
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Invoice Details | Dumagete Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+{% endblock %}
+{% block content %}
+    {% include '_components/navbar.html' %}
+    <main class="container profile">
+        <a href="{% url 'finances:finances_invoices' %}" id="backButton">
+            <calcite-icon icon="chevron-left"></calcite-icon>
+            Back to Invoices
+        </a>
+        <header>
+            <div>
+                <h1>Invoice Details</h1>
+                <p>{{ invoice.invoice_number }}</p>
+            </div>
+            <div>
+                <calcite-button href="{% url 'finances:invoice_edit' invoice.id %}">Edit</calcite-button>
+            </div>
+        </header>
+        <section>
+            <p>Some Information</p>
+        </section>
+    </main>
+{% endblock %}
+

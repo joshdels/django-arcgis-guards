@@ -17,16 +17,16 @@
            None="true">
         <calcite-icon icon="script"></calcite-icon>Billings</a>
         <a class="sidebar-link"
-           hx-get="{% url 'finances:finances_payments' %}"
-           hx-target="#finance-content"
-           hx-replace-url="true"
-           None="true">
-        <calcite-icon icon="credit-card"></calcite-icon>Payments</a>
-        <a class="sidebar-link"
            hx-get="{% url 'finances:finances_invoices' %}"
            hx-target="#finance-content"
            hx-replace-url="true"
            None="true">
         <calcite-icon icon="file-user"></calcite-icon>Invoices</a>
+        <a class="sidebar-link"
+           hx-get="{% url 'finances:finances_payments' %}"
+           hx-target="#finance-content"
+           hx-replace-url="true"
+           None="true">
+        <calcite-icon icon="credit-card"></calcite-icon>Payments</a>
     </main>
 </div>
