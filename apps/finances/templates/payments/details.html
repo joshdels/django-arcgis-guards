@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load humanize %}
 {% load static %}
 {% block title %}Payment Details | Dumagete Guards{% endblock %}
 {% block extra_head %}
@@ -21,7 +22,108 @@
             </div>
         </header>
         <section>
-            <p>Some Information</p>
+            <h2>General Information</h2>
+            <div class="grid">
+                <div>
+                    <p>Payment ID</p>
+                    <h4>{{ payment.payment_number }}</h4>
+                </div>
+                <div>
+                    <p>Payment Date</p>
+                    <h4>{{ payment.payment_date }}</h4>
+                </div>
+                <div>
+                    <p>Remarks</p>
+                    <h4>{{ payment.remarks|default:"-" }}</h4>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Payment Details</h2>
+            <div class="grid">
+                <div>
+                    <p>Total Payment</p>
+                    <h1>₱ {{ payment.amount|floatformat:2|intcomma }}</h1>
+                </div>
+                <div>
+                    <p>Payment Mode</p>
+                    <h4>{{ payment.payment_method }}</h4>
+                </div>
+                <div>
+                    <p>Reference Number</p>
+                    <h4>{{ payment.reference_number|default:"N/A"}}</h4>
+                </div>
+                <div>
+                    <p>Payment Proof</p>
+                    {% if payment.proof_of_payment %}
+                        {% with payment.proof_of_payment.name|lower as filename %}
+
+                            {% if ".pdf" in filename %}
+                                <calcite-button
+                                    appearance="outline"
+                                    icon-start="file-pdf"
+                                    href="{{ payment.proof_of_payment.url }}"
+                                    target="_blank">
+                                    View PDF
+                                </calcite-button>
+
+                            {% elif ".doc" in filename or ".docx" in filename %}
+                                <calcite-button
+                                    appearance="outline"
+                                    icon-start="file"
+                                    href="{{ payment.proof_of_payment.url }}"
+                                    target="_blank">
+                                    View Document
+                                </calcite-button>
+
+                            {% elif ".jpg" in filename or ".jpeg" in filename or ".png" in filename %}
+                                <calcite-button
+                                    appearance="outline"
+                                    icon-start="image"
+                                    href="{{ payment.proof_of_payment.url }}"
+                                    target="_blank">
+                                    View Image
+                                </calcite-button>
+
+                            {% else %}
+                                <calcite-button
+                                    appearance="outline"
+                                    icon-start="download"
+                                    href="{{ payment.proof_of_payment.url }}"
+                                    target="_blank">
+                                    Download File
+                                </calcite-button>
+                            {% endif %}
+
+                        {% endwith %}
+
+                    {% else %}
+                        None
+                    {% endif %}
+
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Contract Information</h2>
+            <div class="grid">
+                <div>
+                    <p>Contract Title</p>
+                    <h4>{{ payment.invoice.billing.contract.title}}</h4>
+                </div>
+                <div>
+                    <p>Contract ID</p>
+                    <h4>{{ payment.invoice.billing.contract.contract_number}}</h4>
+                </div>
+                <div>
+                    <p>Client Name</p>
+                    <h4>{{ payment.invoice.billing.contract.client.name}}</h4>
+                </div>
+                <div>
+                    <p>Client ID</p>
+                    <h4>{{ payment.invoice.billing.contract.client.client_id}}</h4>
+                </div>
+            </div>
         </section>
     </main>
 {% endblock %}

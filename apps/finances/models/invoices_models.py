@@ -82,6 +82,9 @@ class Invoice(models.Model):
             )
 
     def save(self, *args, **kwargs):
+        if self.billing_id:
+            self.total_amount = self.billing.total_amount
+
         self.full_clean()
 
         if not self.invoice_number:

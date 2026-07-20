@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load humanize %}
 {% load static %}
 {% block title %}Billing Details | Dumagete Guards{% endblock %}
 {% block extra_head %}
@@ -21,7 +22,52 @@
             </div>
         </header>
         <section>
-            <p>Some information</p>
+            <h2>Total Amount</h2>
+            <div class="grid">
+                <div>
+                    <h1>₱ {{ billing.total_amount|floatformat:2|intcomma }}</h1>
+                </div>
+                <div>
+                    <p>Taxes</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>General Information</h2>
+            <div class="grid">
+                <div>
+                    <p>Billing ID</p>
+                    <h4>{{ billing.billing_number }}</h4>
+                </div>
+                <div>
+                    <p>Date Issue</p>
+                </div>
+                <div>
+                    <p>Scope</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Contract Information</h2>
+            <div class="grid">
+                <div>
+                    <p>Contract Title</p>
+                    <h4>{{ billing.contract.title}}</h4>
+                </div>
+                <div>
+                    <p>Contract ID</p>
+                    <h4>{{ billing.contract.contract_number}}</h4>
+                </div>
+                <div>
+                    <p>Client Name</p>
+                    <h4>{{ billing.contract.client.name}}</h4>
+                </div>
+                <div>
+                    <p>Client ID</p>
+                    <h4>{{ billing.contract.client.client_id}}</h4>
+                </div>
+            </div>
         </section>
     </main>
 {% endblock %}

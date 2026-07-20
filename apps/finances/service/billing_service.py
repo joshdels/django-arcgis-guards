@@ -70,10 +70,8 @@ def get_period(contract, today):
 
         return start, end
 
-    raise NotImplementedError(
-        f"{contract.billing_cycle} is not implemented."
-    )
-    
+    raise NotImplementedError(f"{contract.billing_cycle} is not implemented.")
+
 
 from decimal import Decimal
 
@@ -86,6 +84,4 @@ def calculate_subtotal(contract, start, end):
     if contract.billing_type == BillingType.MONTHLY_FIXED:
         return contract.rate
 
-    raise NotImplementedError(
-        f"{contract.billing_type} is not implemented."
-    )
+    raise NotImplementedError(f"{contract.billing_type} is not implemented.")
