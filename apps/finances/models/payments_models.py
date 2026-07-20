@@ -1,6 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
+from decimal import Decimal
+from django.db.models import Sum
 
 from apps.finances.models import Invoice
 
@@ -49,6 +51,7 @@ class Payment(models.Model):
         max_length=100,
         blank=True,
         help_text="Bank transaction, OR number, check number, etc.",
+        unique=True,
     )
 
     status = models.CharField(
@@ -78,10 +81,31 @@ class Payment(models.Model):
     class Meta:
         ordering = ["-payment_date", "-created_at"]
 
+        indexes = [
+            models.Index(fields=["payment_date"]),
+            models.Index(fields=["status"]),
+        ]
+
     def clean(self):
-        if self.amount <= 0:
+        if self.amount <= Decimal("0.00"):
             raise ValidationError(
                 {"amount": "Payment amount must be greater than zero."}
+            )
+
+        if self.payment_method != PaymentMethod.CASH and not self.reference_number:
+            raise ValidationError(
+                {
+                    "reference_number": "Reference number is required for non-cash payments."
+                }
+            )
+
+        paid = self.invoice.payments.filter(status=PaymentStatus.COMPLETED).exclude(
+            pk=self.pk
+        ).aggregate(total=Sum("amount"))["total"] or Decimal("0.00")
+
+        if paid + self.amount > self.invoice.total_amount:
+            raise ValidationError(
+                {"amount": "Payment exceeds the remaining invoice balance."}
             )
 
     def save(self, *args, **kwargs):
@@ -101,6 +125,8 @@ class Payment(models.Model):
             self.payment_number = f"PAY-{year}-{number:04d}"
 
         super().save(*args, **kwargs)
+
+        self.invoice.update_status()
 
     def __str__(self):
         return self.payment_number

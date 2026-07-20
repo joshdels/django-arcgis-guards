@@ -28,7 +28,8 @@ class Billing(models.Model):
     billing_period_start = models.DateField()
     billing_period_end = models.DateField()
 
-    billing_date = models.DateField(
+    issue_date = models.DateField(
+        auto_now_add=True,
         help_text="Date this billing was generated.",
     )
     due_date = models.DateField()
@@ -97,14 +98,20 @@ class Billing(models.Model):
         super().save(*args, **kwargs)
 
     def clean(self):
-        if self.billing_period_end < self.billing_period_start:
+        if (
+            self.billing_period_start
+            and self.billing_period_end
+            and self.billing_period_end < self.billing_period_start
+        ):
             raise ValidationError(
                 {
                     "billing_period_end": "Billing period end cannot be before the start date."
                 }
             )
 
-        if self.due_date < self.billing_date:
+        issue_date = self.issue_date or timezone.localdate()
+
+        if self.due_date and self.due_date < issue_date:
             raise ValidationError(
                 {"due_date": "Due date cannot be before the billing date."}
             )

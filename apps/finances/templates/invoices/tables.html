@@ -1,5 +1,107 @@
-{% for invoice in invoices %}
-    <a href="{% url 'finances:invoice_details' invoice.id %}">{{ invoice }}</a>
-{% empty %}
-    <li>empty :)</li>
-{% endfor %}
+{# djlint:off #}
+{% load humanize %}
+
+{% if not invoices %}
+
+{% else %}
+
+<calcite-table
+    bordered
+    striped
+    numbered
+    page-size="20"
+    current-page="0"
+    layout="auto"
+    interaction-mode="interactive"
+>
+
+    <calcite-table-row slot="table-header">
+        <calcite-table-header heading="Invoice No."></calcite-table-header>
+        <calcite-table-header heading="Client"></calcite-table-header>
+        <calcite-table-header heading="Billing"></calcite-table-header>
+        <calcite-table-header heading="Issue Date"></calcite-table-header>
+        <calcite-table-header heading="Due Date"></calcite-table-header>
+        <calcite-table-header heading="Amount"></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+    </calcite-table-row>
+
+    {% for invoice in invoices %}
+
+    <calcite-table-row>
+
+        <calcite-table-cell>
+            <strong>{{ invoice.invoice_number }}</strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>{{ invoice.billing.contract.client.name }}</strong>
+            <br>
+            <small>{{ invoice.billing.contract.client.organization }}</small>
+            -
+            <small>{{ invoice.billing.contract.client.client_id }}</small>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>{{ invoice.billing.billing_number }}</strong>
+            <br>
+            <small>{{ invoice.billing.billing_period_start|date:"M d, Y" }}</small>
+            -
+            <small>{{ invoice.billing.billing_period_end|date:"M d, Y" }}</small>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ invoice.issue_date|date:"M d, Y" }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ invoice.due_date|date:"M d, Y" }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>₱ {{ invoice.total_amount|floatformat:2|intcomma }}</strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+
+            {% if invoice.status == "draft" %}
+                <calcite-chip kind="neutral" appearance="outline" scale="s">
+                    Draft
+                </calcite-chip>
+
+            {% elif invoice.status == "sent" %}
+                <calcite-chip kind="brand" appearance="solid" scale="s">
+                    Sent
+                </calcite-chip>
+
+            {% elif invoice.status == "paid" %}
+                <calcite-chip kind="success" appearance="solid" scale="s">
+                    Paid
+                </calcite-chip>
+
+            {% elif invoice.status == "overdue" %}
+                <calcite-chip kind="warning" appearance="solid" scale="s">
+                    Overdue
+                </calcite-chip>
+
+            {% elif invoice.status == "cancelled" %}
+                <calcite-chip kind="danger" appearance="solid" scale="s">
+                    Cancelled
+                </calcite-chip>
+
+            {% else %}
+                <calcite-chip kind="neutral" appearance="outline" scale="s">
+                    {{ invoice.get_status_display }}
+                </calcite-chip>
+            {% endif %}
+
+        </calcite-table-cell>
+
+    </calcite-table-row>
+
+    {% endfor %}
+
+</calcite-table>
+
+{% endif %}
+
+{# djlint:on #}

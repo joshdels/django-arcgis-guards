@@ -77,3 +77,4 @@ def invoice_edit(request, invoice_id):
     context = {"form": form, "invoice": invoice}
 
     return render(request, "invoices/update.html", context)
+

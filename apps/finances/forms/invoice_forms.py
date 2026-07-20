@@ -9,7 +9,6 @@ class InvoiceForm(CalciteModelForm):
         fields = [
             "billing",
             "due_date",
-            "status",
             "remarks",
         ]
 

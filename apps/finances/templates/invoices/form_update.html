@@ -1,6 +1,7 @@
 <form class="standard-form"
       action="{% url 'finances:invoice_update' invoice.id %}"
       method="post">
+    {% csrf_token %}
     <div class="deployment-card">
         <div class="form-group">
             <label for="{{ form.billing.id_for_label }}">Billing</label>

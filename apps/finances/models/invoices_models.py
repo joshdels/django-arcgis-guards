@@ -1,6 +1,8 @@
-from django.core.exceptions import ValidationError
-from django.db import models
+from decimal import Decimal
 from django.utils import timezone
+from django.db import models
+from django.db.models import Sum
+from django.core.exceptions import ValidationError
 
 from apps.finances.models import Billing
 
@@ -24,6 +26,11 @@ class Invoice(models.Model):
         Billing,
         on_delete=models.PROTECT,
         related_name="invoice",
+    )
+
+    total_amount = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
     )
 
     issue_date = models.DateField(
@@ -51,17 +58,22 @@ class Invoice(models.Model):
     )
 
     @property
-    def total_amount(self):
-        return self.billing.total_amount
+    def amount_paid(self):
+        return self.payments.filter(status="completed").aggregate(total=Sum("amount"))[
+            "total"
+        ] or Decimal("0.00")
 
-    class Meta:
-        ordering = ["-issue_date"]
-        indexes = [
-            models.Index(fields=["status"]),
-        ]
+    @property
+    def balance_due(self):
+        return self.total_amount - self.amount_paid
 
-        verbose_name = "Invoice"
-        verbose_name_plural = "Invoices"
+    def update_status(self):
+        if self.amount_paid >= self.total_amount:
+            self.status = InvoiceStatus.PAID
+        else:
+            self.status = InvoiceStatus.SENT
+
+        self.save(update_fields=["status"])
 
     def clean(self):
         if self.due_date and self.issue_date and self.due_date < self.issue_date:

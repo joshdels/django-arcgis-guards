@@ -38,14 +38,17 @@ def billing_create(request):
         form = BillingForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            with transaction.atomic():
+                billing = form.save(commit=False)
+                billing.created_by = request.user
+                billing.save()
 
-            messages.success(
-                request,
-                "Billing created successfully.",
-            )
+                messages.success(
+                    request,
+                    "Billing created successfully.",
+                )
 
-            return redirect("finances:finances_billings")
+                return redirect("finances:finances_billings")
 
     else:
         form = BillingForm()

@@ -1,5 +1,127 @@
-{% for payment in payments %}
-    <a href="{% url 'finances:payment_details' payment.id %}">{{ payment }}</a>
-{% empty %}
-    <li>empty :)</li>
-{% endfor %}
+{# djlint:off #}
+{% load humanize %}
+
+{% if not payments %}
+
+{% else %}
+
+<calcite-table
+    bordered
+    striped
+    numbered
+    page-size="20"
+    current-page="0"
+    layout="auto"
+    interaction-mode="interactive"
+>
+
+    <calcite-table-row slot="table-header">
+
+        <calcite-table-header heading="Payment No."></calcite-table-header>
+        <calcite-table-header heading="Invoice"></calcite-table-header>
+        <calcite-table-header heading="Client"></calcite-table-header>
+        <calcite-table-header heading="Payment Date"></calcite-table-header>
+        <calcite-table-header heading="Amount"></calcite-table-header>
+        <calcite-table-header heading="Method"></calcite-table-header>
+        <calcite-table-header heading="Reference No."></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+        <calcite-table-header heading="Proof"></calcite-table-header>
+
+    </calcite-table-row>
+
+    {% for payment in payments %}
+
+    <calcite-table-row>
+
+        <calcite-table-cell>
+            <strong>{{ payment.payment_number }}</strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>{{ payment.invoice.invoice_number }}</strong>
+            <br>
+            <small>{{ payment.invoice.billing.contract.contract_number }}</small>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>{{ payment.invoice.billing.contract.client.name }}</strong>
+            <br>
+            <small>{{ payment.invoice.billing.contract.client.organization }}</small>
+            -
+            <small>{{ payment.invoice.billing.contract.client.client_id }}</small>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ payment.payment_date|date:"M d, Y" }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>₱ {{ payment.amount|floatformat:2|intcomma }}</strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ payment.get_payment_method_display }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {% if payment.reference_number %}
+                {{ payment.reference_number }}
+            {% else %}
+                —
+            {% endif %}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+
+            {% if payment.status == "pending" %}
+                <calcite-chip kind="warning" appearance="solid" scale="s">
+                    Pending
+                </calcite-chip>
+
+            {% elif payment.status == "completed" %}
+                <calcite-chip kind="success" appearance="solid" scale="s">
+                    Completed
+                </calcite-chip>
+
+            {% elif payment.status == "failed" %}
+                <calcite-chip kind="danger" appearance="solid" scale="s">
+                    Failed
+                </calcite-chip>
+
+            {% elif payment.status == "refunded" %}
+                <calcite-chip kind="neutral" appearance="solid" scale="s">
+                    Refunded
+                </calcite-chip>
+
+            {% else %}
+                <calcite-chip kind="neutral" appearance="outline" scale="s">
+                    {{ payment.get_status_display }}
+                </calcite-chip>
+            {% endif %}
+
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+
+            {% if payment.proof_of_payment %}
+                <calcite-link
+                    href="{{ payment.proof_of_payment.url }}"
+                    target="_blank"
+                >
+                    View File
+                </calcite-link>
+            {% else %}
+                —
+            {% endif %}
+
+        </calcite-table-cell>
+
+    </calcite-table-row>
+
+    {% endfor %}
+
+</calcite-table>
+
+{% endif %}
+
+{# djlint:on #}
