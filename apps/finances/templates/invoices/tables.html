@@ -1,0 +1,5 @@
+{% for invoice in invoices %}
+    <a href="{% url 'finances:invoice_details' invoice.id %}">{{ invoice }}</a>
+{% empty %}
+    <li>empty :)</li>
+{% endfor %}

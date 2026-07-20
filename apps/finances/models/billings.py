@@ -3,7 +3,6 @@ from django.conf import settings
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 
-from apps.client.models import Client
 from apps.contract.models import Contract
 
 
@@ -79,8 +78,6 @@ class Billing(models.Model):
     class Meta:
         ordering = ["-billing_period_start", "-created_at"]
 
-    def __str__(self):
-        return f"{self.billing_number} - {self.client.name}"
 
     def save(self, *args, **kwargs):
         self.full_clean()
@@ -112,3 +109,6 @@ class Billing(models.Model):
             raise ValidationError(
                 {"due_date": "Due date cannot be before the billing date."}
             )
+    
+    def __str__(self):
+        return f"{self.billing_number} - {self.contract.client.name}"

@@ -69,9 +69,6 @@ class Invoice(models.Model):
         verbose_name = "Invoice"
         verbose_name_plural = "Invoices"
 
-    def __str__(self):
-        return f"{self.invoice_number} - {self.billing.client.name}"
-
     def clean(self):
         if self.due_date and self.issue_date and self.due_date < self.issue_date:
             raise ValidationError(
@@ -95,3 +92,6 @@ class Invoice(models.Model):
             self.invoice_number = f"INV-{year}-{number:04d}"
 
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.invoice_number} - {self.billing.contract.client.name}"

@@ -10,15 +10,23 @@ from apps.finances.helpers import render_finances_tab
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def finances_invoices(request):
-    return render_finances_tab(request, "invoices/_invoices.html")
+    # search = request.GET.get("search")
 
-
-def invoice_list(request):
-    invoices = Invoice.objects.select_related("client")
+    invoices = Invoice.objects.select_related("billing")
 
     context = {"invoices": invoices}
 
-    return render(request, "finance/invoice/list.html", context)
+    return render_finances_tab(request, "invoices/_invoices.html", context)
+
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def invoice_details(request, pk):
+    invoice = Invoice.objects.select_related("billing", "billing__contract")
+    invoice = invoice.get(pk=pk)
+
+    context = {"invoice": invoice}
+
+    return render(request, "invoices/details.html", context)
 
 
 # invoice_list()

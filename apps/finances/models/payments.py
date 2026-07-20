@@ -78,9 +78,6 @@ class Payment(models.Model):
     class Meta:
         ordering = ["-payment_date", "-created_at"]
 
-    def __str__(self):
-        return self.payment_number
-
     def clean(self):
         if self.amount <= 0:
             raise ValidationError(
@@ -104,3 +101,6 @@ class Payment(models.Model):
             self.payment_number = f"PAY-{year}-{number:04d}"
 
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.payment_number

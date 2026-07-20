@@ -1,0 +1,5 @@
+{% for payment in payments %}
+    <a href="{% url 'finances:payment_details' payment.id %}">{{ payment }}</a>
+{% empty %}
+    <li>empty :)</li>
+{% endfor %}

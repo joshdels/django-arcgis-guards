@@ -83,6 +83,7 @@ class Contract(models.Model):
         max_digits=12,
         decimal_places=2,
         help_text="Rate according to the selected billing type.",
+        null=True,
     )
 
     payment_terms = models.CharField(

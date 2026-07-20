@@ -13,27 +13,20 @@ from apps.finances.helpers import render_finances_tab
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def finances_billings(request):
-    return render_finances_tab(request, "billings/_billings.html")
-
-
-@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
-def billing_list(request):
     billings = Billing.objects.select_related("contract", "contract__client")
 
     context = {"billings": billings}
 
-    return render(request, "finance/billing.html", context)
+    return render_finances_tab(request, "billings/_billings.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def billing_details(request, pk):
-    billings = Billing.objects.select_related("contract", "contract__client").get(
-        pk, pk
-    )
+    billing = Billing.objects.select_related("contract", "contract__client").get(pk=pk)
 
-    context = {"billings": billings}
+    context = {"billing": billing}
 
-    return render(request, "", context)
+    return render(request, "billings/details.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
