@@ -1,0 +1,32 @@
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h1>Finances Dashboard</h1>
+    </div>
+    <main>
+        <a class="sidebar-link active"
+           hx-get=""
+           hx-target="#finance-content"
+           hx-replace-url="true"
+           None="true">
+            <calcite-icon icon="dashboard-graph"></calcite-icon> Overview
+        </a>
+        <a class="sidebar-link"
+           hx-get=""
+           hx-target="#finance-content"
+           hx-replace-url="true"
+           None="true">
+        <calcite-icon icon="script"></calcite-icon>Billings</a>
+        <a class="sidebar-link"
+           hx-get=""
+           hx-target="#finance-content"
+           hx-replace-url="true"
+           None="true">
+        <calcite-icon icon="credit-card"></calcite-icon>Payments</a>
+        <a class="sidebar-link"
+           hx-get=""
+           hx-target="#finance-content"
+           hx-replace-url="true"
+           None="true">
+        <calcite-icon icon="file-user"></calcite-icon>Invoices</a>
+    </main>
+</div>

@@ -4,12 +4,11 @@
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
 {% endblock %}
-{% block content %} 
-<div class="auth-container">
-    <div class="auth-form">
-        <h1>Guard Portal</h1>
-        {% include '_partials/_forms/login.html' %}
+{% block content %}
+    <div class="auth-container">
+        <div class="auth-form">
+            <h1>Guard Portal</h1>
+            {% include '_partials/_forms/login.html' %}
+        </div>
     </div>
-</div>
 {% endblock %}
-

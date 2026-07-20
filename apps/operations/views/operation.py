@@ -1,9 +1,3 @@
-#     Assignments     -> Decide which guard goes to which deployment.
-#      • Assign guards
-#      • Replace guards
-#      • Transfer guards
-
-
 from django.shortcuts import render
 
 from apps.accounts.decorators import roles_required

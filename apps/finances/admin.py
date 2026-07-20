@@ -7,7 +7,6 @@ from .models import Billing, Invoice, Payment
 class BillingAdmin(admin.ModelAdmin):
     list_display = (
         "billing_number",
-        "client",
         "contract",
         "billing_period_start",
         "billing_period_end",
