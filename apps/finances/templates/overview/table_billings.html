@@ -1,5 +1,17 @@
 {# djlint:off #}
 {% load humanize %}
+
+{% if not recent_billings %}
+
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No recent billings found.
+        </div>
+    </calcite-notice>
+
+{% else %}
+
+
 <calcite-table bordered>
 
     <calcite-table-row slot="table-header">
@@ -55,23 +67,17 @@
 
     </calcite-table-row>
 
-    {% empty %}
-
-    <calcite-notice open kind="info">
-        <div slot="message">
-            No recent billings found.
-        </div>
-    </calcite-notice>
-
     {% endfor %}
 
 </calcite-table>
 
 <div class="button-actions">
     <calcite-button 
-      appearance="outline-fill" 
-      icon-start="arrow-right"
-      href="{% url 'finances:finances_billings' %}"
+        appearance="outline-fill" 
+        icon-start="arrow-right"
+        href="{% url 'finances:finances_billings' %}"
     >View More</calcite-button>
 </div>
+
+{% endif %}
 {# djlint:on #}

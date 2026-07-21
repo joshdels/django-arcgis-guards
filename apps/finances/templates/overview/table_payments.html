@@ -1,6 +1,16 @@
 {# djlint:off #}
 {% load humanize %}
 
+{% if not recent_payments %}
+
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No recent payments found.
+        </div>
+    </calcite-notice>
+
+{% else %}
+
 <calcite-table bordered>
 
     <calcite-table-row slot="table-header">
@@ -25,19 +35,19 @@
         </calcite-table-cell>
 
         <calcite-table-cell>
-          <strong>
-            {{ payment.invoice.billing.contract.client.name }}
-          </strong>
-          <br>
-          <small>
-              {{ payment.invoice.billing.contract.client.organization }}
-          </small>
+            <strong>
+                {{ payment.invoice.billing.contract.client.name }}
+            </strong>
+            <br>
+            <small>
+                {{ payment.invoice.billing.contract.client.organization }}
+            </small>
         </calcite-table-cell>
 
         <calcite-table-cell>
-          <strong>
-            ₱ {{ payment.amount|floatformat:2|intcomma }}
-          </strong>
+            <strong>
+                ₱ {{ payment.amount|floatformat:2|intcomma }}
+            </strong>
         </calcite-table-cell>
 
         <calcite-table-cell>
@@ -56,22 +66,17 @@
 
     </calcite-table-row>
 
-    {% empty %}
-
-    <calcite-notice open kind="info">
-        <div slot="message">
-            No recent payments found.
-        </div>
-    </calcite-notice>
-
     {% endfor %}
 
 </calcite-table>
 
 <div class="button-actions">
-  <calcite-button 
-    appearance="outline-fill" 
-    icon-start="arrow-right"
-    href="{% url 'finances:finances_payments' %}"
-  >View More</calcite-button>
+    <calcite-button 
+        appearance="outline-fill" 
+        icon-start="arrow-right"
+        href="{% url 'finances:finances_payments' %}"
+    >View More</calcite-button>
 </div>
+
+{% endif %}
+{# djlint:on #}

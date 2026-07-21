@@ -1,6 +1,16 @@
 {# djlint:off #}
 {% load humanize %}
 
+{% if not upcoming_invoices %}
+
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No upcoming invoices found.
+        </div>
+    </calcite-notice>
+
+{% else %}
+
 <calcite-table bordered striped>
 
     <calcite-table-row slot="table-header">
@@ -60,22 +70,16 @@
 
     </calcite-table-row>
 
-    {% empty %}
-
-    <calcite-notice open kind="info">
-        <div slot="message">
-            No upcoming invoices found.
-        </div>
-    </calcite-notice>
-
     {% endfor %}
 
 </calcite-table>
 
 <div class="button-actions">
     <calcite-button 
-      appearance="outline-fill" 
-      icon-start="arrow-right"
-      href="{% url 'finances:finances_invoices' %}"
+        appearance="outline-fill" 
+        icon-start="arrow-right"
+        href="{% url 'finances:finances_invoices' %}"
     >View More</calcite-button>
 </div>
+
+{% endif %}

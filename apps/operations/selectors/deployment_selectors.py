@@ -1,7 +1,7 @@
 from django.db.models import Prefetch, Q
 from django.db.models import Count
 
-from .models import Deployment
+from apps.operations.models import Deployment
 
 from apps.contract.models import Contract
 
