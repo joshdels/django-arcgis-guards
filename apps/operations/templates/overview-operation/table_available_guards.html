@@ -1,0 +1,66 @@
+{# djlint:off #}
+{% load humanize %}
+
+{% if not unassigned_guards %}
+
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No recent deployment found.
+        </div>
+    </calcite-notice>
+
+{% else %}
+
+    <calcite-table bordered>
+
+        <calcite-table-row slot="table-header">
+
+            <calcite-table-header heading="Guard Name"></calcite-table-header>
+            <calcite-table-header heading="ID Number"></calcite-table-header>
+            <calcite-table-header heading="Address"></calcite-table-header>
+            <calcite-table-header heading="Phone Number"></calcite-table-header>
+            <calcite-table-header heading="Email"></calcite-table-header>
+
+        </calcite-table-row>
+
+        {% for guard in unassigned_guards %}
+
+        <calcite-table-row>
+            
+            <calcite-table-cell>
+                <strong>{{ guard.first_name }} - {{ guard.last_name}} </strong>
+            </calcite-table-cell>
+
+            <calcite-table-cell>
+                <strong>{{ guard.badge_number }}</strong>
+            </calcite-table-cell>
+
+            <calcite-table-cell>
+                <strong>{{ guard.address }}</strong>
+            </calcite-table-cell>
+
+            <calcite-table-cell>
+                <strong>{{ guard.phone_number }}</strong>
+            </calcite-table-cell>
+
+            <calcite-table-cell>
+                <strong>{{ guard.email }}</strong>
+            </calcite-table-cell>
+
+        </calcite-table-row>
+
+        {% endfor %}
+
+    </calcite-table>
+
+<div class="button-actions">
+    <calcite-button 
+        appearance="outline-fill" 
+        icon-start="arrow-right"
+        href="{% url 'agency:show_guards' %}"
+    >View More</calcite-button>
+</div>   
+
+{% endif %}
+{# djlimt:on #}
+

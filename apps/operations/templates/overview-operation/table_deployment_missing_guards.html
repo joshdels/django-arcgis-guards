@@ -1,0 +1,71 @@
+{# djlint:off #}
+{% load humanize %}
+
+{% if not requiring_more_guards %}
+
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No recent deployment found.
+        </div>
+    </calcite-notice>
+
+{% else %}
+
+    <calcite-table bordered>
+
+        <calcite-table-row slot="table-header">
+
+            <calcite-table-header heading="Guard Name"></calcite-table-header>
+            <calcite-table-header heading="Location"></calcite-table-header>
+            <calcite-table-header heading="Required Guards"></calcite-table-header>
+            <calcite-table-header heading="Assigned Guards"></calcite-table-header>
+            <calcite-table-header heading="Missing Guards"></calcite-table-header>
+            <calcite-table-header heading="Action" alignment="end"></calcite-table-header>
+
+        </calcite-table-row>
+
+        {% for deployment in requiring_more_guards %}
+
+            <calcite-table-row>
+                
+                <calcite-table-cell>
+                    <strong>{{ deployment.name }} </strong>
+                </calcite-table-cell>
+
+                <calcite-table-cell>
+                    <strong>{{ deployment.location }}</strong>
+                </calcite-table-cell>
+
+                <calcite-table-cell>
+                    <strong>{{ deployment.required_guards }}</strong>
+                </calcite-table-cell>
+
+                <calcite-table-cell>
+                    <strong>{{ deployment.assigned_guards }}</strong>
+                </calcite-table-cell>
+
+                <calcite-table-cell>
+                    <strong>{{ deployment.missing_guards }}</strong>
+                </calcite-table-cell>
+
+                <calcite-table-cell>
+                    View
+                </calcite-table-cell>
+
+            </calcite-table-row>
+
+        {% endfor %}
+
+    </calcite-table>
+
+<div class="button-actions">
+    <calcite-button 
+        appearance="outline-fill" 
+        icon-start="arrow-right"
+        href="{% url 'agency:show_guards' %}"
+    >View More</calcite-button>
+</div>   
+
+{% endif %}
+{# djlimt:on #}
+

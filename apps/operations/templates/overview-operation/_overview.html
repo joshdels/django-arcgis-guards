@@ -12,15 +12,18 @@
     </section>
     <div class="dashboard-column">
         <section>
-            <h2>Recent Deployment</h2>
+            <h2>Recent Deployments</h2>
+            {% include 'overview-operation/table_recent_deployment.html' %}
         </section>
         <section>
-            <h2>Unassigned Guard</h2>
+            <h2>Available Guards</h2>
+            {% include 'overview-operation/table_available_guards.html' %}
         </section>
     </div>
     <div>
         <section>
             <h2>Requiring More Guards</h2>
+            {% include 'overview-operation/table_deployment_missing_guards.html' %}
         </section>
     </div>
 </main>

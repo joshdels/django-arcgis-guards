@@ -28,9 +28,7 @@ class ClientForm(CalciteModelForm):
             "organization": CalciteInputWidget(
                 attrs={"placeholder": "Enter organization name"}
             ),
-            "location": CalciteInputWidget(
-                attrs={"placeholder": "Dumagete City"}
-            ),
+            "location": CalciteInputWidget(attrs={"placeholder": "Dumagete City"}),
             "contact_person": CalciteInputWidget(
                 attrs={"placeholder": "Enter contact person"}
             ),
@@ -47,7 +45,6 @@ class GuardForm(CalciteModelForm):
             "first_name",
             "middle_name",
             "last_name",
-            "email",
             "address",
             "email",
             "phone_number",
@@ -64,7 +61,6 @@ class GuardForm(CalciteModelForm):
 
 
 class ContractForm(CalciteModelForm):
-
     class Meta:
         model = Contract
 

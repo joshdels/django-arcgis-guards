@@ -12,7 +12,7 @@
             <calcite-table-header heading="Assigned Guards"></calcite-table-header>
             <calcite-table-header heading="Created at"></calcite-table-header>
             <calcite-table-header heading="Status"></calcite-table-header>
-            <calcite-table-header heading="Actions"></calcite-table-header>
+            <calcite-table-header heading="Actions" alignment="end"></calcite-table-header>
         </calcite-table-row>
 
         {% for deployment in contract.deployments.all %}
@@ -46,7 +46,7 @@
                 {% endif %}
             </calcite-table-cell>
 
-            <calcite-table-cell>
+            <calcite-table-cell alignment="end">
                 <calcite-dropdown placement="bottom-end">
                     <calcite-action
                         slot="trigger"
@@ -55,11 +55,15 @@
                     <calcite-dropdown-group selection-mode="none">
                         <calcite-dropdown-item
                             href="{% url 'operations:deployment_detail' deployment.id %}">
-                            View
+                            View Deployment
+                        </calcite-dropdown-item>
+                        <calcite-dropdown-item
+                            href="{% url 'operations:assignment_create_deployment' deployment.id %}">
+                            Assign Guard
                         </calcite-dropdown-item>
                         <calcite-dropdown-item
                             href="{% url 'operations:deployment_update' deployment.id %}">
-                            Edit
+                            Edit Deployment
                         </calcite-dropdown-item>
                     </calcite-dropdown-group>
                 </calcite-dropdown>

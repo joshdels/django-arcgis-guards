@@ -2,21 +2,21 @@
 <div class="overview-container">
     <div class="dashboard-card">
         <p>Active Contracts</p>
-        <h1>{{ active_contracts|intcomma }}</h1>
+        <h1>{{ active_contracts|intcomma|default:"0" }}</h1>
     </div>
 
     <div class="dashboard-card">
         <p>Active Deployments</p>
-        <h1>{{ active_deployments|intcomma }}</h1>
+        <h1>{{ active_deployments|intcomma|default:"0" }}</h1>
     </div>
 
     <div class="dashboard-card">
         <p>Guards Assigned</p>
-        <h1>{{ guards_assigned|intcomma }}</h1>
+        <h1>{{ guards_assigned|intcomma|default:"0" }}</h1>
     </div>
 
     <div class="dashboard-card">
         <p>Vacant Posts</p>
-        <h1>{{ vacant_posts|intcomma }}</h1>
+        <h1>{{ vacant_posts|intcomma|default:"0" }}</h1>
     </div>
 </div>
