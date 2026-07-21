@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth
 
-from apps.finances.models import Billing, Invoice, Payment, PaymentStatus, InvoiceStatus
+from apps.finances.models import Billing, Invoice, Payment, InvoiceStatus
 
 
 def get_finance_overview():
