@@ -15,11 +15,22 @@ from apps.finances.forms import InvoiceForm, InvoiceUpdateForm
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def finances_invoices(request):
-    # search = request.GET.get("search")
+    search = request.GET.get("search")
 
     invoices = Invoice.objects.select_related("billing")
 
-    context = {"invoices": invoices}
+    if search:
+        invoices = invoices.filter(
+            Q(invoice_number__icontains=search)
+            | Q(billing__billing_number__icontains=search)
+            | Q(billing__contract__title__icontains=search)
+            | Q(billing__contract__contract_number__icontains=search)
+            | Q(billing__contract__client__name__icontains=search)
+            | Q(billing__contract__client__organization__icontains=search)
+            | Q(billing__contract__client__client_id__icontains=search)
+        )
+
+    context = {"invoices": invoices, "search": search}
 
     return render_finances_tab(request, "invoices/_invoices.html", context)
 
@@ -77,4 +88,3 @@ def invoice_edit(request, invoice_id):
     context = {"form": form, "invoice": invoice}
 
     return render(request, "invoices/update.html", context)
-

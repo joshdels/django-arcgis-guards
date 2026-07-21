@@ -9,7 +9,6 @@ from apps.finances.models import Billing
 
 class InvoiceStatus(models.TextChoices):
     DRAFT = "draft", "Draft"
-    SENT = "sent", "Sent"
     PAID = "paid", "Paid"
     OVERDUE = "overdue", "Overdue"
     CANCELLED = "cancelled", "Cancelled"
@@ -64,8 +63,11 @@ class Invoice(models.Model):
         ] or Decimal("0.00")
 
     @property
-    def balance_due(self):
-        return self.total_amount - self.amount_paid
+    def remaining_balance(self):
+        return max(
+            self.total_amount - self.amount_paid,
+            Decimal("0.00"),
+        )
 
     def update_status(self):
         if self.amount_paid >= self.total_amount:

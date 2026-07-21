@@ -1,0 +1,19 @@
+{% load humanize %}
+<div class="overview-container">
+    <div class="dashboard-card">
+        <p>Total Billings</p>
+        <h1>₱ {{ total_billings|floatformat:2|intcomma|default:"N/A" }}</h1>
+    </div>
+    <div class="dashboard-card">
+        <p>Total Invoices</p>
+        <h1>₱ {{ total_invoices|floatformat:2|intcomma|default:"N/A" }}</h1>
+    </div>
+    <div class="dashboard-card">
+        <p>Total Payments</p>
+        <h1>₱ {{ total_payments|floatformat:2|intcomma|default:"N/A" }}</h1>
+    </div>
+    <div class="dashboard-card">
+        <p>Outstanding Balance</p>
+        <h1>₱ {{ outstanding|floatformat:2|intcomma|default:"N/A" }}</h1>
+    </div>
+</div>

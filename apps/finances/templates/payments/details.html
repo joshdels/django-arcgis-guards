@@ -4,6 +4,7 @@
 {% block title %}Payment Details | Dumagete Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/overview.css' %}">
 {% endblock %}
 {% block content %}
     {% include '_components/navbar.html' %}
@@ -81,26 +82,48 @@
                 </div>
             </div>
         </section>
-        <section>
-            <h2>Contract Information</h2>
-            <div class="grid">
-                <div>
-                    <p>Contract Title</p>
-                    <h4>{{ payment.invoice.billing.contract.title }}</h4>
+        <div class="dashboard-column">
+            <section>
+                <h2>Invoice Information</h2>
+                <div class="grid">
+                    <div>
+                        <p>Invoice ID</p>
+                        <h4>{{ payment.invoice.invoice_number }}</h4>
+                    </div>
+                    <div>
+                        <p>Total Payment</p>
+                        <h4>₱ {{ payment.amount|floatformat:2|intcomma }}</h4>
+                    </div>
+                    <div>
+                        <p>Tax</p>
+                    </div>
+                    <div>
+    
+                    </div>
                 </div>
-                <div>
-                    <p>Contract ID</p>
-                    <h4>{{ payment.invoice.billing.contract.contract_number }}</h4>
+            </section>
+            <section>
+                <h2>Contract Information</h2>
+                <div class="grid">
+                    <div>
+                        <p>Contract Title</p>
+                        <h4>{{ payment.invoice.billing.contract.title }}</h4>
+                    </div>
+                    <div>
+                        <p>Contract ID</p>
+                        <h4>{{ payment.invoice.billing.contract.contract_number }}</h4>
+                    </div>
+                    <div>
+                        <p>Client Name</p>
+                        <h4>{{ payment.invoice.billing.contract.client.name }}</h4>
+                    </div>
+                    <div>
+                        <p>Client ID</p>
+                        <h4>{{ payment.invoice.billing.contract.client.client_id }}</h4>
+                    </div>
                 </div>
-                <div>
-                    <p>Client Name</p>
-                    <h4>{{ payment.invoice.billing.contract.client.name }}</h4>
-                </div>
-                <div>
-                    <p>Client ID</p>
-                    <h4>{{ payment.invoice.billing.contract.client.client_id }}</h4>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
+
     </main>
 {% endblock %}

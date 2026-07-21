@@ -1,0 +1,12 @@
+{% load humanize %}
+<section class="dashboard-chart">
+    <div class="dashboard-header">
+        <h2>Monthly Revenue</h2>
+        <p>Payments received per month</p>
+    </div>
+    <div class="chart-wrapper">
+        <canvas id="monthlyRevenueChart"></canvas>
+    </div>
+    {{ revenue_labels|json_script:"revenue-labels" }}
+    {{ revenue_totals|json_script:"revenue-totals" }}
+</section>

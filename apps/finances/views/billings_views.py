@@ -16,9 +16,25 @@ from apps.finances.helpers import render_finances_tab
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def finances_billings(request):
+    search = request.GET.get("search")
+
     billings = Billing.objects.select_related("contract", "contract__client")
 
-    context = {"billings": billings}
+    if search:
+        billings = billings.filter(
+            Q(billing_number__icontains=search)
+            | Q(contract__title__icontains=search)
+            | Q(contract__contract_number__icontains=search)
+            | Q(contract__client__name__icontains=search)
+            | Q(contract__client__organization__icontains=search)
+            | Q(contract__client__organization__icontains=search)
+            | Q(contract__client__client_id__icontains=search)
+        )
+
+    context = {
+        "billings": billings,
+        "search": search,
+    }
 
     return render_finances_tab(request, "billings/_billings.html", context)
 

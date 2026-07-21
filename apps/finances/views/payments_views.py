@@ -15,11 +15,27 @@ from apps.finances.forms import PaymentForm, PaymentUpdateForm
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def finances_payments(request):
+    search = request.GET.get("search")
+
     payments = Payment.objects.select_related(
         "invoice",
         "invoice__billing",
     )
-    context = {"payments": payments}
+
+    if search:
+        payments = payments.filter(
+            Q(payment_number__icontains=search)
+            | Q(reference_number__icontains=search)
+            | Q(invoice__invoice_number__icontains=search)
+            | Q(invoice__billing__billing_number__icontains=search)
+            | Q(invoice__billing__contract__title__icontains=search)
+            | Q(invoice__billing__contract__contract_number__icontains=search)
+            | Q(invoice__billing__contract__client__name__icontains=search)
+            | Q(invoice__billing__contract__client__organization__icontains=search)
+            | Q(invoice__billing__contract__client__client_id__icontains=search)
+        )
+
+    context = {"payments": payments, "search": search}
 
     return render_finances_tab(request, "payments/_payments.html", context)
 

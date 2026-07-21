@@ -1,0 +1,81 @@
+{# djlint:off #}
+{% load humanize %}
+
+<calcite-table bordered striped>
+
+    <calcite-table-row slot="table-header">
+        <calcite-table-header heading="Invoice No."></calcite-table-header>
+        <calcite-table-header heading="Client"></calcite-table-header>
+        <calcite-table-header heading="Amount"></calcite-table-header>
+        <calcite-table-header heading="Due Date"></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+        <calcite-table-header heading="Action"></calcite-table-header>
+    </calcite-table-row>
+
+    {% for invoice in upcoming_invoices %}
+
+    <calcite-table-row>
+
+        <calcite-table-cell>
+            <strong>{{ invoice.invoice_number }}</strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>
+                {{ invoice.billing.contract.client.name }}
+            </strong>
+            <br>
+            <small>
+                {{ invoice.billing.contract.client.organization }}
+            </small>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>
+                ₱ {{ invoice.total_amount|floatformat:2|intcomma }}
+            </strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ invoice.due_date }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {% if invoice.is_paid %}
+                Paid
+            {% else %}
+                Unpaid
+            {% endif %}
+        </calcite-table-cell>
+
+        <calcite-table-cell alignment="end">
+            <calcite-dropdown placement="bottom-end">
+                <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
+                <calcite-dropdown-group selection-mode="none">
+                    <calcite-dropdown-item href="{% url 'finances:invoice_details' invoice.id %}">View Invoice </calcite-dropdown-item>
+                    <calcite-dropdown-item href="{% url 'finances:invoice_edit' invoice.id %}">Edit Invoice</calcite-dropdown-item>
+                </calcite-dropdown-group>
+            </calcite-dropdown>
+        </calcite-table-cell> 
+
+    </calcite-table-row>
+
+    {% empty %}
+
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No upcoming invoices found.
+        </div>
+    </calcite-notice>
+
+    {% endfor %}
+
+</calcite-table>
+
+<div class="button-actions">
+    <calcite-button 
+      appearance="outline-fill" 
+      icon-start="arrow-right"
+      href="{% url 'finances:finances_invoices' %}"
+    >View More</calcite-button>
+</div>

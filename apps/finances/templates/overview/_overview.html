@@ -1,43 +1,22 @@
 {% load humanize %}
 <main class="profile">
     <h1>Overview</h1>
-
-    <div class="overview-container">
-        <div class="dashboard-card">
-            <p>Total Billings</p>
-            <h1>₱ {{ total_billings|floatformat:2|intcomma|default:"N/A" }}</h1>
-        </div>
-        <div class="dashboard-card">
-            <p>Total Invoices</p>
-            <h1>₱ {{ total_invoices|floatformat:2|intcomma|default:"N/A" }}</h1>
-        </div>
-        <div class="dashboard-card">
-            <p>Total Payments</p>
-            <h1>₱ {{ total_payments|floatformat:2|intcomma|default:"N/A" }}</h1>
-        </div>
-        <div class="dashboard-card">
-            <p>Outstanding Balance</p>
-            <h1>₱ {{ outstanding|floatformat:2|intcomma|default:"N/A" }}</h1>
-        </div>
+    <div>{% include 'overview/summary_card.html' %}</div>
+    <div>{% include 'overview/chart_yearly.html' %}</div>
+    <div class="dashboard-column">
+        <section>
+            <h2>Recent Payments</h2>
+            {% include 'overview/table_payments.html' %}
+        </section>
+        <section>
+            <h2>Upcoming Due Invoice</h2>
+            {% include 'overview/table_invoices.html' %}
+        </section>
     </div>
     <div>
-        <h2>Montly Revenue</h2>
-        <p>Comming Soon</p>
+        <section>
+            <h2>Recent Billings</h2>
+            {% include 'overview/table_billings.html' %}
+        </section>
     </div>
-    <div>
-
-    </div>
-
-    <section>
-        <h2>Billings</h2>
-        <p>Comming Soon</p>
-    </section>
-    <section>
-        <h2>Invoices</h2>
-        <p>Comming Soon</p>
-    </section>
-    <section>
-        <h2>Payments</h2>
-        <p>Comming Soon</p>
-    </section>
 </main>
