@@ -3,6 +3,10 @@
 init:
 		uv sync 
 
+activate:
+		source .venv/Scripts/activate
+		source .venv/lib/activate
+
 run:
 		python manage.py runserver
 
