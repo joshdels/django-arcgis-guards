@@ -1,0 +1,58 @@
+.overview-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.overview-container h1 {
+  font-size: 3rem;
+}
+
+.overview-container .dashboard-card {
+  background-color: var(--calcite-color-surface-2);
+  border: solid 1px var(--calcite-color-border-1);
+  padding: 2rem;
+}
+
+#monthlyRevenueChart {
+  width: 100%;
+  height: 350px;
+}
+
+.dashboard-chart {
+  background: var(--calcite-color-surface-2);
+  border: 1px solid var(--calcite-color-border-1);
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.dashboard-header {
+  margin-bottom: 1rem;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 380px;
+  width: 100%;
+}
+
+.dashboard-column {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.dashboard-column > section {
+  flex: 1;
+}
+
+.button-actions {
+  display: flex;
+  margin-top: 1rem;
+}
+
+@media (max-width: 1000px) {
+    .dashboard-column {
+        flex-direction: column;
+    }
+}
