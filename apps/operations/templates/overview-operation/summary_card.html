@@ -1,0 +1,22 @@
+{% load humanize %}
+<div class="overview-container">
+    <div class="dashboard-card">
+        <p>Active Contracts</p>
+        <h1>{{ active_contracts }}</h1>
+    </div>
+
+    <div class="dashboard-card">
+        <p>Active Deployments</p>
+        <h1>{{ active_deployments }}</h1>
+    </div>
+
+    <div class="dashboard-card">
+        <p>Guards Assigned</p>
+        <h1>{{ assigned_guards }}</h1>
+    </div>
+
+    <div class="dashboard-card">
+        <p>Vacant Posts</p>
+        <h1>{{ vacant_posts }}</h1>
+    </div>
+</div>
