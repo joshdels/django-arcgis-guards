@@ -78,18 +78,15 @@
             </header>
             <div class="card-vertical-space">
                 <calcite-chip>
-                    {{ deployment.required_guards }} Required
+                {{ deployment.required_guards }} Required
                 </calcite-chip>
-
                 <calcite-chip>
-                    {{ deployment.assigned_guard_count }}  Assigned
+                {{ deployment.assigned_guard_count }}  Assigned
                 </calcite-chip>
-
                 <calcite-chip>
-                    {{ deployment.vacant_guard_count }}  To Fill
+                {{ deployment.vacant_guard_count }}  To Fill
                 </calcite-chip>
             </div>
-            
             {% include '_partials/deployment/table_detail.html' %}
         </section>
     {% endblock %}

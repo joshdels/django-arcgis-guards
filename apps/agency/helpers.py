@@ -70,6 +70,9 @@ def render_client_tab(request, id, partial_template):
         "billings": billings,
         "invoices": invoices,
         "payments": payments,
+
+        "client": client,
+        "current_partial": partial_template,
     }
 
     if request.htmx:

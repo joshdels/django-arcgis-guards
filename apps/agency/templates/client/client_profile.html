@@ -28,7 +28,7 @@
                             </p>
                         </div>
                         <div>
-                            {% if client.is_active %}
+                            {% if client.is_active %}``
                                 <calcite-button href="{% url 'agency:client_toggle_status' client.id %}" appearance="outline-fill" kind="danger">Deactivate Client</calcite-button>
                             {% else %}
                                 <calcite-button href="{% url 'agency:client_toggle_status' client.id %}" appearance="outline-fill" kind="brand">Activate Client</calcite-button>
@@ -36,7 +36,9 @@
                             <calcite-button href="{% url 'agency:client_update' client.id %}">Edit</calcite-button>
                         </div>
                     </header>
-                    <div id="client-content">{% include "client/partial/overview.html" %}</div>
+                    <div id="client-content">
+                        {% include current_partial %}
+                    </div>
                 </div>
             </main>
         </section>
