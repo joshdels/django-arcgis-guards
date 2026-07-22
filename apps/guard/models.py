@@ -2,7 +2,11 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
-from apps.contract.models import Contract
+
+class GuardStatus(models.TextChoices):
+    AVAILABLE = "available", "Available"
+    LEAVE = "leave", "On Leave"
+    SUSPENDED = "suspended", "Suspended"
 
 
 class Guard(models.Model):
@@ -27,6 +31,12 @@ class Guard(models.Model):
     phone_number = models.CharField(
         max_length=20,
         blank=True,
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=GuardStatus.choices,
+        default=GuardStatus.AVAILABLE,
     )
 
     is_active = models.BooleanField(default=True)
@@ -54,4 +64,3 @@ class Guard(models.Model):
             self.badge_number = f"G-{year}-{number:04d}"
 
         super().save(*args, **kwargs)
-

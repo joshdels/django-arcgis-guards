@@ -1,37 +1,8 @@
 <main class="profile">
-    <section>
+    <div>
         <h2>General Contract</h2>
-        <div class="grid">
-            <div>
-                <p>total contract</p>
-                <h4>
-                    <calcite-icon scale="s" icon="files"></calcite-icon>
-                    {{ total_contracts }}
-                </h4>
-            </div>
-            <div>
-                <p>active contract</p>
-                <h4>
-                    <calcite-icon scale="s" icon="date-time"></calcite-icon>
-                    {{ active_contracts.count }}
-                </h4>
-            </div>
-            <div>
-                <p>finished contract</p>
-                <h4>
-                    <calcite-icon scale="s" icon="register"></calcite-icon>
-                    {{ finished_contracts }}
-                </h4>
-            </div>
-            <div>
-                <p>cancelled contract</p>
-                <h4>
-                    <calcite-icon scale="s" icon="unregister"></calcite-icon>
-                    {{ cancelled_contracts }}
-                </h4>
-            </div>
-        </div>
-    </section>
+        {% include 'client/card/card_contract.html' %}
+    </div>
     <section>
         <div class="space-between">
             <h2>Active Contracts</h2>

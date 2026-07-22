@@ -4,9 +4,11 @@
     {% include '_components/navbar.html' %}
     <div class="form-container">
         <header>
-            <a href="{% url 'agency:show_contracts' %}" id="backButton">
+            {% comment %} <a href="{% url 'agency:show_contracts' %}" id="backButton"> {% endcomment %}
+            <a href="#" id="backButton">
                 <calcite-icon icon="chevron-left"> </calcite-icon>
-                Back to Contracts
+                {% comment %} Back to Contracts {% endcomment %}
+                Back
             </a>
             <h2>New Contract</h2>
             {% include "_partials/forms/contract_form.html" %}

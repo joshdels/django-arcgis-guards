@@ -1,0 +1,18 @@
+<div class="overview-container">
+    <div class="dashboard-card-small">
+        <p>Total</p>
+        <h1><calcite-icon icon="files"></calcite-icon>  {{ total_contracts }}</h1>
+    </div>
+    <div class="dashboard-card-small">
+        <p>Active</p>
+        <h1><calcite-icon icon="date-time"></calcite-icon> {{ active_contracts.count }}</h1>
+    </div>
+    <div class="dashboard-card-small">
+        <p>Completed</p>
+        <h1><calcite-icon icon="register"></calcite-icon> {{ finished_contracts  }}</h1>
+    </div>
+    <div class="dashboard-card-small">
+        <p>Cancelled</p>
+        <h1><calcite-icon icon="unregister"></calcite-icon> {{ cancelled_contracts }}</h1>
+    </div>
+</div>

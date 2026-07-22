@@ -1,35 +1,16 @@
 <main class="profile">
-    <section>
-        <h2>General Guards Information</h2>
-        <div class="grid">
-            <div>
-                <p>Total Guard Hired</p>
-                <h4>
-                    <calcite-icon icon="users" scale="s"></calcite-icon>  {{ total_guards }}
-                </h4>
-            </div>
-            <div>
-                <p>Active Guards</p>
-                <h4>
-                    <calcite-icon icon="user" scale="s"></calcite-icon> {{ active_guards }}
-                </h4>
-            </div>
-            <div>
-                <p>Inactive Guards</p>
-                <h4>
-                    <calcite-icon icon="user-x" scale="s"></calcite-icon> {{ inactive_guards }}
-                </h4>
-            </div>
-        </div>
-    </section>
+    <div>
+        <h2>Guard Information</h2>
+        {% include 'client/card/card_guard.html' %}
+    </div>
     <section>
         <div>
             <h2>Guards on Duty</h2>
-            <h4>Comming Soon</h4>
+            {% include 'client/table/table_guard_active.html' %}
         </div>
     </section>
     <section>
         <h2>Guards History</h2>
-        <h4>Coming Soon</h4>
+        {% include 'client/table/table_guard_history.html' %}
     </section>
 </main>

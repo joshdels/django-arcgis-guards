@@ -5,12 +5,17 @@
                 <h2>Payments</h2>
                 <calcite-button icon-start="plus" scale="s" appearance="outline-fill" href="">Add Payment</calcite-button>
             </div>
+            {% include 'client/table/table_payment.html' %}
         </section>
     </div>
-    <section>
-        <h2>Billing</h2>
-    </section>
-    <section>
-        <h2>Invoice</h2>
-    </section>
+    <div class="dashboard-column">
+        <section>
+            <h2>Billings</h2>
+            {% include 'client/table/table_billing.html' %}
+        </section>
+        <section>
+            <h2>Invoices</h2>
+            {% include 'client/table/table_invoice.html' %}
+        </section>
+    </div>
 </main>

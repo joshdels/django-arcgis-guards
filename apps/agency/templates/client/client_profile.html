@@ -3,6 +3,7 @@
 {% block title %}Client Profile | Dumagete Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/overview.css' %}">
 {% endblock %}
 {% block content %}
     <div class="dashboard-container ">
@@ -36,9 +37,7 @@
                             <calcite-button href="{% url 'agency:client_update' client.id %}">Edit</calcite-button>
                         </div>
                     </header>
-                    <div id="client-content">
-                        {% include current_partial %}
-                    </div>
+                    <div id="client-content">{% include current_partial %}</div>
                 </div>
             </main>
         </section>

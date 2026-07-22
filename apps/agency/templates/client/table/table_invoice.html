@@ -1,0 +1,106 @@
+{# djlint:off #}
+{% load humanize %}
+
+{% if not invoices %}
+
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No active invoice found.
+        </div>
+    </calcite-notice>
+
+{% else %}
+
+<calcite-table bordered numbered pageSize=5 >
+
+    <calcite-table-row> 
+        <calcite-table-header heading="Invoice ID"></calcite-table-header>
+        <calcite-table-header heading="Contract ID"></calcite-table-header>
+        <calcite-table-header heading="Total Amount"></calcite-table-header>
+        <calcite-table-header heading="Amount Paid"></calcite-table-header>
+        <calcite-table-header heading="Issue Date"></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+
+        <calcite-table-header heading="Action" alignment="end"></calcite-table-header>
+    </calcite-table-row>
+
+    
+    {% for invoice in invoices%}    
+    
+    <calcite-table-row>
+        
+        <calcite-table-cell>
+            <strong>{{ invoice.invoice_number }}</strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ invoice.billing.contract.contract_number }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>₱ {{ invoice.total_amount|floatformat:2|intcomma }} </strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>₱ {{ invoice.amount_paid|floatformat:2|intcomma }} </strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ invoice.created_at|date:"m/d/y" }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {% if invoice.status == "draft" %}
+                <calcite-chip kind="brand" appearance="outline-fill">
+                    {{ invoice.get_status_display }}
+                </calcite-chip>
+
+            {% elif invoice.status == "paid" %}
+                <calcite-chip kind="brand" appearance="solid">
+                    {{ invoice.get_status_display }}
+                </calcite-chip>
+
+            {% elif invoice.status == "unpaid" %}
+                <calcite-chip kind="inverse" appearance="solid">
+                    {{ invoice.get_status_display }}
+                </calcite-chip>
+
+            {% elif invoice.status == "overdue" %}
+                <calcite-chip kind="inverse" appearance="outline-fill">
+                    {{ invoice.get_status_display }}
+                </calcite-chip>
+
+            {% elif invoice.status == "cancelled" %}
+                <calcite-chip kind="neutral" appearance="solid">
+                    {{ invoice.get_status_display }}
+                </calcite-chip>
+
+            {% else %}
+                <calcite-chip kind="inverse">
+                    {{ invoice.get_status_display }}
+                </calcite-chip>
+            {% endif %}
+        </calcite-table-cell>
+
+        <calcite-table-cell alignment="end">
+            <calcite-dropdown placement="bottom-end">
+                <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
+                <calcite-dropdown-group selection-mode="none">
+                    <calcite-dropdown-item href="{% url 'finances:invoice_details' invoice.id %}">View Invoice</calcite-dropdown-item>
+                    {% comment %} To edit {% endcomment %}
+                    <calcite-dropdown-item href="{% url 'finances:payment_create' %}">Add Payment</calcite-dropdown-item>
+                    <calcite-dropdown-item href="{% url 'finances:invoice_edit' invoice.id %}">Edit Invoice</calcite-dropdown-item>
+                </calcite-dropdown-group>
+            </calcite-dropdown>
+        </calcite-table-cell>  
+
+  
+    </calcite-table-row>
+
+  {% endfor %}
+
+</calite-table>
+
+{% endif %}
+
+{# djlint:on #}
