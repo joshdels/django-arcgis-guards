@@ -1,6 +1,6 @@
 <main class="profile">
     <section>
-        <h2>Genral Contract</h2>
+        <h2>General Contract</h2>
         <div class="grid">
             <div>
                 <p>total contract</p>
@@ -38,15 +38,13 @@
             <calcite-button icon-start="plus" label="Add New Contract"  scale="s" appearance="outline-fill" href="{% url 'agency:contract_create_client' client.id %}">Add Contract</calcite-button>
         </div>
         <div>
-            {% for contract in active_contracts %}
-                <h4>{{ contract.contract_number }}</h4>
-            {% empty %}
-                <p>No active contracts.</p>
-            {% endfor %}
+            {% include 'client/table/table_contract_active.html' %}
         </div>
     </section>
     <section>
+
         <h2>Contract History</h2>
-        <h4>Coming Soon</h4>
+        {% include 'client/table/table_contract_history.html' %}
+
     </section>
 </main>

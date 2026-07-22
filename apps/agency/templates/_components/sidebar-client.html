@@ -3,7 +3,7 @@
         <h1>Client Dashboard</h1>
     </div>
     <main>
-        <a class="sidebar-link active"
+        <a class="sidebar-link"
            hx-get="{% url 'agency:client_overview' client.id %}"
            hx-target="#client-content"
            hx-replace-url="true"

@@ -36,7 +36,7 @@
                             <calcite-button href="{% url 'agency:client_update' client.id %}">Edit</calcite-button>
                         </div>
                     </header>
-                    <div id="client-content">{% include "_partials/content_client/overview.html" %}</div>
+                    <div id="client-content">{% include "client/partial/overview.html" %}</div>
                 </div>
             </main>
         </section>
@@ -44,5 +44,4 @@
 {% endblock %}
 {% block extra_script %}
     <script src="{% static 'js/highlight.js' %}"></script>
-    <script src="{% static 'js/back.js' %}"></script>
 {% endblock %}

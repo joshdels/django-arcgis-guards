@@ -4,5 +4,4 @@ from .guard import *
 from .contract import *
 from .operation import *
 
-from .client_dashboard import *
 from .operation_dashboard import *

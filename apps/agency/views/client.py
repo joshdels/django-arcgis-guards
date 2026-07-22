@@ -10,6 +10,8 @@ from apps.agency.forms import ClientForm
 
 from ..services import create_client
 
+from apps.agency.helpers import render_client_tab
+
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def show_clients(request):
@@ -36,16 +38,33 @@ def show_clients(request):
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
-def client_profile(request, id):
-    client = get_object_or_404(Client, id=id)
+def client_overview(request, id):
+    return render_client_tab(request, id, "client/partial/overview.html")
 
-    return render(
-        request,
-        "client/client_profile.html",
-        {
-            "client": client,
-        },
-    )
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def client_information(request, id):
+    return render_client_tab(request, id, "client/partial/information.html")
+
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def client_contract(request, id):
+    return render_client_tab(request, id, "client/partial/contract.html")
+
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def client_guard(request, id):
+    return render_client_tab(request, id, "client/partial/guard.html")
+
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def client_billing(request, id):
+    return render_client_tab(request, id, "client/partial/billing.html")
+
+
+@roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
+def client_report(request, id):
+    return render_client_tab(request, id, "client/partial/report.html")
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)

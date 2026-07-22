@@ -16,8 +16,6 @@ urlpatterns = [
     path("client-profile/guard/<int:id>", views.client_guard, name="client_guard"),
     path("client-profile/billing/<int:id>", views.client_billing, name="client_billing"),
     path("client-profile/report/<int:id>", views.client_report, name="client_report"),
-    
-    path("client-profile/<int:id>/", views.client_profile, name="client_profile"),
     path("client-profile/create/", views.client_create, name="client_create"),
     path("client-profile/update/<int:id>/", views.client_update, name="client_update"),
     path("client-profile/toggle-status/<int:id>/", views.client_toggle_status, name="client_toggle_status"),

@@ -6,7 +6,7 @@
     {# djlint:on #}
 {% endif %}
 {% for client in clients %}
-    <a href="{% url 'agency:client_profile' client.id %}" class="list-card">
+    <a href="{% url 'agency:client_overview' client.id %}" class="list-card">
         <div>
             <div>
                 <div class="column">

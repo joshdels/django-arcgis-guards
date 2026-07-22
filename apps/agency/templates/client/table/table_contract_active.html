@@ -1,0 +1,110 @@
+{# djlint:off #}
+{% load humanize %}
+
+{% if not active_contracts %}
+
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No active contract found.
+        </div>
+    </calcite-notice>
+
+{% else %}
+
+<calcite-table bordered numbered>
+
+    <calcite-table-row> 
+        <calcite-table-header heading="Contract Number"></calcite-table-header>
+        <calcite-table-header heading="Contract Title"></calcite-table-header>
+        <calcite-table-header heading="Required Guards"></calcite-table-header>
+        <calcite-table-header heading="Duration"></calcite-table-header>
+        <calcite-table-header heading="Created at"></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+
+        <calcite-table-header heading="Action" alignment="end"></calcite-table-header>
+    </calcite-table-row>
+
+    
+    {% for contract in active_contracts%}    
+    
+    <calcite-table-row>
+        
+        <calcite-table-cell>
+          <strong>{{ contract.contract_number }}</strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+          {{ contract.title }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+          {{ contract.number_of_guards }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+          {% if contract.start_date and contract.end_date %}
+            {{ contract.start_date }}
+            <br>
+            <small>to {{ contract.end_date }} </small>
+          {% else %}
+            N/A
+          {% endif %}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+          {{ contract.created_at|date:"m/d/y" }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {% if contract.status == "draft" %}
+                <calcite-chip kind="brand" appearance="outline-fill">
+                    {{ contract.get_status_display }}
+                </calcite-chip>
+
+            {% elif contract.status == "pending" %}
+                <calcite-chip kind="brand" appearance="outline-fill">
+                    {{ contract.get_status_display }}
+                </calcite-chip>
+
+            {% elif contract.status == "approved" %}
+                <calcite-chip kind="brand" appearance="solid">
+                    {{ contract.get_status_display }}
+                </calcite-chip>
+
+            {% elif contract.status == "ongoing" %}
+                <calcite-chip kind="brand" appearance="outline-fill">
+                    {{ contract.get_status_display }}
+                </calcite-chip>
+
+            {% elif contract.status == "finished" %}
+                <calcite-chip kind="inverse" appearance="outline-fill">
+                    {{ contract.get_status_display }}
+                </calcite-chip>
+
+            {% else %}
+                <calcite-chip kind="inverse">
+                    {{ contract.get_status_display }}
+                </calcite-chip>
+            {% endif %}
+        </calcite-table-cell>
+
+        <calcite-table-cell alignment="end">
+            <calcite-dropdown placement="bottom-end">
+                <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
+                <calcite-dropdown-group selection-mode="none">
+                    <calcite-dropdown-item href="{% url 'agency:contract_profile' contract.id %}">View Contract</calcite-dropdown-item>
+                    <calcite-dropdown-item href="{% url 'agency:contract_update' contract.id %}">Edit Contract</calcite-dropdown-item>
+                </calcite-dropdown-group>
+            </calcite-dropdown>
+        </calcite-table-cell>  
+
+  
+    </calcite-table-row>
+
+  {% endfor %}
+
+</calite-table>
+
+{% endif %}
+
+{# djlint:on #}
