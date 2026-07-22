@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.functional import cached_property
 
 from apps.client.models import Client
 
@@ -127,6 +128,13 @@ class Contract(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True,
     )
+
+    @cached_property
+    def allocated_guard_count(self):
+        return sum(
+            deployment.required_guards
+            for deployment in self.deployments.all()
+        )
 
     class Meta:
         ordering = ["-created_at"]

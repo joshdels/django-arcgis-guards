@@ -5,7 +5,25 @@
 
     <div class="contract-header">
         <div>
-            <h3>{{ contract.client.name }}</h3> 
+            <div class="column">
+                <h3>{{ contract.client.name }}</h3> 
+                <div class="column">
+                    {% if contract.status == "approved" %}
+                        <calcite-chip kind="brand">
+                            Active
+                        </calcite-chip>
+                    {% elif contract.status == "ongoing" %}
+                        <calcite-chip kind="brand" appearance="outline-fill">
+                            On Going
+                        </calcite-chip>
+                    {% else %}
+                        <calcite-chip>
+                            {{ contract.get_status_display }}
+                        </calcite-chip>
+                    {% endif %}
+                </div>
+
+            </div>
             <p>{{ contract.client.organization }}</p>
             <p>{{ contract.contract_number }} </p>
         </div>
@@ -27,18 +45,17 @@
         </calcite-chip>
 
         <calcite-chip>
-            {{contract.assigned_guard_count }} / {{ contract.number_of_guards }} Guards
+            {{ contract.number_of_guards }} Required Guard/s
         </calcite-chip>
 
-        {% if contract.status == "ongoing" %}
-            <calcite-chip kind="success">
-                Active
-            </calcite-chip>
-        {% else %}
-            <calcite-chip>
-                {{ contract.get_status_display }}
-            </calcite-chip>
-        {% endif %}
+        <calcite-chip>
+            {{ contract.allocated_guard_count }} Allocated Guard/s
+        </calcite-chip>
+
+        <calcite-chip>
+            {{ contract.assigned_guard_count }} Assigned Guard/s
+        </calcite-chip>
+
     </div>
 
     {% include '_partials/deployment/table.html' %}

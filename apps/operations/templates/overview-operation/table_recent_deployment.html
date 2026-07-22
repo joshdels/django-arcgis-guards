@@ -13,33 +13,41 @@
 
     <calcite-table bordered>
 
-      <calcite-table-row slot="table-header">
+        <calcite-table-row slot="table-header">
+            <calcite-table-header heading="Deployment Name"></calcite-table-header>
+            <calcite-table-header heading="Location"></calcite-table-header>
+            <calcite-table-header heading="Required Guards"></calcite-table-header>
+            <calcite-table-header heading="Action" alignment="end"></calcite-table-header>
+        </calcite-table-row>
 
-        <calcite-table-header heading="Deployment Name"></calcite-table-header>
-        <calcite-table-header heading="Location"></calcite-table-header>
-        <calcite-table-header heading="Required Guards"></calcite-table-header>
+        {% for deployment in recent_deployments %}
 
-      </calcite-table-row>
+        <calcite-table-row>
+            
+            <calcite-table-cell>
+                {{ deployment.name }}
+            </calcite-table-cell>
 
-      {% for deployment in recent_deployments %}
+            <calcite-table-cell>
+                {{ deployment.location }}
+            </calcite-table-cell>
 
-      <calcite-table-row>
-        
-        <calcite-table-cell>
-            <strong>{{ deployment.name }}</strong>
-        </calcite-table-cell>
+            <calcite-table-cell>
+                <strong>{{ deployment.required_guards }}</strong>
+            </calcite-table-cell>
 
-        <calcite-table-cell>
-            <strong>{{ deployment.location }}</strong>
-        </calcite-table-cell>
+            <calcite-table-cell alignment="end">
+                <calcite-dropdown placement="bottom-end">
+                    <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
+                    <calcite-dropdown-group selection-mode="none">
+                        <calcite-dropdown-item href="{% url 'operations:deployment_detail' deployment.id %}">View Deployment</calcite-dropdown-item>
+                    </calcite-dropdown-group>
+                </calcite-dropdown>
+            </calcite-table-cell>  
 
-        <calcite-table-cell>
-            <strong>{{ deployment.required_guards }}</strong>
-        </calcite-table-cell>
+        </calcite-table-row>
 
-      </calcite-table-row>
-
-    {% endfor %}
+        {% endfor %}
 
     </calcite-table>
 

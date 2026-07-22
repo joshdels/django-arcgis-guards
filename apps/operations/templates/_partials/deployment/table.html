@@ -26,10 +26,14 @@
                 {{ deployment.location }}
             </calcite-table-cell>
             <calcite-table-cell>
-                {{ deployment.required_guards }}
+                <strong>
+                    {{ deployment.required_guards }}
+                </strong>
             </calcite-table-cell>
             <calcite-table-cell>
-                <p>{{ deployment.assignments.count }}</p>
+                <strong>
+                    <p>{{ deployment.assignments.count }}</p>
+                </strong>
             </calcite-table-cell>
             <calcite-table-cell>
                 {{ deployment.created_at|date:"m/d/y" }}

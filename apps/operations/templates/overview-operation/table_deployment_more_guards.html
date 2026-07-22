@@ -29,11 +29,11 @@
             <calcite-table-row>
                 
                 <calcite-table-cell>
-                    <strong>{{ deployment.name }} </strong>
+                    {{ deployment.name }}
                 </calcite-table-cell>
 
                 <calcite-table-cell>
-                    <strong>{{ deployment.location }}</strong>
+                    {{ deployment.location }}
                 </calcite-table-cell>
 
                 <calcite-table-cell>
@@ -48,9 +48,17 @@
                     <strong>{{ deployment.missing_guards }}</strong>
                 </calcite-table-cell>
 
-                <calcite-table-cell>
-                    View
-                </calcite-table-cell>
+            <calcite-table-cell alignment="end">
+                <calcite-dropdown placement="bottom-end">
+                    <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
+                    <calcite-dropdown-group selection-mode="none">
+                        
+                        <calcite-dropdown-item href="{% url 'operations:deployment_detail' deployment.id %}">View Deployment</calcite-dropdown-item>
+                        <calcite-dropdown-item href="{% url 'operations:assignment_create_deployment' deployment.id %}">Assign Guard</calcite-dropdown-item>
+                    
+                    </calcite-dropdown-group>
+                </calcite-dropdown>
+            </calcite-table-cell>  
 
             </calcite-table-row>
 

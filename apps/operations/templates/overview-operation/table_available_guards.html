@@ -16,10 +16,10 @@
         <calcite-table-row slot="table-header">
 
             <calcite-table-header heading="Guard Name"></calcite-table-header>
-            <calcite-table-header heading="ID Number"></calcite-table-header>
             <calcite-table-header heading="Address"></calcite-table-header>
             <calcite-table-header heading="Phone Number"></calcite-table-header>
             <calcite-table-header heading="Email"></calcite-table-header>
+            <calcite-table-header heading="Action" alignment="end"></caclite-table-header>
 
         </calcite-table-row>
 
@@ -28,23 +28,41 @@
         <calcite-table-row>
             
             <calcite-table-cell>
-                <strong>{{ guard.first_name }} - {{ guard.last_name}} </strong>
+                <strong>{{ guard.first_name }} {{ guard.last_name}} </strong>
+                <br>
+                <small>
+                    {{ guard.badge_number }}
+                </small>
             </calcite-table-cell>
 
             <calcite-table-cell>
-                <strong>{{ guard.badge_number }}</strong>
+                {{ guard.address }}
             </calcite-table-cell>
 
             <calcite-table-cell>
-                <strong>{{ guard.address }}</strong>
+                {{ guard.phone_number }}
             </calcite-table-cell>
 
             <calcite-table-cell>
-                <strong>{{ guard.phone_number }}</strong>
+                {{ guard.email }}
             </calcite-table-cell>
 
-            <calcite-table-cell>
-                <strong>{{ guard.email }}</strong>
+            <calcite-table-cell alignment="end">
+                <calcite-dropdown placement="bottom-end">
+                    <calcite-button
+                        slot="trigger"
+                        icon-start="ellipsis"
+                        appearance="transparent"
+                        scale="s">
+                    </calcite-button>
+
+                    <calcite-dropdown-group selection-mode="none">
+                        <calcite-dropdown-item href="{% url 'agency:guard_profile' guard.id %}">
+                            View Profile
+                        </calcite-dropdown-item>
+
+                    </calcite-dropdown-group>
+                </calcite-dropdown>
             </calcite-table-cell>
 
         </calcite-table-row>

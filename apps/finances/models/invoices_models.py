@@ -10,6 +10,7 @@ from apps.finances.models import Billing
 class InvoiceStatus(models.TextChoices):
     DRAFT = "draft", "Draft"
     PAID = "paid", "Paid"
+    UNPAID = "unpaid", "Unpaid"
     OVERDUE = "overdue", "Overdue"
     CANCELLED = "cancelled", "Cancelled"
 
@@ -73,7 +74,7 @@ class Invoice(models.Model):
         if self.amount_paid >= self.total_amount:
             self.status = InvoiceStatus.PAID
         else:
-            self.status = InvoiceStatus.SENT
+            self.status = InvoiceStatus.UNPAID
 
         self.save(update_fields=["status"])
 
