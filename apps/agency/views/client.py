@@ -123,4 +123,4 @@ def client_toggle_status(request, id):
     else:
         messages.success(request, "Client deactivated successfully.")
 
-    return redirect("agency:client_profile", id=client.id)
+    return redirect("agency:client_overview", id=client.id)

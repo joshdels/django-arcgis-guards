@@ -32,7 +32,9 @@
             </div>
             <div>
                 <p>joined at</p>
-                <h4>{{ client.created_at|date:"M d, Y" }}</h4>
+                <h4>
+                    <calcite-icon scale="s" icon="user-plus"></calcite-icon>
+                    {{ client.created_at|date:"M d, Y" }}</h4>
             </div>
         </div>
     </section>
