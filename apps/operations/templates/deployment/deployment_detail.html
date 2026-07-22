@@ -3,6 +3,7 @@
 {% block title %}Deployment Details | Dumagete Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/overview.css' %}">
 {% endblock %}
 {% block content %}
     {% include "_components/navbar.html" %}
@@ -13,9 +14,8 @@
         </a>
         <header>
             <div>
-                <h1>Deployment Details</h1>
                 <div class="column">
-                    <h2>{{ deployment.name }}</h2>
+                    <h1>Deployment Details</h1>
                     {% if deployment.is_active %}
                         <calcite-chip kind="brand" appearance="solid">Active</calcite-chip>
                     {% else %}
@@ -27,27 +27,69 @@
                 <calcite-button href="{% url 'operations:deployment_update' deployment.pk %}">Edit Deployment</calcite-button>
             </div>
         </header>
-        <section>
-            <h2>Contract Information</h2>
-            <h4>{{ deployment.contract.contract_number }}</h4>
-            <p>{{ deployment.contract.client.name }}</p>
-            <p>{{ deployment.contract.client.organization }}</p>
-            <p>{{ deployment.contract.remarks }}</p>
-        </section>
-        <section>
-            <h2>Deployment Information</h2>
-            <p>{{ deployment.name }}</p>
-            <p>{{ deployment.location }}</p>
-            <p>{{ deployment.remarks|default:"-" }}</p>
-        </section>
+        <div class="dashboard-column">
+            <section>
+                <h2>Deployment Information</h2>
+                <div class="grid">
+                    <div>
+                        <p>Deployment Name</p>
+                        <h4>{{ deployment.name }}</h4>
+                    </div>
+                    <div>
+                        <p>Deployment Location</p>
+                        <h4>{{ deployment.location }}</h4>
+                    </div>
+                    <div>
+                        <p>Remarks</p>
+                        <h4>{{ deployment.remarks|default:"-" }}</h4>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Contract Information</h2>
+                <div class="grid">
+                    <div>
+                        <p>Client Name</p>
+                        <h4>{{ deployment.contract.client.name }}</h4>
+                    </div>
+                    <div>
+                        <p>Client Organization</p>
+                        <h4>{{ deployment.contract.client.organization }}</h4>
+                    </div>
+                    <div>
+                        <p>Contract Number</p>
+                        <h4>{{ deployment.contract.contract_number }}</h4>
+                    </div>
+                    <div>
+                        <p>Contract Span</p>
+                        <h4>{{ deployment.contract.start_date|date:'m/d/y' }} - {{ deployment.contract.end_date|date:'m/d/y' }}</h4>
+                    </div>
+                    <div>
+                        <p>Remarks</p>
+                        <h4>{{ deployment.contract.remarks }}</h4>
+                    </div>
+                </div>
+            </section>
+        </div>
         <section>
             <header>
                 <h2>Guards Section</h2>
                 <calcite-button icon-start="plus" appearance="outline-fill" scale="s" href="{% url 'operations:assignment_create_deployment' deployment.id %}">Assign Guard</calcite-button>
             </header>
-            <calcite-chip>
-            {{ deployment.required_guards }}  Required Guards
-            </calcite-chip>
+            <div class="card-vertical-space">
+                <calcite-chip>
+                    {{ deployment.required_guards }} Required
+                </calcite-chip>
+
+                <calcite-chip>
+                    {{ deployment.assigned_guard_count }}  Assigned
+                </calcite-chip>
+
+                <calcite-chip>
+                    {{ deployment.vacant_guard_count }}  To Fill
+                </calcite-chip>
+            </div>
+            
             {% include '_partials/deployment/table_detail.html' %}
         </section>
     {% endblock %}

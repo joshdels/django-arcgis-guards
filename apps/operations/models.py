@@ -1,6 +1,8 @@
 from django.db import models
 
+from django.utils.functional import cached_property
 from django.core.exceptions import ValidationError
+from django.db.models import Count, Q
 
 from apps.contract.models import Contract
 from apps.guard.models import Guard
@@ -17,6 +19,17 @@ class Deployment(models.Model):
     remarks = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @cached_property
+    def assigned_guard_count(self):
+        return self.assignments.filter(status=AssignmentStatus.ACTIVE).count()
+
+    @cached_property
+    def vacant_guard_count(self):
+        return max(
+            self.required_guards - self.assigned_guard_count,
+            0,
+        )
 
     class Meta:
         ordering = ["name"]

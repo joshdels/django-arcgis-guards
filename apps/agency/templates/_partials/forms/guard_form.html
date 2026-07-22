@@ -1,6 +1,6 @@
 <form class="standard-form"
-        action="{% if guard %}{% url 'agency:guard_update' guard.id %}{% else %}{% url 'agency:guard_create' %}{% endif %}"
-        method="post">
+      action="{% if guard %}{% url 'agency:guard_update' guard.id %}{% else %}{% url 'agency:guard_create' %}{% endif %}"
+      method="post">
     {% csrf_token %}
     <div class="form-group">
         <label for="{{ form.first_name.id_for_label }}">First Name</label>

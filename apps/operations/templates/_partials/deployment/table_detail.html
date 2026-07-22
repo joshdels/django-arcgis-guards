@@ -1,11 +1,12 @@
 {# djlint:off #}
-<calcite-table bordered striped layout="fixed">
+<calcite-table bordered numbered>
 
     <calcite-table-row slot="table-header">
         <calcite-table-header heading="Guard Name"></calcite-table-header>
+        <calcite-table-header heading="Guard ID"></calcite-table-header>
         <calcite-table-header heading="Assigned at"></calcite-table-header>
         <calcite-table-header heading="Status"></calcite-table-header>
-        <calcite-table-header heading="Actions"></calcite-table-header>
+        <calcite-table-header heading="Actions" alignment="end"></calcite-table-header>
     </calcite-table-row>
 
     {% for assignment in assignments %}
@@ -19,9 +20,9 @@
                     {% endif %}
                 {{assignment.guard.last_name}}</strong>
             <br>
-            <small>
-                {{ assignment.guard.badge_number }}
-            </small>
+        </calcite-table-cell>
+                <calcite-table-cell>
+            {{ assignment.guard.badge_number }}
         </calcite-table-cell>
 
         <calcite-table-cell>
@@ -43,7 +44,7 @@
             {% endif %}
         </calcite-table-cell>
 
-        <calcite-table-cell>
+        <calcite-table-cell alignment="end">
             <calcite-dropdown placement="bottom-end">
                 <calcite-action
                     slot="trigger"
@@ -51,9 +52,9 @@
                 </calcite-action>
                 <calcite-dropdown-group selection-mode="none">
                     <calcite-dropdown-item
-                        href="{% url 'operations:deployment_detail' deployment.id %}">
-                        View Deployment
-                    </calcite-dropdown-item
+                        href="{% url 'agency:guard_profile' assignment.guard.id %}">
+                        View Guard
+                    </calcite-dropdown-item>
                 </calcite-dropdown-group>
             </calcite-dropdown>
         </calcite-table-cell>

@@ -29,8 +29,6 @@ from ..services import (
 def operation_deployment(request):
     contracts, search = contract_deployment_list(request)
 
-    
-
     context = {"contracts": contracts, "search": search}
 
     return render_operation_tab(

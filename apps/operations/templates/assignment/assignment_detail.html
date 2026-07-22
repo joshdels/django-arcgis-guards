@@ -42,48 +42,46 @@
             <h2>Assigned Guard</h2>
             <div>{{ assignment.guard }}</div>
         </section>
-
         <div class="dashboard-column">
-        <section>
-            <h2>Deployment Information</h2>
-            <div class="grid">
-                <div>
-                    <p>Name</p>
-                    <h4>{{ assignment.deployment.name }}</h4>
+            <section>
+                <h2>Deployment Information</h2>
+                <div class="grid">
+                    <div>
+                        <p>Name</p>
+                        <h4>{{ assignment.deployment.name }}</h4>
+                    </div>
+                    <div>
+                        <p>Location</p>
+                        <h4>{{ assignment.deployment.location }}</h4>
+                    </div>
+                    <div>
+                        <p>Remarks</p>
+                        <h4>{{ assignment.deployment.remarks }}</h4>
+                    </div>
                 </div>
-                <div>
-                    <p>Location</p>
-                    <h4>{{ assignment.deployment.location }}</h4>
+            </section>
+            <section>
+                <h2>Contract Information</h2>
+                <div class="grid">
+                    <div>
+                        <p>Client Name</p>
+                        <h4>{{ assignment.deployment.contract.client.name }}</h4>
+                    </div>
+                    <div>
+                        <p>Client Organization</p>
+                        <h4>{{ assignment.deployment.contract.client.organization }}</h4>
+                    </div>
+                    <div>
+                        <p>Contract Number</p>
+                        <h4>{{ assignment.deployment.contract.contract_number }}</h4>
+                    </div>
+                    <div>
+                        <p>Contract Span</p>
+                        <h4>{{ assignment.deployment.contract.start_date|date:'m/d/y' }} - {{ assignment.deployment.contract.end_date|date:'m/d/y' }}</h4>
+                    </div>
                 </div>
-                <div>
-                    <p>Remarks</p>
-                    <h4>{{ assignment.deployment.remarks }}</h4>
-                </div>
-            </div>
-        </section>
-        <section>
-            <h2>Contract Information</h2>
-            <div class="grid">
-                <div>
-                    <p>Client Name</p>
-                    <h4>{{ assignment.deployment.contract.client.name }}</h4>
-                </div>
-                <div>
-                    <p>Client Organization</p>
-                    <h4>{{ assignment.deployment.contract.client.organization }}</h4>
-                </div>
-                <div>
-                    <p>Contract Number</p>
-                    <h4>{{ assignment.deployment.contract.contract_number }}</h4>
-                </div>
-                <div>
-                    <p>Contract Span</p>
-                    <h4>{{ assignment.deployment.contract.start_date|date:'m/d/y' }} - {{ assignment.deployment.contract.end_date|date:'m/d/y' }}</h4>
-                </div>
-            </div>
-        </section>
+            </section>
         </div>
-
     {% endblock %}
 </main>
 {% block extra_script %}

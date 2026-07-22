@@ -80,3 +80,7 @@
   align-items: center;
   gap: 0.5rem
 } 
+
+.profile .card-vertical-space {
+  padding: 1rem 0;
+}
