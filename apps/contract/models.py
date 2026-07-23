@@ -131,10 +131,7 @@ class Contract(models.Model):
 
     @cached_property
     def allocated_guard_count(self):
-        return sum(
-            deployment.required_guards
-            for deployment in self.deployments.all()
-        )
+        return sum(deployment.required_guards for deployment in self.deployments.all())
 
     class Meta:
         ordering = ["-created_at"]

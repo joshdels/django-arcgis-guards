@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import Q
 
 from apps.accounts.decorators import roles_required
 
@@ -9,6 +8,7 @@ from apps.client.models import Client
 from apps.contract.models import Contract
 
 from apps.agency.forms import ContractForm, ClientContractForm
+from apps.agency.selectors import get_contracts
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -16,18 +16,7 @@ def show_contracts(request):
     search = request.GET.get("search")
     status = request.GET.get("status")
 
-    contracts = Contract.objects.all()
-
-    if status:
-        contracts = contracts.filter(status=status)
-
-    if search:
-        contracts = contracts.filter(
-            Q(contract_number__icontains=search)
-            | Q(title__icontains=search)
-            | Q(client__name__icontains=search)
-            | Q(client__organization__icontains=search)
-        )
+    contracts = get_contracts(search, status)
 
     context = {"contracts": contracts, "search": search, "status": status}
 

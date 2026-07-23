@@ -16,7 +16,7 @@ from apps.accounts.decorators import roles_required
 
 
 from ..selectors import (
-    contract_deployment_list,
+    get_contract_deployments,
     deployment_detail,
 )
 from ..services import (
@@ -27,9 +27,18 @@ from ..services import (
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def operation_deployment(request):
-    contracts, search = contract_deployment_list(request)
+    search = request.GET.get("search", "")
+    status = request.GET.get("status")
+    filter = request.GET.get("filter")
 
-    context = {"contracts": contracts, "search": search}
+    contracts = get_contract_deployments(search, status, filter)
+
+    context = {
+        "contracts": contracts,
+        "search": search,
+        "status": status,
+        "filter": filter,
+    }
 
     return render_operation_tab(
         request, "_partials/deployment/_deployment.html", context
@@ -39,11 +48,9 @@ def operation_deployment(request):
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def deployment_detail_view(request, pk):
     deployment = deployment_detail(pk)
-    
-    assignments = (
-        deployment.assignments
-        .select_related("guard")
-        .order_by("guard__last_name", "guard__first_name")
+
+    assignments = deployment.assignments.select_related("guard").order_by(
+        "guard__last_name", "guard__first_name"
     )
 
     context = {"deployment": deployment, "assignments": assignments}

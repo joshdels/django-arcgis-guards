@@ -1,19 +1,67 @@
-from django.db.models import Prefetch, Q
-from django.db.models import Count
+from django.db.models.functions import Coalesce
+from django.db.models import (
+    Count,
+    F,
+    IntegerField,
+    OuterRef,
+    Prefetch,
+    Q,
+    Subquery,
+    Sum,
+)
 
-from apps.operations.models import Deployment
+from apps.operations.models import Deployment, Assignment, AssignmentStatus
+from apps.contract.models import Contract, ContractStatus
 
-from apps.contract.models import Contract
+
+def get_contract_deployments(search=None, status=None, filter=None):
+    required_guards = Deployment.objects.filter(
+        contract=OuterRef("pk"),
+    )
+    required_guards = required_guards.values("contract")
+    required_guards = required_guards.annotate(
+        total=Sum("required_guards"),
+    )
+    required_guards = required_guards.values("total")
 
 
-def contract_deployment_list(request):
-    search = request.GET.get("search", "").strip()
+    assigned_guards = Assignment.objects.filter(
+        deployment__contract=OuterRef("pk"),
+        status=AssignmentStatus.ACTIVE,
+    )
+    assigned_guards = assigned_guards.values(
+        "deployment__contract",
+    )
+    assigned_guards = assigned_guards.annotate(
+        total=Count("pk"),
+    )
+    assigned_guards = assigned_guards.values("total")
 
-    contracts = Contract.objects.annotate(
-        assigned_guard_count=Count(
-            "deployments__assignments",
-            distinct=True,
-        )
+
+    contracts = Contract.objects.filter(
+        status__in=[
+            ContractStatus.APPROVED,
+            ContractStatus.ONGOING,
+        ]
+    )
+
+    contracts = contracts.select_related("client")
+
+    contracts = contracts.annotate(
+        required_guard_count=Coalesce(
+            Subquery(
+                required_guards,
+                output_field=IntegerField(),
+            ),
+            0,
+        ),
+        assigned_guard_count=Coalesce(
+            Subquery(
+                assigned_guards,
+                output_field=IntegerField(),
+            ),
+            0,
+        ),
     )
 
     if search:
@@ -24,20 +72,24 @@ def contract_deployment_list(request):
             | Q(client__organization__icontains=search)
         )
 
-    contracts = (
-        contracts.select_related("client")
-        .filter(deployments__isnull=False)
-        .prefetch_related(
-            Prefetch(
-                "deployments",
-                queryset=Deployment.objects.order_by("name"),
-            )
+    if status:
+        contracts = contracts.filter(status=status)
+
+    if filter == "needs_guards":
+        contracts = contracts.filter(
+            required_guard_count__gt=F("assigned_guard_count"),
         )
-        .distinct()
-        .order_by("-created_at")
+
+    contracts = contracts.prefetch_related(
+        Prefetch(
+            "deployments",
+            queryset=Deployment.objects.order_by("name"),
+        )
     )
 
-    return contracts, search
+    contracts = contracts.order_by("-created_at")
+
+    return contracts
 
 
 def deployment_detail(pk):
