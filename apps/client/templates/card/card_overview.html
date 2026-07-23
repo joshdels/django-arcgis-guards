@@ -13,7 +13,11 @@
         </h1>
     </div>
     <div class="dashboard-card">
-        <p>Total Payments</p>
+        <p>Total Paid</p>
         <h1><span>₱</span>  {{ total_payments|floatformat:2|intcomma }}</h1>
+    </div>
+    <div class="dashboard-card">
+        <p>Remaining Balance</p>
+        <h1><span>₱</span>  {{ total_balance|floatformat:2|intcomma }}</h1>
     </div>
 </div>

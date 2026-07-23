@@ -1,7 +1,7 @@
 <main class="profile">
     <div>
         <h2>Finances</h2>
-        {% include 'client/card/card_finances.html' %}
+        {% include 'card/card_finances.html' %}
     </div>
     <div>
         <section>
@@ -9,15 +9,11 @@
                 <h2>Payments</h2>
                 <calcite-button icon-start="plus" scale="s" appearance="outline-fill" href="">Add Payment</calcite-button>
             </div>
-            {% include 'client/table/table_payment.html' %}
+            {% include 'table/table_payment.html' %}
         </section>
     </div>
     <section>
-        <h2>Billings</h2>
-        {% include 'client/table/table_billing.html' %}
-    </section>
-    <section>
         <h2>Invoices</h2>
-        {% include 'client/table/table_invoice.html' %}
+        {% include 'table/table_invoice.html' %}
     </section>
 </main>

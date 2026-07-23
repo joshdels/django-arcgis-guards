@@ -30,29 +30,29 @@
     <calcite-table-row>
         
         <calcite-table-cell>
-          <strong>{{ contract.contract_number }}</strong>
+            <strong>{{ contract.contract_number }}</strong>
         </calcite-table-cell>
 
         <calcite-table-cell>
-          {{ contract.title }}
+            {{ contract.title }}
         </calcite-table-cell>
 
         <calcite-table-cell>
-          {{ contract.number_of_guards }}
+            {{ contract.number_of_guards }}
         </calcite-table-cell>
 
         <calcite-table-cell>
-          {% if contract.start_date and contract.end_date %}
-            {{ contract.start_date }}
-            <br>
-            <small>to {{ contract.end_date }} </small>
-          {% else %}
+            {% if contract.start_date and contract.end_date %}
+                {{ contract.start_date }}
+                <br>
+                <small>to {{ contract.end_date }} </small>
+            {% else %}
             N/A
-          {% endif %}
+            {% endif %}
         </calcite-table-cell>
 
         <calcite-table-cell>
-          {{ contract.created_at|date:"m/d/y" }}
+            {{ contract.created_at|date:"m/d/y" }}
         </calcite-table-cell>
 
         <calcite-table-cell>
@@ -98,10 +98,9 @@
             </calcite-dropdown>
         </calcite-table-cell>  
 
-  
     </calcite-table-row>
 
-  {% endfor %}
+    {% endfor %}
 
 </calite-table>
 

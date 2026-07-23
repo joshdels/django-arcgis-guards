@@ -87,17 +87,14 @@
                 <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
                 <calcite-dropdown-group selection-mode="none">
                     <calcite-dropdown-item href="{% url 'finances:invoice_details' invoice.id %}">View Invoice</calcite-dropdown-item>
-                    {% comment %} To edit {% endcomment %}
                     <calcite-dropdown-item href="{% url 'finances:payment_create' %}">Add Payment</calcite-dropdown-item>
-                    <calcite-dropdown-item href="{% url 'finances:invoice_edit' invoice.id %}">Edit Invoice</calcite-dropdown-item>
                 </calcite-dropdown-group>
             </calcite-dropdown>
         </calcite-table-cell>  
 
-  
     </calcite-table-row>
 
-  {% endfor %}
+    {% endfor %}
 
 </calite-table>
 

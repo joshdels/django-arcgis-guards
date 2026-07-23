@@ -132,20 +132,24 @@ def get_client_contracts(client):
 
 def get_client_guards(client):
     guards = Guard.objects.filter(
-        assignments__deployment__contract__client=client
+        assignments__deployment__contract__client=client,
     ).distinct()
 
-    available_guards = Guard.objects.filter(
-        assignments__deployment__contract__client=client,
-        assignments__status=AssignmentStatus.ACTIVE,
-    ).prefetch_related("assignments")
+    available_guards = (
+        Guard.objects.filter(
+            assignments__deployment__contract__client=client,
+            assignments__status=AssignmentStatus.ACTIVE,
+        )
+        .distinct()
+        .prefetch_related("assignments")
+    )
 
     past_guards = guards.filter(
         assignments__status__in=[
             AssignmentStatus.ENDED,
             AssignmentStatus.CANCELLED,
         ]
-    ).distinct
+    ).distinct()
 
     return {
         "available_guards": available_guards,
