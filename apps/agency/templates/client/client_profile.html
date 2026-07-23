@@ -20,13 +20,19 @@
                 <div>
                     <header>
                         <div>
-                            <h1>{{ client.name }}</h1>
-                            <p>
-                                <calcite-icon icon="users" scale="s"></calcite-icon> {{ client.organization }}
-                            </p>
-                            <p>
-                                <calcite-icon icon="employee-id" scale="s"></calcite-icon> {{ client.client_id }}
-                            </p>
+                            <div class="column">
+                                <h1>{{ client.name }}</h1>
+                                {% if client.organization %}
+                                    <p>
+                                        <calcite-icon icon="users" scale="s"></calcite-icon>    {{ client.organization }}
+                                    </p>
+                                {% endif %}
+                                {% if client.client_id %}
+                                    <p>
+                                        <calcite-icon icon="employee-id" scale="s"></calcite-icon> {{ client.client_id }}
+                                    </p>
+                                {% endif %}
+                            </div>
                         </div>
                         <div>
                             {% if client.is_active %}``

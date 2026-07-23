@@ -1,7 +1,11 @@
+from decimal import Decimal
+
 from django.shortcuts import get_object_or_404, render
+from django.db.models.functions import Coalesce
+from django.db.models import Sum, Value, DecimalField
 
 from apps.client.models import Client
-from apps.guard.models import Guard, GuardStatus
+from apps.guard.models import Guard
 from apps.contract.models import ContractStatus
 
 from apps.finances.models import Billing, Invoice, Payment
@@ -29,6 +33,28 @@ def render_client_tab(request, id, partial_template):
     ).distinct
 
     contracts = client.contracts.all()
+
+    total_invoices = Invoice.objects.filter(
+        billing__contract__client=client
+    ).aggregate(
+        total=Coalesce(
+            Sum("total_amount"),
+            Value(Decimal("0.00")),
+            output_field=DecimalField(),
+        )
+    )["total"]
+
+    total_payments = Payment.objects.filter(
+        invoice__billing__contract__client=client
+    ).aggregate(
+        total=Coalesce(
+            Sum("amount"),
+            Value(Decimal("0.00")),
+            output_field=DecimalField(),
+        )
+    )["total"]
+
+    total_balance = total_invoices - total_payments
 
     active_contracts = client.contracts.filter(
         status__in=[
@@ -78,16 +104,14 @@ def render_client_tab(request, id, partial_template):
         "current_partial": partial_template,
         "available_guards": available_guards,
         "past_guards": past_guards,
+        # total finances
+        "total_invoices": total_invoices,
+        "total_payments": total_payments,
+        "total_balance": total_balance
     }
+    
 
     if request.htmx:
         return render(request, partial_template, context)
 
     return render(request, "client/client_profile.html", context)
-
-
-def render_operation_tab(request, partial_tempalte):
-    if request.htmx:
-        return render(request, partial_tempalte)
-
-    return render(request, "operation/operation_page.html")

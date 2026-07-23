@@ -19,22 +19,19 @@
                     </h2>
                     {% if guard.status == "leave" %}
                         <calcite-chip kind="warning" appearance="outline-fill">
-                            On Leave
+                        On Leave
                         </calcite-chip>
-
                     {% elif guard.status == "suspended" %}
                         <calcite-chip kind="inverse" appearance="outline-fill">
-                            Suspended
+                        Suspended
                         </calcite-chip>
-
                     {% elif guard.on_duty %}
                         <calcite-chip kind="info" appearance="outline-fill">
-                            On Duty
+                        On Duty
                         </calcite-chip>
-
                     {% else %}
                         <calcite-chip kind="brand" appearance="solid">
-                            Available
+                        Available
                         </calcite-chip>
                     {% endif %}
                 </div>

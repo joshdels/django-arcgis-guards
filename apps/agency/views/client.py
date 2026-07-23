@@ -58,8 +58,8 @@ def client_guard(request, id):
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
-def client_billing(request, id):
-    return render_client_tab(request, id, "client/partial/billing.html")
+def client_finances(request, id):
+    return render_client_tab(request, id, "client/partial/finances.html")
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -95,7 +95,7 @@ def client_update(request, id):
             form.save()
             messages.success(request, "Client updated successfully.")
             return redirect(
-                "agency:client_profile",
+                "agency:client_overview",
                 id=client.id,
             )
 

@@ -65,7 +65,7 @@ def contract_create(request, client_id=None):
             messages.success(request, "Contract created successfully.")
 
             if client:
-                return redirect("agency:client_profile", id=client.id)
+                return redirect("agency:client_overview", id=client.id)
 
             return redirect("agency:show_contracts")
 

@@ -1,0 +1,15 @@
+{% load humanize %}
+<div class="overview-container">
+    <div class="dashboard-card-small">
+        <p>Total Invoices</p>
+        <h1><span>₱</span>  {{ total_invoices|floatformat:2|intcomma }}</h1>
+    </div>
+    <div class="dashboard-card-small">
+        <p>Total Payments</p>
+        <h1><span>₱</span>  {{ total_payments|floatformat:2|intcomma }}</h1>
+    </div>
+    <div class="dashboard-card-small">
+        <p>Remaining Balance</p>
+        <h1><span>₱</span>  {{ total_balance|floatformat:2|intcomma }}</h1>
+    </div>
+</div>
