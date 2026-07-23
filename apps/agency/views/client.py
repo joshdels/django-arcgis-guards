@@ -8,7 +8,7 @@ from apps.accounts.models import User
 from apps.client.models import Client
 from apps.agency.forms import ClientForm
 
-from ..services import create_client
+from apps.agency.services import create_client
 
 from apps.agency.helpers import render_client_tab
 
@@ -49,11 +49,7 @@ def client_information(request, id):
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_contract(request, id):
-    return render_client_tab(
-        request,
-        id,
-        "client/partial/contract.html",
-    )
+    return render_client_tab(request, id, "client/partial/contract.html")
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)

@@ -84,3 +84,14 @@
 .profile .card-vertical-space {
   padding: 1rem 0;
 }
+
+.job-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.job-history-card .space-between {
+  display: flex;
+  justify-content: space-between;
+}

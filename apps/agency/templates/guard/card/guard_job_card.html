@@ -1,0 +1,46 @@
+{% if guard.assignments.all %}
+    <div class="job-history-list">
+
+        {% for assignment in guard.assignments.all %}
+            <div class="job-history-card">
+                <header class="space-between">
+                    <h4>{{ assignment.deployment.name|default:"N/A" }} | {{ assignment.deployment.location|default:"N/A" }}</h4>
+                    {% if assignment.status == "ACTIVE" %}
+                        <calcite-chip kind="brand">
+                            Active
+                        </calcite-chip>
+                    {% elif assignment.status == "ENDED" %}
+                        <calcite-chip kind="inverse" appearance="outline-fill">
+                            Ended
+                        </calcite-chip>
+                    {% else %}
+                        <calcite-chip kind="inverse">
+                            Cancelled
+                        </calcite-chip>
+                    {% endif %}
+                </header>
+                <main>
+                    <p>
+                        {{ assignment.deployment.contract }}
+                    </p>
+        
+                    <small>
+                        {{ assignment.start_date|date:"m/d/y" }}
+                        —
+                        {{ assignment.end_date|date:"m/d/y"|default:"Present" }}
+                    </small>
+                </main>
+            </div>
+
+        {% empty %}
+
+                <calcite-notice open kind="info">
+                    <div slot="message">
+                        No jobs found.
+                    </div>
+                </calcite-notice>
+
+        {% endfor %}
+
+    </div>
+{% endif %}

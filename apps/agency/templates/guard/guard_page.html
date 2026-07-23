@@ -19,13 +19,30 @@
                     </calcite-input>
                     <calcite-button type="submit">Search</calcite-button>
                 </form>
-                <!-- Might flag this one -->
                 <a href="{% url 'agency:show_guards' %}"
-                   class="{% if not is_active %}active{% endif %}">All</a>
-                <a href="?status=active"
-                   class="{% if is_active == 'active' %}active{% endif %}">Active</a>
-                <a href="?status=inactive"
-                   class="{% if is_active == 'inactive' %}active{% endif %}">Inactive</a>
+                class="{% if not status %}active{% endif %}">
+                    All
+                </a>
+
+                <a href="?status=available"
+                class="{% if status == 'available' %}active{% endif %}">
+                    Available
+                </a>
+
+                <a href="?status=on_duty"
+                class="{% if status == 'on_duty' %}active{% endif %}">
+                    On Duty
+                </a>
+
+                <a href="?status=leave"
+                class="{% if status == 'leave' %}active{% endif %}">
+                    On Leave
+                </a>
+
+                <a href="?status=suspended"
+                class="{% if status == 'suspended' %}active{% endif %}">
+                    Suspended
+                </a>
             </div>
             <calcite-button href="{% url 'agency:guard_create' %}"  icon-start="plus">Add Guard</calcite-button>
         </header>

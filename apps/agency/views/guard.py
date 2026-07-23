@@ -1,18 +1,38 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
-from django.db.models import Q
+from django.db.models import Q, Exists, OuterRef, Prefetch
 
 from apps.accounts.decorators import roles_required
-from apps.accounts.models import User
-
 from apps.agency.forms import GuardForm
 
-from apps.guard.models import Guard
+from apps.accounts.models import User
+from apps.guard.models import Guard, GuardStatus
+from apps.operations.models import AssignmentStatus, Assignment
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def guard_profile(request, id):
-    guard = get_object_or_404(Guard, id=id)
+    # chaining, i might chunk it down
+    guard = get_object_or_404(
+        Guard.objects.annotate(
+            on_duty=Exists(
+                Assignment.objects.filter(
+                    guard=OuterRef("pk"),
+                    status=AssignmentStatus.ACTIVE,
+                )
+            )
+        ).prefetch_related(
+            Prefetch(
+                "assignments",
+                queryset=Assignment.objects.select_related(
+                    "deployment",
+                    "deployment__contract",
+                ).order_by("-created_at"),
+            )
+        ),
+        id=id,
+    )
+
     context = {"guard": guard}
 
     return render(request, "guard/guard_profile.html", context)
@@ -23,13 +43,28 @@ def show_guards(request):
     search = request.GET.get("search")
     status = request.GET.get("status")
 
-    guards = Guard.objects.all()
+    guards = Guard.objects.annotate(
+        on_duty=Exists(
+            Assignment.objects.filter(
+                guard=OuterRef("pk"),
+                status=AssignmentStatus.ACTIVE,
+            )
+        )
+    )
 
-    if status == "active":
-        guards = guards.filter(is_active=True)
+    if status == "available":
+        guards = guards.filter(status=GuardStatus.AVAILABLE).exclude(
+            assignments__status=AssignmentStatus.ACTIVE
+        )
 
-    elif status == "inactive":
-        guards = guards.filter(is_active=False)
+    elif status == "on_duty":
+        guards = guards.filter(assignments__status=AssignmentStatus.ACTIVE).distinct()
+
+    elif status == "leave":
+        guards = guards.filter(status=GuardStatus.LEAVE)
+
+    elif status == "suspended":
+        guards = guards.filter(status=GuardStatus.SUSPENDED)
 
     if search:
         guards = guards.filter(
@@ -38,7 +73,7 @@ def show_guards(request):
             | Q(last_name__icontains=search)
         )
 
-    context = {"guards": guards, "search": search, "is_active": status}
+    context = {"guards": guards, "search": search, "status": status}
 
     return render(
         request,

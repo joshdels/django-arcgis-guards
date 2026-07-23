@@ -3,6 +3,7 @@
 {% block title %}Guard Profile | Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/overview.css' %}">
 {% endblock %}
 {% block content %}
     {% include '_components/navbar.html' %}
@@ -13,7 +14,29 @@
         </a>
         <header>
             <div>
-                <h1>{{ guard.first_name }} {{ guard.middle_name }} {{ guard.last_name }}</h1>
+                <div class="column">
+                    <h1>{{ guard.first_name }} {{ guard.middle_name }} {{ guard.last_name }}</h1>
+                    {% if guard.status == "leave" %}
+                        <calcite-chip kind="warning" appearance="outline-fill">
+                            On Leave
+                        </calcite-chip>
+
+                    {% elif guard.status == "suspended" %}
+                        <calcite-chip kind="inverse" appearance="outline-fill">
+                            Suspended
+                        </calcite-chip>
+
+                    {% elif guard.on_duty %}
+                        <calcite-chip kind="info" appearance="outline-fill">
+                            On Duty
+                        </calcite-chip>
+
+                    {% else %}
+                        <calcite-chip kind="brand" appearance="solid">
+                            Available
+                        </calcite-chip>
+                    {% endif %}
+                </div>
                 <p>
                     <calcite-icon icon="check-shield" scale="s"></calcite-icon> {{ guard.badge_number }}
                 </p>
@@ -27,73 +50,77 @@
                 <calcite-button href="{% url 'agency:guard_update' guard.id %}">Edit</calcite-button>
             </div>
         </header>
-        <section>
-            <h2>General Information</h2>
-            <div class="grid">
-                <div>
-                    <p>First Name</p>
-                    <h4>{{ guard.first_name }}</h4>
-                </div>
-                <div>
-                    <p>Middle Name</p>
-                    <h4>{{ guard.middle_name }}</h4>
-                </div>
-                <div>
-                    <p>Last Name</p>
-                    <h4>{{ guard.last_name }}</h4>
-                </div>
-                <div>
-                    <p>ID Number</p>
-                    <h4>
-                        <calcite-icon scale="s" icon="check-shield"></calcite-icon> {{ guard.badge_number }}
-                    </h4>
-                </div>
-                <div>
-                    <p>Address</p>
-                    <h4>
-                        <calcite-icon scale="s" icon="pin-tear"></calcite-icon> {{ guard.address }}
-                    </h4>
-                </div>
-            </section>
-            <section>
-                <h2>Contact</h2>
-                <div class="grid">
-                    <div>
-                        <p>email</p>
-                        <h4>
-                            <calcite-icon scale="s" icon="envelope"></calcite-icon>  {{ guard.email }}
-                        </h4>
+        <div class="dashboard-column-one">
+            <div>
+                <section>
+                    <h2>General Information</h2>
+                    <div class="grid">
+                        <div>
+                            <p>First Name</p>
+                            <h4>{{ guard.first_name }}</h4>
+                        </div>
+                        <div>
+                            <p>Middle Name</p>
+                            <h4>{{ guard.middle_name }}</h4>
+                        </div>
+                        <div>
+                            <p>Last Name</p>
+                            <h4>{{ guard.last_name }}</h4>
+                        </div>
+                        <div>
+                            <p>ID Number</p>
+                            <h4>
+                                <calcite-icon scale="s" icon="check-shield"></calcite-icon> {{ guard.badge_number }}
+                            </h4>
+                        </div>
+                        <div>
+                            <p>Address</p>
+                            <h4>
+                                <calcite-icon scale="s" icon="pin-tear"></calcite-icon> {{ guard.address }}
+                            </h4>
+                        </div>
                     </div>
-                    <div>
-                        <p>phone</p>
-                        <h4>
-                            <calcite-icon scale="s" icon="phone"></calcite-icon>  {{ guard.phone_number }}
-                        </h4>
+                </section>
+        
+                <section>
+                    <h2>Contact</h2>
+                    <div class="grid">
+                        <div>
+                            <p>email</p>
+                            <h4>
+                                <calcite-icon scale="s" icon="envelope"></calcite-icon>  {{ guard.email }}
+                            </h4>
+                        </div>
+                        <div>
+                            <p>phone</p>
+                            <h4>
+                                <calcite-icon scale="s" icon="phone"></calcite-icon>  {{ guard.phone_number }}
+                            </h4>
+                        </div>
+                        <div>
+                            <p>address</p>
+                            <h4>
+                                <calcite-icon scale="s" icon="home"></calcite-icon>  {{ guard.address }}
+                            </h4>
+                        </div>
+                        <div>
+                            <p>joined since</p>
+                            <h4>
+                                <calcite-icon scale="s" icon="user-plus"></calcite-icon>  {{ guard.created_at|date:"M d, Y" }}
+                            </h4>
+                        </div>
                     </div>
-                    <div>
-                        <p>address</p>
-                        <h4>
-                            <calcite-icon scale="s" icon="home"></calcite-icon>  {{ guard.address }}
-                        </h4>
-                    </div>
-                    <div>
-                        <p>joined since</p>
-                        <h4>
-                            <calcite-icon scale="s" icon="user-plus"></calcite-icon>  {{ guard.created_at|date:"M d, Y" }}
-                        </h4>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h2>Job History</h2>
-                <p>guard 1</p>
-                <p>guard 2</p>
-            </section>
-            <section>
-                <h2>Invoice History</h2>
-                <div>
-                    <p>Coming Soon</p>
-                </div>
-            </section>
-        </main>
+                </section>
+            </div>
+            <div>
+                <section>
+                    <h2>Job History</h2>
+
+                    {% include 'guard/card/guard_job_card.html' %}
+
+                </section>
+            </div>
+        </div>
+
+    </main>
     {% endblock %}

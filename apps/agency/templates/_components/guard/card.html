@@ -17,10 +17,25 @@
                         {% endif %}
                         {{ guard.last_name }}
                     </h2>
-                    {% if guard.is_active %}
-                        <calcite-chip appearance="outline-fill">active</calcite-chip>
+                    {% if guard.status == "leave" %}
+                        <calcite-chip kind="warning" appearance="outline-fill">
+                            On Leave
+                        </calcite-chip>
+
+                    {% elif guard.status == "suspended" %}
+                        <calcite-chip kind="inverse" appearance="outline-fill">
+                            Suspended
+                        </calcite-chip>
+
+                    {% elif guard.on_duty %}
+                        <calcite-chip kind="info" appearance="outline-fill">
+                            On Duty
+                        </calcite-chip>
+
                     {% else %}
-                        <calcite-chip>inactive</calcite-chip>
+                        <calcite-chip kind="brand" appearance="solid">
+                            Available
+                        </calcite-chip>
                     {% endif %}
                 </div>
                 <p>
