@@ -2,15 +2,19 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 
-
 from apps.accounts.decorators import roles_required
 from apps.accounts.models import User
 from apps.client.models import Client
 from apps.agency.forms import ClientForm
-
 from apps.agency.services import create_client
-
 from apps.agency.helpers import render_client_tab
+from apps.agency.selectors import get_clients
+from apps.agency.services import (
+    get_overview_stats,
+    get_client_contracts,
+    get_client_guards,
+    get_client_billings,
+)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
@@ -20,17 +24,10 @@ def show_clients(request):
 
     clients = Client.objects.all()
 
-    if search:
-        clients = clients.filter(
-            Q(name__icontains=search)
-            | Q(organization__icontains=search)
-            | Q(client_id__icontains=search)
-        )
-    if status == "active":
-        clients = clients.filter(is_active=True)
-
-    elif status == "inactive":
-        clients = clients.filter(is_active=False)
+    clients = get_clients(
+        search=search,
+        status=status,
+    )
 
     context = {"clients": clients, "search": search, "is_active": status}
 
@@ -39,32 +36,69 @@ def show_clients(request):
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_overview(request, id):
-    return render_client_tab(request, id, "client/partial/overview.html")
+    context = {}
+
+    client = get_object_or_404(Client, id=id)
+
+    context.update(get_overview_stats(client))
+    context.update(get_client_contracts(client))
+
+    return render_client_tab(
+        request,
+        client,
+        "client/partial/overview.html",
+        context,
+    )
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_information(request, id):
-    return render_client_tab(request, id, "client/partial/information.html")
+    client = get_object_or_404(Client, id=id)
+
+    return render_client_tab(request, client, "client/partial/information.html")
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_contract(request, id):
-    return render_client_tab(request, id, "client/partial/contract.html")
+    context = {}
+
+    client = get_object_or_404(Client, id=id)
+
+    context.update(get_overview_stats(client))
+    context.update(get_client_contracts(client))
+
+    return render_client_tab(request, client, "client/partial/contract.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_guard(request, id):
-    return render_client_tab(request, id, "client/partial/guard.html")
+    context = {}
+
+    client = get_object_or_404(Client, id=id)
+
+    context.update(get_overview_stats(client))
+    context.update(get_client_guards(client))
+
+    return render_client_tab(request, client, "client/partial/guard.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_finances(request, id):
-    return render_client_tab(request, id, "client/partial/finances.html")
+    context = {}
+
+    client = get_object_or_404(Client, id=id)
+
+    context.update(get_overview_stats(client))
+    context.update(get_client_billings(client))
+
+    return render_client_tab(request, client, "client/partial/finances.html", context)
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def client_report(request, id):
-    return render_client_tab(request, id, "client/partial/report.html")
+    client = get_object_or_404(Client, id=id)
+
+    return render_client_tab(request, client, "client/partial/report.html")
 
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)

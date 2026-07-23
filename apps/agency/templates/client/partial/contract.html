@@ -5,13 +5,13 @@
     </div>
     <section>
         <div class="space-between">
-            <h2>Active Contracts</h2>
+            <h2>Active</h2>
             <calcite-button icon-start="plus" label="Add New Contract"  scale="s" appearance="outline-fill" href="{% url 'agency:contract_create_client' client.id %}">Add Contract</calcite-button>
         </div>
         <div>{% include 'client/table/table_contract_active.html' %}</div>
     </section>
     <section>
-        <h2>Contract History</h2>
+        <h2>History</h2>
         {% include 'client/table/table_contract_history.html' %}
     </section>
 </main>
