@@ -1,0 +1,93 @@
+{# djlint:off #}
+{% load humanize %}
+
+{% if not payments %}
+
+    <calcite-notice open kind="info">
+        <div slot="message">
+            No active billings found.
+        </div>
+    </calcite-notice>
+
+{% else %}
+
+<calcite-table bordered numbered pageSize=5 >
+
+    <calcite-table-row slot="table-header"> 
+        <calcite-table-header heading="Payment ID"></calcite-table-header>
+        <calcite-table-header heading="Method"></calcite-table-header>
+        <calcite-table-header heading="Reference No."></calcite-table-header>
+        <calcite-table-header heading="Amount"></calcite-table-header>
+        <calcite-table-header heading="Paid Date"></calcite-table-header>
+        <calcite-table-header heading="Status"></calcite-table-header>
+        <calcite-table-header heading="Action" alignment="end"></calcite-table-header>
+    </calcite-table-row>
+
+    
+    {% for payment in payments%}    
+    
+    <calcite-table-row>
+        
+        <calcite-table-cell>
+            <strong>{{ payment.payment_number }}</strong>
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ payment.payment_method|capfirst }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {{ payment.reference_number }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            <strong>₱ {{ payment.amount|floatformat:2|intcomma }}</strong>
+        </calcite-table-cell>
+
+
+        <calcite-table-cell>
+            {{ payment.payment_date|date:"m/d/y" }}
+        </calcite-table-cell>
+
+        <calcite-table-cell>
+            {% if payment.status == "pending" %}
+                <calcite-chip kind="brand" appearance="outline-fill">
+                    {{ payment.get_status_display }}
+                </calcite-chip>
+
+            {% elif payment.status == "completed" %}
+                <calcite-chip kind="brand" appearance="outline-fill">
+                    {{ payment.get_status_display }}
+                </calcite-chip>
+
+            {% elif payment.status == "refunded" %}
+                <calcite-chip kind="brand" appearance="outline-fill">
+                    {{ payment.get_status_display }}
+                </calcite-chip>
+
+            {% else %}
+                <calcite-chip kind="inverse">
+                    {{ payment.get_status_display }}
+                </calcite-chip>
+            {% endif %}
+        </calcite-table-cell>
+
+        <calcite-table-cell alignment="end">
+            <calcite-dropdown placement="bottom-end">
+                <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
+                <calcite-dropdown-group selection-mode="none">
+                    <calcite-dropdown-item href="{% url 'finances:payment_details' payment.id %}">View Payment</calcite-dropdown-item>
+                    <calcite-dropdown-item href="{% url 'finances:payment_edit' payment.id %}">Edit Payment</calcite-dropdown-item>
+                </calcite-dropdown-group>
+            </calcite-dropdown>
+        </calcite-table-cell>  
+
+    </calcite-table-row>
+
+{% endfor %}
+
+</calite-table>
+
+{% endif %}
+
+{# djlint:on #}

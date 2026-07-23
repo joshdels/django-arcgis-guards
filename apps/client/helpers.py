@@ -22,6 +22,6 @@ def render_client_tab(
 
     return render(
         request,
-        "client/client_profile.html",
+        "_client_dashboard.html",
         context,
     )

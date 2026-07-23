@@ -1,0 +1,19 @@
+{% load humanize %}
+<div class="overview-container">
+    <div class="dashboard-card">
+        <p>Total Contracts</p>
+        <h1>
+            <calcite-icon icon="files"></calcite-icon>  {{ total_contracts }}
+        </h1>
+    </div>
+    <div class="dashboard-card">
+        <p>Total Assigned Guards</p>
+        <h1>
+            <calcite-icon icon="users"></calcite-icon> {{ total_guards }}
+        </h1>
+    </div>
+    <div class="dashboard-card">
+        <p>Total Payments</p>
+        <h1><span>₱</span>  {{ total_payments|floatformat:2|intcomma }}</h1>
+    </div>
+</div>

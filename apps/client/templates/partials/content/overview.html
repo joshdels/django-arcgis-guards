@@ -1,73 +1,39 @@
 <main class="profile">
+    <div>
+        <h2>Overview</h2>
+        {% include 'client/card/card_overview.html' %}
+    </div>
     <section>
-        <h2>Information</h2>
+        <h2>Client Information</h2>
         <div class="grid">
             <div>
-                <p>email</p>
+                <p>client name</p>
                 <h4>
-                    <calcite-icon scale="s" icon="envelope"></calcite-icon>
-                    {{ client.email }}
+                    <calcite-icon scale="s" icon="address-book"></calcite-icon>
+                    {{ client.name }}
                 </h4>
             </div>
             <div>
-                <p>phone</p>
+                <p>client id</p>
                 <h4>
-                    <calcite-icon scale="s" icon="phone"></calcite-icon>
-                    {{ client.phone }}
+                    <calcite-icon scale="s" icon="license"></calcite-icon>
+                    {{ client.client_id }}
                 </h4>
             </div>
             <div>
-                <p>client since</p>
-                <h4>{{ client.created_at|date:"M d, Y" }}</h4>
+                <p>joined at</p>
+                <h4>
+                    <calcite-icon scale="s" icon="user-plus"></calcite-icon>
+                    {{ client.created_at|date:"M d, Y" }}
+                </h4>
             </div>
         </div>
     </section>
     <section>
         <div class="space-between">
             <h2>Active Contracts</h2>
+            <calcite-button icon-start="plus" label="Add New Contract" appearance="outline-fill" scale="s" href="">Add Contract</calcite-button>
         </div>
-        <div>
-            <h4>contract 1</h4>
-            <h4>contract 2</h4>
-        </div>
-    </section>
-    <section>
-        <h2>Guards</h2>
-        <div class="grid">
-            <div>
-                <p>Total Guard Hired</p>
-                <h4>
-                    <calcite-icon icon="users" scale="s"></calcite-icon>  13
-                </h4>
-            </div>
-            <div>
-                <p>Active Guards</p>
-                <h4>
-                    <calcite-icon icon="user" scale="s"></calcite-icon> 5
-                </h4>
-            </div>
-            <div>
-                <p>Inactive Guards</p>
-                <h4>
-                    <calcite-icon icon="user-x" scale="s"></calcite-icon> 2
-                </h4>
-            </div>
-        </div>
-    </section>
-    <section>
-        <h2>Billing Overview</h2>
-        <div class="grid">
-            <div>
-                <p>Current Billing</p>
-                <h4>Php 43,000.00</h4>
-            </div>
-            <div>
-                <p>Total Spent</p>
-                <h4>Php 43,000.00</h4>
-            </div>
-        </div>
-    </section>
-    <section>
-        <h2>Report</h2>
+        <div>{% include 'client/table/table_contract_active.html' %}</div>
     </section>
 </main>

@@ -3,9 +3,10 @@
 {% block title %}My Client Portal | Dumagete Guards{% endblock %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/overview.css' %}">
 {% endblock %}
 {% block content %}
-    <div class="dashboard-container ">
+    <div class="dashboard-container">
         <aside class="dashboard-sidebar">
             {% include 'components/client-sidebar.html' %}
         </aside>
@@ -15,14 +16,25 @@
                 <div>
                     <header>
                         <div>
-                            <h1>{{ client.name }}</h1>
-                            <p>{{ client.organization }}</p>
+                            <div class="column">
+                                <h1>{{ client.name }}</h1>
+                                {% if client.organization %}
+                                    <p>
+                                        <calcite-icon icon="users" scale="s"></calcite-icon>    {{ client.organization }}
+                                    </p>
+                                {% endif %}
+                                {% if client.client_id %}
+                                    <p>
+                                        <calcite-icon icon="employee-id" scale="s"></calcite-icon> {{ client.client_id }}
+                                    </p>
+                                {% endif %}
+                            </div>
                         </div>
                         <div>
                             <calcite-button icon-start="plus" scale="l" appearance="outline" kind="brand">New Contract</calcite-button>
                         </div>
                     </header>
-                    <div id="client-content">{% include "_partials/content_client/overview.html" %}</div>
+                    <div id="client-content">{% include "partials/content/overview.html" %}</div>
                 </div>
             </main>
         </section>

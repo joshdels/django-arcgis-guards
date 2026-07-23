@@ -42,7 +42,7 @@ class ClientLoginView(BaseRoleLoginView):
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse_lazy("client:dashboard")
+        return reverse_lazy("client_portal:overview")
 
 
 class GuardLoginView(BaseRoleLoginView):
