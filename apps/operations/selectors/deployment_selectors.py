@@ -24,7 +24,6 @@ def get_contract_deployments(search=None, status=None, filter=None):
     )
     required_guards = required_guards.values("total")
 
-
     assigned_guards = Assignment.objects.filter(
         deployment__contract=OuterRef("pk"),
         status=AssignmentStatus.ACTIVE,
@@ -36,7 +35,6 @@ def get_contract_deployments(search=None, status=None, filter=None):
         total=Count("pk"),
     )
     assigned_guards = assigned_guards.values("total")
-
 
     contracts = Contract.objects.filter(
         status__in=[

@@ -1,11 +1,33 @@
 <main class="dashboard">
     <h1>Guard Assignment</h1>
     <header>
-        <form method="get" class="flex">
-            <calcite-input type="search" name="search" placeholder="Contract Number, Company Name" icon="search" value="{{ search|default:'' }}">
-            </calcite-input>
-            <calcite-button type="submit">Search</calcite-button>
-        </form>
+        <div>
+            <form method="get" class="flex">
+                <calcite-input type="search" name="search" placeholder="Contract Number, Company Name" icon="search" value="{{ search|default:'' }}">
+                </calcite-input>
+                <calcite-button type="submit">Search</calcite-button>
+            </form>
+
+            <a href="?search={{ search }}"
+                class="{% if not status %}active{% endif %}">
+                    All
+                </a>
+    
+                <a href="?search={{ search }}&status=ACTIVE"
+                class="{% if status == 'ACTIVE' %}active{% endif %}">
+                    Active
+                </a>
+    
+                <a href="?search={{ search }}&status=ENDED"
+                class="{% if status == 'ENDED' %}active{% endif %}">
+                    Ended
+                </a>
+    
+                <a href="?search={{ search }}&status=CANCELLED"
+                class="{% if status == 'CANCELLED' %}active{% endif %}">
+                    Cancelled
+                </a>
+        </div>
     </header>
     {% include "_partials/assignment/table.html" %}
 </main>

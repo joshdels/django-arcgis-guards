@@ -16,28 +16,17 @@ from apps.operations.forms import (
     AssignmentUpdateForm,
 )
 
+from apps.operations.selectors import get_guard_assignments
+
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def operation_assignment(request):
     search = request.GET.get("search")
+    status = request.GET.get("status")
 
-    assignments = Assignment.objects.select_related(
-        "guard",
-        "deployment",
-        "deployment__contract",
-    )
+    assignments = get_guard_assignments(search, status)
 
-    if search:
-        assignments = assignments.filter(
-            Q(guard__first_name__icontains=search)
-            | Q(guard__last_name__icontains=search)
-            | Q(guard__badge_number__icontains=search)
-            | Q(deployment__name__icontains=search)
-            | Q(deployment__location__icontains=search)
-            | Q(deployment__contract__contract_number__icontains=search)
-        )
-
-    context = {"assignments": assignments}
+    context = {"assignments": assignments, "search": search, "status": status}
 
     return render_operation_tab(
         request,
@@ -136,7 +125,7 @@ def assignment_edit_view(request, pk):
 
     form = AssignmentUpdateForm(request.POST or None, instance=assignment)
 
-    if request.method == "POST" and form.is_valid():    
+    if request.method == "POST" and form.is_valid():
         form.save()
 
         messages.success(
