@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from django.db.models import Q
 from django.db import transaction
 
 from apps.accounts.decorators import roles_required
@@ -12,25 +11,21 @@ from apps.finances.models import Invoice
 from apps.finances.helpers import render_finances_tab
 from apps.finances.forms import InvoiceForm, InvoiceUpdateForm
 
+from apps.finances.selectors import get_invoices
+
 
 @roles_required("accounts:staff_login", User.ROLE_STAFF, User.ROLE_ADMIN)
 def finances_invoices(request):
     search = request.GET.get("search")
+    status = request.GET.get("status")
 
-    invoices = Invoice.objects.select_related("billing")
+    invoices = get_invoices(search, status)
 
-    if search:
-        invoices = invoices.filter(
-            Q(invoice_number__icontains=search)
-            | Q(billing__billing_number__icontains=search)
-            | Q(billing__contract__title__icontains=search)
-            | Q(billing__contract__contract_number__icontains=search)
-            | Q(billing__contract__client__name__icontains=search)
-            | Q(billing__contract__client__organization__icontains=search)
-            | Q(billing__contract__client__client_id__icontains=search)
-        )
-
-    context = {"invoices": invoices, "search": search}
+    context = {
+        "invoices": invoices,
+        "search": search,
+        "status": status,
+    }
 
     return render_finances_tab(request, "invoices/_invoices.html", context)
 

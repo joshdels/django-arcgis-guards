@@ -3,6 +3,8 @@
     <header>
         <div>
             <form method="get" class="flex">
+                <input type="hidden" name="status" value="{{ status|default:'' }}">
+                <input type="hidden" name="filter" value="{{ filter|default:'' }}">
                 <calcite-input type="search" name="search" placeholder="Contract Number, Company Name" icon="search" value="{{ search|default:'' }}">
                 </calcite-input>
                 <calcite-button type="submit">Search</calcite-button>
