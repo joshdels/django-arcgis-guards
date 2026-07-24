@@ -92,8 +92,10 @@
             <calcite-dropdown placement="bottom-end">
                 <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
                 <calcite-dropdown-group selection-mode="none">
-                    <calcite-dropdown-item href="">View Contract</calcite-dropdown-item>
-                    <calcite-dropdown-item href="{% url 'client_portal:contract_update' contract.id %}">Edit Contract</calcite-dropdown-item>
+                    <calcite-dropdown-item href="{% url 'client_portal:contract_details' contract.id %}">View Contract</calcite-dropdown-item>
+                    {%if contract.status == "draft" or contract.status == "pending"  %}
+                        <calcite-dropdown-item href="{% url 'client_portal:contract_update' contract.id %}">Edit Contract</calcite-dropdown-item>
+                    {% endif %}
                 </calcite-dropdown-group>
             </calcite-dropdown>
         </calcite-table-cell>  

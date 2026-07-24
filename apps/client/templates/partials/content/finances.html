@@ -3,17 +3,18 @@
         <h2>Finances</h2>
         {% include 'card/card_finances.html' %}
     </div>
-    <div>
-        <section>
-            <div class="space-between">
-                <h2>Payments</h2>
-                <calcite-button icon-start="plus" scale="s" appearance="outline-fill" href="">Add Payment</calcite-button>
-            </div>
-            {% include 'table/table_payment.html' %}
-        </section>
-    </div>
     <section>
         <h2>Invoices</h2>
         {% include 'table/table_invoice.html' %}
     </section>
+    <div>
+        <section>
+            <div class="space-between">
+                <h2>Payments</h2>
+                <calcite-button icon-start="plus" scale="s" appearance="outline-fill" href="{% url 'client_portal:payment_create' %}">Add Payment</calcite-button>
+            </div>
+            {% include 'table/table_payment.html' %}
+        </section>
+    </div>
+
 </main>

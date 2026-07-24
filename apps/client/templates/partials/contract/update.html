@@ -8,10 +8,29 @@
                 <calcite-icon icon="chevron-left"></calcite-icon>
                 Back
             </a>
-            <h2>Edit Contract</h2>
+            <div class="">
+                <h2>Edit Contract</h2>
+                {% if contract.status == "draft" %}
+                    <calcite-chip kind="brand" appearance="outline-fill">
+                        {{ contract.get_status_display }}
+                    </calcite-chip>
+
+                {% elif contract.status == "pending" %}
+                    <calcite-chip kind="brand" appearance="outline-fill">
+                        {{ contract.get_status_display }}
+                    </calcite-chip>
+
+                {% else %}
+                    <calcite-chip kind="inverse">
+                        {{ contract.get_status_display }}
+                    </calcite-chip>
+                {% endif %}
+            </div>
             <p>
-                <calcite-icon icon="check-shield" scale="s"></calcite-icon>
-                {{ contract.contract_id|default:"N/A" }}
+                <calcite-icon icon="inspection" scale="s"></calcite-icon>
+                {{ contract.contract_number|default:"N/A" }}
+
+
             </p>
             {% include "forms/contract_form.html" %}
         </header>

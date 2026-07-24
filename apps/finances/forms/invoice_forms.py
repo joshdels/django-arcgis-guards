@@ -10,6 +10,7 @@ class InvoiceForm(CalciteModelForm):
             "billing",
             "due_date",
             "remarks",
+            "status",
         ]
 
 

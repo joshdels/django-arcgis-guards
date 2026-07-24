@@ -1,25 +1,26 @@
 <form class="standard-form"
-      action="{% url 'finances:payment_edit' payment.id %}"
       method="post"
       enctype="multipart/form-data">
     {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.invoice.id_for_label }}">Invoice</label>
+        {{ form.invoice }} {{ form.invoice.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.payment_method.id_for_label }}">Payment Method</label>
+        {{ form.payment_method }} {{ form.payment_method.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.payment_date.id_for_label }}">Payment Date</label>
+        {{ form.payment_date }} {{ form.payment_date.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.amount.id_for_label }}">Amount</label>
+        {{ form.amount }} {{ form.amount.errors }}
+    </div>
     <div>
-        <div class="form-group">
-            <label for="{{ form.invoice.id_for_label }}">Invoice</label>
-            {{ form.invoice }} {{ form.invoice.errors }}
-        </div>
-        <div class="form-group">
-            <label for="{{ form.payment_method.id_for_label }}">Payment Method</label>
-            {{ form.payment_method }} {{ form.payment_method.errors }}
-        </div>
-        <div class="form-group">
-            <label for="{{ form.payment_date.id_for_label }}">Payment Date</label>
-            {{ form.payment_date }} {{ form.payment_date.errors }}
-        </div>
-        <div class="form-group">
-            <label for="{{ form.amount.id_for_label }}">Amount</label>
-            {{ form.amount }} {{ form.amount.errors }}
-        </div>
+        <label for="{{ form.reference_number.id_for_label}}">Reference Number</label>
+        {{ form.reference_number }} {{ form.reference_number.errors }}
     </div>
     {% if form.status %}
         <div class="form-group">

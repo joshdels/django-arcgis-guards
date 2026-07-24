@@ -87,7 +87,7 @@
                 <calcite-button slot="trigger" icon-start="ellipsis" appearance="transparent" scale="s"> </calcite-button>
                 <calcite-dropdown-group selection-mode="none">
                     <calcite-dropdown-item href="{% url 'finances:invoice_details' invoice.id %}">View Invoice</calcite-dropdown-item>
-                    <calcite-dropdown-item href="{% url 'finances:payment_create' %}">Add Payment</calcite-dropdown-item>
+                    <calcite-dropdown-item href="{% url 'client_portal:payment_create_invoice' invoice.pk %}">Add Payment</calcite-dropdown-item>
                 </calcite-dropdown-group>
             </calcite-dropdown>
         </calcite-table-cell>  

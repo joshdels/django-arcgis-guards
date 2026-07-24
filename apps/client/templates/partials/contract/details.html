@@ -1,0 +1,89 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Guard Profile | Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+{% endblock %}
+{% block content %}
+    {% include '_components/navbar.html' %}
+    <main class="container profile">
+        <a href="#" id="backButton">
+            <calcite-icon icon="chevron-left"> </calcite-icon>
+            Back
+        </a>
+        <header>
+            <div>
+                <div class="column">
+                    <h2>{{ contract.title }}</h2>
+                    {% if contract.status == "draft" %}
+                        <calcite-chip kind="neutral" appearance="outline">Draft</calcite-chip>
+                    {% elif contract.status == "pending" %}
+                        <calcite-chip kind="neutral" appearance="outline-fill">Pending</calcite-chip>
+                    {% elif contract.status == "approved" %}
+                        <calcite-chip kind="brand" appearance="outline-fill">Approved</calcite-chip>
+                    {% elif contract.status == "ongoing" %}
+                        <calcite-chip kind="inverse" appearance="outline-fill">Ongoing</calcite-chip>
+                    {% elif contract.status == "finished" %}
+                        <calcite-chip kind="brand">Finished</calcite-chip>
+                    {% else %}
+                        <calcite-chip kind="inverse">Cancelled</calcite-chip>
+                    {% endif %}
+                </div>
+                <p>
+                    <calcite-icon icon="inspection" scale="s"></calcite-icon>  {{ contract.contract_number }}
+                </p>
+            </div>
+            <div>
+                {%if contract.status == "draft" or contract.status == "pending" %}
+                    <calcite-button href="{% url 'client_portal:contract_update' contract.id %}">Edit Contract</calcite-button>
+                {% endif %}
+            </div>
+        </header>
+        <section>
+            <h2>General Information</h2>
+            <div class="grid">
+                <div>
+                    <p>Contract Name</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="envelope"></calcite-icon>  {{ contract.title }}
+                    </h4>
+                </div>
+                <div>
+                    <p>Contract Number</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="inspection"></calcite-icon> {{ contract.contract_number }}
+                    </h4>
+                </div>
+                <div>
+                    <p>Start Date</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="clock"></calcite-icon> {{ contract.start_date }}
+                    </h4>
+                </div>
+                <div>
+                    <p>End Date</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="clock"></calcite-icon> {{ contract.end_date }}
+                    </h4>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Contract Description</h2>
+            <div class="grid">
+                <div>
+                    <p>Required Guards</p>
+                    <h4>
+                        <calcite-icon scale="s" icon="users"></calcite-icon> {{ contract.number_of_guards }}
+                    </h4>
+                </div>
+                <div>
+                    <p>Contract Description</p>
+                    <h4>
+                        <h4>{{ contract.description }}</h4>
+                    </h4>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,2 +1,3 @@
 from .dashboard import *
-from .contract import *
+from .contracts import *
+from .payments import *

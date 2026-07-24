@@ -3,8 +3,6 @@ from . import views
 
 app_name = "client_portal"
 
-print(views.contract)
-print(type(views.contract))
 
 urlpatterns = [
     path("overview/", views.overview, name="overview"),
@@ -15,6 +13,11 @@ urlpatterns = [
     path("report/", views.report, name="report"),
     path("setting/", views.setting, name="setting"),
 
+    path("contract/details/<int:id>/", views.contract_details, name="contract_details"),
     path("contract/create", views.contract_create, name="contract_create"),
     path("contract/update/<int:id>/", views.contract_update, name="contract_update"),
+
+    path("payment/details/<int:pk>/", views.payment_details, name="payment_details"),
+    path("payment/create/", views.payment_create, name="payment_create"),
+    path("payment/create/<int:invoice_id>/", views.payment_create_invoice, name="payment_create_invoice"),
 ]

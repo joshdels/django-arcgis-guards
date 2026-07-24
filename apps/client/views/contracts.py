@@ -31,6 +31,13 @@ def contract_create(request):
 
 
 @roles_required("accounts:client_login", User.ROLE_CLIENT)
+def contract_details(request, id):
+    contract = get_object_or_404(Contract, id=id)
+
+    return render(request, "partials/contract/details.html", {"contract": contract})
+
+
+@roles_required("accounts:client_login", User.ROLE_CLIENT)
 def contract_update(request, id):
     contract = get_object_or_404(Contract, id=id, client=request.user.client_profile)
 
@@ -50,3 +57,5 @@ def contract_update(request, id):
         "partials/contract/update.html",
         {"form": form, "contract": contract},
     )
+
+

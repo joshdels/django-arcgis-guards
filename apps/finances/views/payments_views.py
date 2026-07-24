@@ -80,22 +80,35 @@ def payment_create(request):
 def payment_edit(request, payment_id):
     payment = get_object_or_404(Payment, pk=payment_id)
 
-    form = PaymentUpdateForm(
-        request.POST or None,
-        instance=payment,
+    if request.method == "POST":
+        form = PaymentUpdateForm(
+            request.POST,
+            request.FILES,
+            instance=payment,
+        )
+
+        print("VALID:", form.is_valid())
+        print(form.errors)
+        print(form.non_field_errors())
+
+        if form.is_valid():
+            print(form.errors.as_data())
+            print(form.errors.as_json())
+            
+            with transaction.atomic():
+                form.save()
+
+            messages.success(request, "Payment updated successfully.")
+            return redirect("finances:payment_details", pk=payment.pk)
+
+    else:
+        form = PaymentUpdateForm(instance=payment)
+
+    return render(
+        request,
+        "payments/update.html",
+        {
+            "form": form,
+            "payment": payment,
+        },
     )
-
-    if request.method == "POST" and form.is_valid():
-        with transaction.atomic():
-            form.save()
-
-            messages.success(
-                request,
-                "payment update successfully.",
-            )
-
-            return redirect("finances:payment_details", payment.id)
-
-    context = {"form": form, "payment": payment}
-
-    return render(request, "payments/update.html", context)
