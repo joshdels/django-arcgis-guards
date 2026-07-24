@@ -1,0 +1,72 @@
+{% extends '_base.html' %}
+{% load humanize %}
+{% load static %}
+{% block title %}Invoice Details | Dumagete Guards{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/overview.css' %}">
+{% endblock %}
+{% block content %}
+    {% include 'components/client-navbar.html' %}
+    <main class="container profile">
+        <a href="{% url 'client_portal:finances' %}" id="backButton">
+            <calcite-icon icon="chevron-left"></calcite-icon>
+            Back to Finances
+        </a>
+        <header>
+            <div>
+                <div class="column">
+                    <h1>Invoice Details</h1>
+                </div>
+                <p>{{ invoice.invoice_number }}</p>
+            </div>
+        </header>
+        <section>
+            <h2>General Information</h2>
+            <div class="grid">
+                <div>
+                    <p>Invoice ID</p>
+                    <h4>{{ invoice.invoice_number }}</h4>
+                </div>
+                <div>
+                    <p>Payment Date</p>
+                    <h4>{{ invoice.issue_date }}</h4>
+                </div>
+                <div>
+                    <p>Due Date</p>
+                    <h4>{{ invoice.due_date }}</h4>
+                </div>
+                <div>
+                    <p>Remarks</p>
+                    <h4>{{ invoice.remarks|default:"-" }}</h4>
+                </div>
+            </div>
+        </section>
+        <div class="dashboard-column">
+            <section>
+                <h2>Total Amount</h2>
+                <div class="grid">
+                    <div>
+                        <h1>₱ {{ invoice.total_amount|floatformat:2|intcomma }}</h1>
+                    </div>
+                    <div>
+                        <p>Taxes</p>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Contract Information</h2>
+                <div class="grid">
+                    <div>
+                        <p>Contract Title</p>
+                        <h4>{{ invoice.billing.contract.title }}</h4>
+                    </div>
+                    <div>
+                        <p>Contract ID</p>
+                        <h4>{{ invoice.billing.contract.contract_number }}</h4>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

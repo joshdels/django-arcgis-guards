@@ -55,17 +55,17 @@
                 </calcite-chip>
 
             {% elif payment.status == "completed" %}
-                <calcite-chip kind="brand" appearance="outline-fill">
+                <calcite-chip kind="brand" appearance="solid">
                     {{ payment.get_status_display }}
                 </calcite-chip>
 
             {% elif payment.status == "refunded" %}
-                <calcite-chip kind="brand" appearance="outline-fill">
+                <calcite-chip kind="inverse" appearance="outline-fill">
                     {{ payment.get_status_display }}
                 </calcite-chip>
 
             {% else %}
-                <calcite-chip kind="inverse">
+                <calcite-chip kind="neutral" appearance="outline-fill">
                     {{ payment.get_status_display }}
                 </calcite-chip>
             {% endif %}

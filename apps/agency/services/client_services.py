@@ -8,7 +8,7 @@ from django.db.models.functions import Coalesce
 from apps.client.models import Client
 from apps.contract.models import ContractStatus
 from apps.finances.models import Invoice, Payment, Billing
-from apps.guard.models import Guard
+from apps.guard.models import Guard, GuardStatus
 from apps.operations.models import AssignmentStatus
 
 User = get_user_model()
@@ -50,13 +50,23 @@ def create_client(data):
 
 
 def get_overview_stats(client):
-    guards = Guard.objects.filter(
-        assignments__deployment__contract__client=client
-    ).distinct()
+    """Calculations of the guards, contracts, invoices, payments"""
+    guards = Guard.objects.filter(assignments__deployment__contract__client=client)
+    guards = guards.distinct()
 
     total_guards = guards.count()
-    active_guards = guards.filter(is_active=True).count()
-    inactive_guards = guards.filter(is_active=False).count()
+
+    on_duty_guards = guards.filter(assignments__status=AssignmentStatus.ACTIVE)
+    on_duty_guards = on_duty_guards.distinct()
+    on_duty_guards = on_duty_guards.count()
+
+    leave_guards = guards.filter(assignments__status=GuardStatus.LEAVE)
+    leave_guards = leave_guards.distinct()
+    leave_guards = leave_guards.count()
+
+    completed_guards = guards.filter(assignments__status=AssignmentStatus.ENDED)
+    completed_guards = completed_guards.distinct()
+    completed_guards = completed_guards.count()
 
     contracts = client.contracts.all()
 
@@ -74,7 +84,8 @@ def get_overview_stats(client):
     finshed_contracts = contracts.filter(status=ContractStatus.FINISHED).count()
     cancelled_contracts = contracts.filter(status=ContractStatus.CANCELLED).count()
 
-    total_invoices = Invoice.objects.filter(billing__contract__client=client).aggregate(
+    total_invoices = Invoice.objects.filter(billing__contract__client=client)
+    total_invoices = total_invoices.aggregate(
         total=Coalesce(
             Sum("total_amount"),
             Value(Decimal("0.00")),
@@ -82,28 +93,29 @@ def get_overview_stats(client):
         )
     )["total"]
 
-    total_payments = Payment.objects.filter(
-        invoice__billing__contract__client=client
-    ).aggregate(
+    total_payments = Payment.objects.filter(invoice__billing__contract__client=client)
+    total_payments = total_payments.aggregate(
         total=Coalesce(
             Sum("amount"),
             Value(Decimal("0.00")),
             output_field=DecimalField(),
         )
-    )[
-        "total"
-    ]
+    )["total"]
 
     total_balance = total_invoices - total_payments
 
     return {
+        #contracts
         "total_contracts": total_contracts,
         "finished_contracts": finshed_contracts,
         "cancelled_contracts": cancelled_contracts,
         "total_active_contracts": total_active_contracts,
+        #guards
         "total_guards": total_guards,
-        "active_guards": active_guards,
-        "inactive_guards": inactive_guards,
+        "leave_guards": leave_guards,
+        "on_duty_guards": on_duty_guards,
+        "completed_guards": completed_guards,
+        #finances
         "total_invoices": total_invoices,
         "total_payments": total_payments,
         "total_balance": total_balance,

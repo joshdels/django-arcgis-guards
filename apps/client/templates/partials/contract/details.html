@@ -34,7 +34,7 @@
                 </p>
             </div>
             <div>
-                {%if contract.status == "draft" or contract.status == "pending" %}
+                {% if contract.status == "draft" or contract.status == "pending" %}
                     <calcite-button href="{% url 'client_portal:contract_update' contract.id %}">Edit Contract</calcite-button>
                 {% endif %}
             </div>

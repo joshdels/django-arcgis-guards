@@ -5,38 +5,20 @@
             <form method="get" class="flex">
                 <input type="hidden" name="status" value="{{ status|default:'' }}">
                 <input type="hidden" name="filter" value="{{ filter|default:'' }}">
-
-                <calcite-input
-                    type="search"
-                    name="search"
-                    placeholder="Client Name, Organization"
-                    icon="search"
-                    value="{{ search|default:'' }}">
+                <calcite-input type="search" name="search" placeholder="Client Name, Organization" icon="search" value="{{ search|default:'' }}">
                 </calcite-input>
-
                 <calcite-button type="submit">
-                    Search
+                Search
                 </calcite-button>
             </form>
             <a href="?search={{ search }}"
-            class="{% if not status and not filter %}active{% endif %}">
-                All
-            </a>
-
+               class="{% if not status and not filter %}active{% endif %}">All</a>
             <a href="?search={{ search }}&status=approved"
-            class="{% if status == 'approved' %}active{% endif %}">
-                Approved
-            </a>
-
+               class="{% if status == 'approved' %}active{% endif %}">Approved</a>
             <a href="?search={{ search }}&status=ongoing"
-            class="{% if status == 'ongoing' %}active{% endif %}">
-                On Going
-            </a>
-
+               class="{% if status == 'ongoing' %}active{% endif %}">On Going</a>
             <a href="?search={{ search }}&filter=needs_guards"
-            class="{% if filter == 'needs_guards' %}active{% endif %}">
-                Require More Guards
-            </a>
+               class="{% if filter == 'needs_guards' %}active{% endif %}">Require More Guards</a>
         </div>
     </header>
     {% include '_partials/deployment/card.html' %}

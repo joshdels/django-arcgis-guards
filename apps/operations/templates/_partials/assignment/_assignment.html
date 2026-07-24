@@ -7,26 +7,14 @@
                 </calcite-input>
                 <calcite-button type="submit">Search</calcite-button>
             </form>
-
             <a href="?search={{ search }}"
-                class="{% if not status %}active{% endif %}">
-                    All
-                </a>
-    
-                <a href="?search={{ search }}&status=ACTIVE"
-                class="{% if status == 'ACTIVE' %}active{% endif %}">
-                    Active
-                </a>
-    
-                <a href="?search={{ search }}&status=ENDED"
-                class="{% if status == 'ENDED' %}active{% endif %}">
-                    Ended
-                </a>
-    
-                <a href="?search={{ search }}&status=CANCELLED"
-                class="{% if status == 'CANCELLED' %}active{% endif %}">
-                    Cancelled
-                </a>
+               class="{% if not status %}active{% endif %}">All</a>
+            <a href="?search={{ search }}&status=ACTIVE"
+               class="{% if status == 'ACTIVE' %}active{% endif %}">Active</a>
+            <a href="?search={{ search }}&status=ENDED"
+               class="{% if status == 'ENDED' %}active{% endif %}">Ended</a>
+            <a href="?search={{ search }}&status=CANCELLED"
+               class="{% if status == 'CANCELLED' %}active{% endif %}">Cancelled</a>
         </div>
     </header>
     {% include "_partials/assignment/table.html" %}

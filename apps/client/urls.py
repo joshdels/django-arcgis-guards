@@ -20,4 +20,6 @@ urlpatterns = [
     path("payment/details/<int:pk>/", views.payment_details, name="payment_details"),
     path("payment/create/", views.payment_create, name="payment_create"),
     path("payment/create/<int:invoice_id>/", views.payment_create_invoice, name="payment_create_invoice"),
+
+    path("invoice/details/<int:pk>/", views.invoice_details, name="invoice_details"),
 ]

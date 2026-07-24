@@ -12,25 +12,21 @@
                 <h2>Edit Contract</h2>
                 {% if contract.status == "draft" %}
                     <calcite-chip kind="brand" appearance="outline-fill">
-                        {{ contract.get_status_display }}
+                    {{ contract.get_status_display }}
                     </calcite-chip>
-
                 {% elif contract.status == "pending" %}
                     <calcite-chip kind="brand" appearance="outline-fill">
-                        {{ contract.get_status_display }}
+                    {{ contract.get_status_display }}
                     </calcite-chip>
-
                 {% else %}
                     <calcite-chip kind="inverse">
-                        {{ contract.get_status_display }}
+                    {{ contract.get_status_display }}
                     </calcite-chip>
                 {% endif %}
             </div>
             <p>
                 <calcite-icon icon="inspection" scale="s"></calcite-icon>
                 {{ contract.contract_number|default:"N/A" }}
-
-
             </p>
             {% include "forms/contract_form.html" %}
         </header>

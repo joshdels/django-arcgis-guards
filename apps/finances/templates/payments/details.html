@@ -19,27 +19,23 @@
                     <h1>Payment Details</h1>
                     {% if payment.status == "pending" %}
                         <calcite-chip kind="brand" appearance="outline-fill">
-                            Pending
+                        Pending
                         </calcite-chip>
-
                     {% elif payment.status == "completed" %}
                         <calcite-chip kind="brand" appearance="solid">
-                            Completed
+                        Completed
                         </calcite-chip>
-
                     {% elif payment.status == "failed" %}
                         <calcite-chip kind="inverse" appearance="solid">
-                            Failed
+                        Failed
                         </calcite-chip>
-
                     {% elif payment.status == "refunded" %}
                         <calcite-chip kind="neutral" appearance="ontline">
-                            Refunded
+                        Refunded
                         </calcite-chip>
-
                     {% else %}
                         <calcite-chip kind="neutral" appearance="outline" scale="s">
-                            {{ payment.get_status_display }}
+                        {{ payment.get_status_display }}
                         </calcite-chip>
                     {% endif %}
                 </div>

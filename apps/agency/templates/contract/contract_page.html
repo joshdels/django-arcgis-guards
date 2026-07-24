@@ -20,19 +20,19 @@
                     <calcite-button type="submit">Search</calcite-button>
                 </form>
                 <a href="{% url 'agency:show_contracts' %}"
-                    class="{% if not status %}active{% endif %}">All</a>
+                   class="{% if not status %}active{% endif %}">All</a>
                 <a href="?status=draft"
-                    class="{% if status == 'draft' %}active{% endif %}">Draft</a>
+                   class="{% if status == 'draft' %}active{% endif %}">Draft</a>
                 <a href="?status=pending"
-                    class="{% if status == 'pending' %}active{% endif %}">Pending</a>
+                   class="{% if status == 'pending' %}active{% endif %}">Pending</a>
                 <a href="?status=approved"
-                    class="{% if status == 'approved' %}active{% endif %}">Approved</a>
+                   class="{% if status == 'approved' %}active{% endif %}">Approved</a>
                 <a href="?status=ongoing"
-                    class="{% if status == 'ongoing' %}active{% endif %}">Ongoing</a>
+                   class="{% if status == 'ongoing' %}active{% endif %}">Ongoing</a>
                 <a href="?status=finished"
-                    class="{% if status == 'finished' %}active{% endif %}">Finished</a>
+                   class="{% if status == 'finished' %}active{% endif %}">Finished</a>
                 <a href="?status=cancelled"
-                    class="{% if status == 'cancelled' %}active{% endif %}">Cancelled</a>
+                   class="{% if status == 'cancelled' %}active{% endif %}">Cancelled</a>
             </div>
             <calcite-button href="{% url 'agency:contract_create' %}"  icon-start="plus">Add Contract</calcite-button>
         </header>

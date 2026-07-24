@@ -1,6 +1,6 @@
 <div class="sidebar">
     <div class="sidebar-header">
-        <h1>My Portal</h1>
+        <h1>My Client Portal</h1>
     </div>
     <main>
         <a class="sidebar-link"
@@ -18,12 +18,12 @@
            hx-get="{% url 'client_portal:client_contract' %}"
            hx-target="#client-content"
            hx-push-url="true">
-        <calcite-icon icon="pen"></calcite-icon>Contract</a>
+        <calcite-icon icon="pen"></calcite-icon>Contracts</a>
         <a class="sidebar-link"
            hx-get="{% url 'client_portal:guard' %}"
            hx-target="#client-content"
            hx-push-url="true">
-        <calcite-icon icon="security"></calcite-icon>Guard</a>
+        <calcite-icon icon="security"></calcite-icon>Guards</a>
         <a class="sidebar-link"
            hx-get="{% url 'client_portal:finances' %}"
            hx-target="#client-content"
