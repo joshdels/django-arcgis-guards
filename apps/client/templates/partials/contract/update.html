@@ -1,0 +1,19 @@
+{% extends "_base.html" %}
+{% block title %}Edit Contract | Dumagete Guards{% endblock %}
+{% block content %}
+    {% include 'components/client-navbar.html' %}
+    <div class="form-container">
+        <header>
+            <a href="#" id="backButton">
+                <calcite-icon icon="chevron-left"></calcite-icon>
+                Back
+            </a>
+            <h2>Edit Contract</h2>
+            <p>
+                <calcite-icon icon="check-shield" scale="s"></calcite-icon>
+                {{ contract.contract_id|default:"N/A" }}
+            </p>
+            {% include "forms/contract_form.html" %}
+        </header>
+    </div>
+{% endblock %}

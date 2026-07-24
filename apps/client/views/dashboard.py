@@ -40,7 +40,7 @@ def information(request):
 
 
 @roles_required("accounts:client_login", User.ROLE_CLIENT)
-def contract(request):
+def client_contract(request):
     context = {}
 
     client = request.user.client_profile

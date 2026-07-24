@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+{% block title %}New Contract | Dumaguete Guards{% endblock %}
+{% block content %}
+    {% include 'components/client-navbar.html' %}
+    <div class="form-container">
+        <header>
+            <a href="#" id="backButton">
+                <calcite-icon icon="chevron-left"> </calcite-icon>
+                Back
+            </a>
+            <h2>New Contract</h2>
+            {% include "forms/contract_form.html" %}
+        </header>
+    </div>
+{% endblock %}

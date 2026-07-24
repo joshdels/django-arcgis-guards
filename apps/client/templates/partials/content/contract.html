@@ -6,7 +6,7 @@
     <section>
         <div class="space-between">
             <h2>Active</h2>
-            <calcite-button icon-start="plus" label="Add New Contract"  scale="s" appearance="outline-fill" href="{% url 'agency:contract_create_client' client.id %}">Add Contract</calcite-button>
+            <calcite-button icon-start="plus" label="Add New Contract"  scale="s" appearance="outline-fill" href="{% url 'client_portal:contract_create' %}">Add Contract</calcite-button>
         </div>
         <div>{% include 'table/table_contract_active.html' %}</div>
     </section>

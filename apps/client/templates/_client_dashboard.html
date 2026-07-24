@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div>
-                            <calcite-button icon-start="plus" scale="l" appearance="outline" kind="brand">New Contract</calcite-button>
+                            <calcite-button icon-start="plus" scale="l" appearance="outline" kind="brand" href="{% url 'client_portal:contract_create' %}">New Contract</calcite-button>
                         </div>
                     </header>
                     <div id="client-content">{% include "partials/content/overview.html" %}</div>
